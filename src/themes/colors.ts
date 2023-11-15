@@ -4,5 +4,6 @@ export const lightColors = {
   primary: MyColors.default,
   onPrimary: MyColors.white,
   background: MyColors.offWhite,
-  onBackground: MyColors.black,
+  onBackground: MyColors.active,
+  outline: MyColors.disabled,
 };

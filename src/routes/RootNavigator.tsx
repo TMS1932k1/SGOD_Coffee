@@ -50,7 +50,7 @@ export default function RootNavigator() {
     () => ({
       orientation: 'portrait',
       headerShadowVisible: false,
-      headerTintColor: colors.primary,
+      headerTintColor: colors.onBackground,
       headerStyle: {
         backgroundColor: colors.background,
       },

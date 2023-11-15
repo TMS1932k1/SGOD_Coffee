@@ -10,6 +10,13 @@ i18n.use(initReactI18next).init({
         subtitleOnboarding:
           'The best grain, the finest roast, the powerful flavor.',
         getStart: 'Get Started',
+        signin: 'Sign in',
+        signinSub: 'Welcome back',
+        signup: 'Sign up',
+        signupSub: 'Create an account here',
+        placeholderEmail: 'Email address',
+        placeholderPassword: 'Password',
+        forgotPassword: 'Forgot Password?',
       },
     },
   },
