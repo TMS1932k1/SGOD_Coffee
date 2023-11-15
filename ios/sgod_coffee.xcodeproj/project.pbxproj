@@ -14,6 +14,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-sgod_coffee-sgod_coffeeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-sgod_coffee-sgod_coffeeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		7426150C979748F9B216DB78 /* mulish_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9B63901606FA4209B3F6F7F0 /* mulish_bold.ttf */; };
+		E19929CF92FC4040BDECD4CF /* mulish_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8543FA2F58DC4F01AC892DF9 /* mulish_regular.ttf */; };
+		4B228801CD0C42BFAA84B43A /* mulish_semi_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4537E1FEFF6C4785925A4480 /* mulish_semi_bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = sgod_coffee/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-sgod_coffee-sgod_coffeeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sgod_coffee-sgod_coffeeTests.release.xcconfig"; path = "Target Support Files/Pods-sgod_coffee-sgod_coffeeTests/Pods-sgod_coffee-sgod_coffeeTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		9B63901606FA4209B3F6F7F0 /* mulish_bold.ttf */ = {isa = PBXFileReference; name = "mulish_bold.ttf"; path = "../src/assets/fonts/mulish_bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8543FA2F58DC4F01AC892DF9 /* mulish_regular.ttf */ = {isa = PBXFileReference; name = "mulish_regular.ttf"; path = "../src/assets/fonts/mulish_regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4537E1FEFF6C4785925A4480 /* mulish_semi_bold.ttf */ = {isa = PBXFileReference; name = "mulish_semi_bold.ttf"; path = "../src/assets/fonts/mulish_semi_bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				08F775429F6741BA93DA72F5 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +154,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		08F775429F6741BA93DA72F5 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				9B63901606FA4209B3F6F7F0 /* mulish_bold.ttf */,
+				8543FA2F58DC4F01AC892DF9 /* mulish_regular.ttf */,
+				4537E1FEFF6C4785925A4480 /* mulish_semi_bold.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -244,6 +262,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				7426150C979748F9B216DB78 /* mulish_bold.ttf in Resources */,
+				E19929CF92FC4040BDECD4CF /* mulish_regular.ttf in Resources */,
+				4B228801CD0C42BFAA84B43A /* mulish_semi_bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
