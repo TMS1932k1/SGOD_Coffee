@@ -10,8 +10,12 @@ import {
 import {useTheme, Icon, IconButton} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../constants';
+import {CustomText} from '../common/CustomText';
 
 interface Props {
+  error?: string;
+  value?: string;
+  onChangeText?: (text: string) => void;
   icon: string;
   placeholder?: string;
   iconSize?: number;
@@ -21,6 +25,9 @@ interface Props {
 }
 
 export default function InputSection({
+  error,
+  value,
+  onChangeText,
   style,
   icon,
   placeholder,
@@ -28,7 +35,7 @@ export default function InputSection({
   isCanSecureText = false,
   iconSize = MyDimensions.iconSmall,
 }: Props) {
-  const [secureText, setSecureText] = useState(true);
+  const [secureText, setSecureText] = useState(isCanSecureText);
 
   const colors = useTheme().colors;
 
@@ -48,34 +55,41 @@ export default function InputSection({
   );
 
   return (
-    <View style={[styles.container, style]}>
-      {iconView}
-      <View style={styles.inputContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder={placeholder}
-          keyboardType={keyboardType}
-          secureTextEntry={secureText}
-          numberOfLines={1}
-        />
-        <View style={styles.eyeContainer}>
-          {isCanSecureText && (
-            <IconButton
-              icon={!secureText ? 'eye-off' : 'eye'}
-              size={MyDimensions.iconSmall}
-              iconColor={colors.onBackground}
-              onPress={onChangeMode}
-            />
-          )}
+    <View style={style}>
+      <View style={[styles.topView]}>
+        {iconView}
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            value={value}
+            onChangeText={onChangeText}
+            placeholder={placeholder}
+            keyboardType={keyboardType}
+            secureTextEntry={secureText}
+            numberOfLines={1}
+          />
+          <View style={styles.eyeContainer}>
+            {isCanSecureText && (
+              <IconButton
+                icon={!secureText ? 'eye-off' : 'eye'}
+                size={MyDimensions.iconSmall}
+                iconColor={colors.onBackground}
+                onPress={onChangeMode}
+              />
+            )}
+          </View>
         </View>
       </View>
+      <CustomText variant="meta1" style={styles.errorText}>
+        {error}
+      </CustomText>
     </View>
   );
 }
 
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
-    container: {
+    topView: {
       flexDirection: 'row',
       height: 42,
       borderBottomColor: colors.outline,
@@ -102,5 +116,9 @@ const styling = (colors: MD3Colors) =>
       width: MyDimensions.iconSmall,
       justifyContent: 'center',
       alignItems: 'center',
+    },
+    errorText: {
+      color: colors.error,
+      marginTop: 2,
     },
   });

@@ -6,4 +6,5 @@ export const lightColors = {
   background: MyColors.offWhite,
   onBackground: MyColors.active,
   outline: MyColors.disabled,
+  error: MyColors.error,
 };

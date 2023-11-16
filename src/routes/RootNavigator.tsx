@@ -46,10 +46,11 @@ export default function RootNavigator() {
     [authStackRoutes],
   );
 
-  const screenOptions: NativeStackNavigationOptions = useMemo(
+  const authScreenOptions: NativeStackNavigationOptions = useMemo(
     () => ({
       orientation: 'portrait',
       headerShadowVisible: false,
+      headerTitle: '',
       headerTintColor: colors.onBackground,
       headerStyle: {
         backgroundColor: colors.background,
@@ -64,7 +65,7 @@ export default function RootNavigator() {
   return (
     <NavigationContainer>
       {true ? (
-        <AuthStack.Navigator screenOptions={screenOptions}>
+        <AuthStack.Navigator screenOptions={authScreenOptions}>
           {authStackScreens}
         </AuthStack.Navigator>
       ) : (

@@ -1,3 +1,4 @@
-import AsyncStorageHelper from './asyncStorageHelper';
+import asyncStorageHelper from './asyncStorageHelper';
+import regexFormatHelper from './regexFormatHelper';
 
-export {AsyncStorageHelper};
+export {asyncStorageHelper, regexFormatHelper};

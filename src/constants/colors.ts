@@ -9,4 +9,5 @@ export const MyColors = {
   warning: '#FBBE21',
   line: '##EAEAEA',
   weak: '#2F4B4E',
+  error: '#E94242',
 };

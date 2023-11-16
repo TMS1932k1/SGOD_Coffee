@@ -3,4 +3,5 @@ export const MyDimensions = {
   paddingMedium: 16,
   paddingLarge: 32,
   iconSmall: 20,
+  borderRadiusSmall: 10,
 };
