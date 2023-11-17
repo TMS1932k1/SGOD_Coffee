@@ -1,9 +1,9 @@
-import {useCallback, useMemo} from 'react';
+import {useCallback, useEffect, useMemo} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import {Button, useTheme} from 'react-native-paper';
+import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {AuthStackNavigationScreenProps} from '../../routes';
 import {
-  ContainedButton,
+  ButtonSection,
   CustomText,
   HeaderSection,
   InputSection,
@@ -13,6 +13,8 @@ import {MyDimensions} from '../../constants';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {Controller, useForm} from 'react-hook-form';
 import {regexFormatHelper} from '../../utils';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {postSignIn, removeErrors} from '../../store/auth/authSlice';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
@@ -20,6 +22,11 @@ interface Props {
 
 export default function SignInScreen({navigation}: Props) {
   const theme = useTheme();
+
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(state => state.authState.isLoading);
+  const errorMes = useAppSelector(state => state.authState.errorMes);
 
   const colors = useMemo(() => theme.colors, [theme]);
 
@@ -31,10 +38,20 @@ export default function SignInScreen({navigation}: Props) {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'tms1932k1@gmail.com',
+      password: 'dt0932782114',
     },
   });
+
+  // Remove errorMes before navigate
+  useEffect(() => {
+    navigation.addListener('transitionStart', event => {
+      dispatch(removeErrors());
+    });
+    navigation.addListener('beforeRemove', event => {
+      dispatch(removeErrors());
+    });
+  }, [navigation]);
 
   // Navigate to [ForgotPasswordScreen]
   const navigateForgotPasswordScreen = useCallback(() => {
@@ -48,7 +65,7 @@ export default function SignInScreen({navigation}: Props) {
 
   // Handle sign in account
   const signInWithEmailPasword = handleSubmit(data => {
-    console.log({data});
+    dispatch(postSignIn(data));
   });
 
   const statusBar = useMemo(
@@ -157,15 +174,19 @@ export default function SignInScreen({navigation}: Props) {
         {forgetBtn}
         {signUpBtn}
       </ScrollView>
-      <Translation>
-        {t => (
-          <ContainedButton
-            onPress={signInWithEmailPasword}
-            style={styles.signInBtn}>
-            {t('signin')}
-          </ContainedButton>
-        )}
-      </Translation>
+      {!isLoading && (
+        <Translation>
+          {t => (
+            <ButtonSection
+              errorMes={errorMes}
+              onPress={signInWithEmailPasword}
+              style={styles.submitContainer}>
+              {t('signin')}
+            </ButtonSection>
+          )}
+        </Translation>
+      )}
+      {isLoading && <ActivityIndicator animating={true} />}
     </View>
   );
 }
@@ -196,7 +217,7 @@ const styling = (colors: MD3Colors) =>
     signUpText: {
       color: colors.outline,
     },
-    signInBtn: {
+    submitContainer: {
       marginTop: MyDimensions.paddingLarge,
     },
   });

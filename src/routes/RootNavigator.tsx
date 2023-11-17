@@ -7,8 +7,10 @@ import {useMemo} from 'react';
 import {
   AuthNavigatorParamList,
   AuthStackRoutesType,
-  RootNavigatorParamList,
-  RootStackRoutesType,
+  HomeNavigatorParamList,
+  HomeStackRoutesType,
+  OnboardingNavigatorParamList,
+  OnboardingStackRoutesType,
 } from './routeConfig';
 import {
   ForgotPasswordScreen,
@@ -19,16 +21,22 @@ import {
 } from '../screens';
 import {useTheme} from 'react-native-paper';
 import HomeScreen from '../screens/home/HomeScreen';
+import {useAppSelector} from '../store/store';
 
-const RootStack = createNativeStackNavigator<RootNavigatorParamList>();
+const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 const AuthStack = createNativeStackNavigator<AuthNavigatorParamList>();
+const OnboardingStack =
+  createNativeStackNavigator<OnboardingNavigatorParamList>();
 
-const rootStackRoutes: RootStackRoutesType = [
+const onboardingStackRoutes: OnboardingStackRoutesType = [
+  {name: 'OnboardingScreen', component: OnboardingScreen},
+];
+
+const homeStackRoutes: HomeStackRoutesType = [
   {name: 'HomeScreen', component: HomeScreen},
 ];
 
 const authStackRoutes: AuthStackRoutesType = [
-  {name: 'OnboardingScreen', component: OnboardingScreen},
   {name: 'SignInScreen', component: SignInScreen},
   {name: 'SignUpScreen', component: SignUpScreen},
   {name: 'ForgotPasswordScreen', component: ForgotPasswordScreen},
@@ -37,13 +45,23 @@ const authStackRoutes: AuthStackRoutesType = [
 
 export default function RootNavigator() {
   const colors = useTheme().colors;
+  const user = useAppSelector(state => state.authState.user);
+  const isFirstOpenApp = useAppSelector(state => state.appState.isFirstOpenApp);
 
-  const rootStackScreens = useMemo(
+  const onboardingStackScreens = useMemo(
     () =>
-      rootStackRoutes.map(stackRoute => (
-        <RootStack.Screen key={stackRoute.name} {...stackRoute} />
+      onboardingStackRoutes.map(stackRoute => (
+        <OnboardingStack.Screen key={stackRoute.name} {...stackRoute} />
       )),
-    [rootStackRoutes],
+    [onboardingStackRoutes],
+  );
+
+  const homeStackScreens = useMemo(
+    () =>
+      homeStackRoutes.map(stackRoute => (
+        <HomeStack.Screen key={stackRoute.name} {...stackRoute} />
+      )),
+    [homeStackRoutes],
   );
 
   const authStackScreens = useMemo(
@@ -52,6 +70,14 @@ export default function RootNavigator() {
         <AuthStack.Screen key={stackRoute.name} {...stackRoute} />
       )),
     [authStackRoutes],
+  );
+
+  const onboardingScreenOptions: NativeStackNavigationOptions = useMemo(
+    () => ({
+      orientation: 'portrait',
+      headerShown: false,
+    }),
+    [],
   );
 
   const authScreenOptions: NativeStackNavigationOptions = useMemo(
@@ -72,12 +98,16 @@ export default function RootNavigator() {
 
   return (
     <NavigationContainer>
-      {true ? (
+      {isFirstOpenApp ? (
+        <OnboardingStack.Navigator screenOptions={onboardingScreenOptions}>
+          {onboardingStackScreens}
+        </OnboardingStack.Navigator>
+      ) : !user ? (
         <AuthStack.Navigator screenOptions={authScreenOptions}>
           {authStackScreens}
         </AuthStack.Navigator>
       ) : (
-        <RootStack.Navigator>{rootStackScreens}</RootStack.Navigator>
+        <HomeStack.Navigator>{homeStackScreens}</HomeStack.Navigator>
       )}
     </NavigationContainer>
   );

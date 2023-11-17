@@ -20,15 +20,18 @@ type StackRoutesType<ParamList extends ParamListBase> = Array<
     NativeStackNavigationEventMap
   >
 >;
+// Declare onboarding navigator param list
+export type OnboardingNavigatorParamList = {
+  OnboardingScreen: undefined;
+};
 
-// Declare root navigator param list
-export type RootNavigatorParamList = {
+// Declare home navigator param list
+export type HomeNavigatorParamList = {
   HomeScreen: undefined;
 };
 
 // Declare auth navigator param list
 export type AuthNavigatorParamList = {
-  OnboardingScreen: undefined;
   SignInScreen: undefined;
   SignUpScreen: {otp: string} | undefined;
   ForgotPasswordScreen: undefined;
@@ -36,13 +39,13 @@ export type AuthNavigatorParamList = {
 };
 
 // Declare type of root navigation props with generic
-export type RootStackNavigationScreenProps<
-  T extends keyof RootNavigatorParamList,
-> = NativeStackNavigationProp<RootNavigatorParamList, T>;
+export type HomeStackNavigationScreenProps<
+  T extends keyof HomeNavigatorParamList,
+> = NativeStackNavigationProp<HomeNavigatorParamList, T>;
 
 // Declare type of root route props with generic
-export type RootStackRouteScreenProps<T extends keyof RootNavigatorParamList> =
-  RouteProp<RootNavigatorParamList, T>;
+export type HomeStackRouteScreenProps<T extends keyof HomeNavigatorParamList> =
+  RouteProp<HomeNavigatorParamList, T>;
 
 // Declare type of auth navigation props with generic
 export type AuthStackNavigationScreenProps<
@@ -53,5 +56,7 @@ export type AuthStackNavigationScreenProps<
 export type AuthStackRouteScreenProps<T extends keyof AuthNavigatorParamList> =
   RouteProp<AuthNavigatorParamList, T>;
 
-export type RootStackRoutesType = StackRoutesType<RootNavigatorParamList>;
+export type OnboardingStackRoutesType =
+  StackRoutesType<OnboardingNavigatorParamList>;
+export type HomeStackRoutesType = StackRoutesType<HomeNavigatorParamList>;
 export type AuthStackRoutesType = StackRoutesType<AuthNavigatorParamList>;

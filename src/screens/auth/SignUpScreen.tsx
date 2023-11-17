@@ -1,10 +1,10 @@
-import {useCallback, useLayoutEffect, useMemo, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import {Translation} from 'react-i18next';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
-import {Button, useTheme} from 'react-native-paper';
+import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {
-  ContainedButton,
+  ButtonSection,
   CustomText,
   HeaderSection,
   SignUpInputs,
@@ -12,22 +12,23 @@ import {
 } from '../../components';
 import {MyDimensions} from '../../constants';
 import {useForm} from 'react-hook-form';
-import {
-  AuthStackNavigationScreenProps,
-  AuthStackRouteScreenProps,
-} from '../../routes';
-import {useRoute} from '@react-navigation/native';
+import {AuthStackNavigationScreenProps} from '../../routes';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {postSignUp, removeErrors} from '../../store/auth/authSlice';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
 }
 
 export default function SignUpScreen({navigation}: Props) {
-  const route = useRoute<AuthStackRouteScreenProps<'SignUpScreen'>>();
-
   const theme = useTheme();
 
   const [visible, setVisible] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(state => state.authState.isLoading);
+  const errorMes = useAppSelector(state => state.authState.errorMes);
 
   const colors = useMemo(() => theme.colors, [theme]);
 
@@ -46,12 +47,15 @@ export default function SignUpScreen({navigation}: Props) {
     },
   });
 
-  useLayoutEffect(() => {
-    const otp = route.params?.otp;
-    if (otp) {
-      // Start loading to post to sign up account
-    }
-  }, [route]);
+  // Remove errorMes before navigate
+  useEffect(() => {
+    navigation.addListener('transitionStart', event => {
+      dispatch(removeErrors());
+    });
+    navigation.addListener('beforeRemove', event => {
+      dispatch(removeErrors());
+    });
+  }, [navigation]);
 
   // Show term of use modal view
   const showTermOfUseModal = useCallback(() => setVisible(true), []);
@@ -61,7 +65,13 @@ export default function SignUpScreen({navigation}: Props) {
 
   // Handle sign up account
   const signUpWithEmailPasword = handleSubmit(data => {
-    navigation.navigate('VerificationOtpScreen', {email: data.email});
+    dispatch(postSignUp(data))
+      .unwrap()
+      .then(result => {
+        if (!result) {
+          navigation.navigate('VerificationOtpScreen', {email: data.email});
+        }
+      });
   });
 
   // Navigate pop to [SignInScreen]
@@ -130,15 +140,19 @@ export default function SignUpScreen({navigation}: Props) {
         {termsBtn}
         {signInBtn}
       </ScrollView>
-      <Translation>
-        {t => (
-          <ContainedButton
-            onPress={signUpWithEmailPasword}
-            style={styles.signUpBtn}>
-            {t('signup')}
-          </ContainedButton>
-        )}
-      </Translation>
+      {!isLoading && (
+        <Translation>
+          {t => (
+            <ButtonSection
+              errorMes={errorMes}
+              onPress={signUpWithEmailPasword}
+              style={styles.submitContainer}>
+              {t('signup')}
+            </ButtonSection>
+          )}
+        </Translation>
+      )}
+      {isLoading && <ActivityIndicator animating={true} />}
       <TermsModal visible={visible} onHideModal={hideTermOfUseModal} />
     </View>
   );
@@ -167,7 +181,7 @@ const styling = (colors: MD3Colors) =>
     signInText: {
       color: colors.outline,
     },
-    signUpBtn: {
+    submitContainer: {
       marginTop: MyDimensions.paddingLarge,
     },
   });

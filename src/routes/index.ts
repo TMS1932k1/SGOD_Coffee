@@ -2,13 +2,13 @@ import RootNavigator from './RootNavigator';
 import {
   AuthStackNavigationScreenProps,
   AuthStackRouteScreenProps,
-  RootStackNavigationScreenProps,
-  RootStackRouteScreenProps,
+  HomeStackNavigationScreenProps,
+  HomeStackRouteScreenProps,
 } from './routeConfig';
 export {RootNavigator};
 export type {
-  RootStackNavigationScreenProps,
-  RootStackRouteScreenProps,
+  HomeStackNavigationScreenProps as RootStackNavigationScreenProps,
+  HomeStackRouteScreenProps as RootStackRouteScreenProps,
   AuthStackNavigationScreenProps,
   AuthStackRouteScreenProps,
 };

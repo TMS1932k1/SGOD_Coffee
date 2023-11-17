@@ -1,22 +1,31 @@
 import {Image, StatusBar, StyleSheet, View} from 'react-native';
-import {useCallback, useLayoutEffect, useMemo} from 'react';
+import {useCallback, useEffect, useMemo} from 'react';
 import {WelcomeSection} from '../../components';
-import {AuthStackNavigationScreenProps} from '../../routes';
 import {MyColors} from '../../constants';
+import {asyncStorageHelper} from '../../utils';
+import {useAppDispatch} from '../../store/store';
+import {setFirstOpenApp} from '../../store/app/appSlice';
 
-interface Props {
-  navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
-}
+export default function OnboardingScreen() {
+  const dispatch = useAppDispatch();
 
-export default function OnboardingScreen({navigation}: Props) {
-  useLayoutEffect(() => {
-    navigation.setOptions({headerShown: false});
-  }, [navigation]);
+  // Set isFirstOpenApp in local storage
+  const saveFirstOpenApp = useCallback(async () => {
+    const isFirstOpenApp = await asyncStorageHelper.getData('@isFirstOpenApp');
+    if (isFirstOpenApp === undefined) {
+      console.log('First');
+      await asyncStorageHelper.saveObject('@isFirstOpenApp', {open: 'opened'});
+    }
+  }, []);
 
-  // Navigate to [SignInScreen]
+  useEffect(() => {
+    saveFirstOpenApp();
+  }, [saveFirstOpenApp]);
+
+  // Set app state: firstOpenApp
   const getStart = useCallback(() => {
-    navigation.navigate('SignInScreen');
-  }, [navigation]);
+    dispatch(setFirstOpenApp());
+  }, []);
 
   const image = useMemo(
     () => (

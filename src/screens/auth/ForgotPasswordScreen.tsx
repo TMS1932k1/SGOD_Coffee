@@ -1,14 +1,26 @@
 import {View, StyleSheet, StatusBar} from 'react-native';
-import {useMemo} from 'react';
-import {useTheme} from 'react-native-paper';
+import {useEffect, useMemo} from 'react';
+import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
-import {ContainedButton, HeaderSection, InputSection} from '../../components';
+import {ButtonSection, HeaderSection, InputSection} from '../../components';
 import {Controller, useForm} from 'react-hook-form';
 import {regexFormatHelper} from '../../utils';
+import {useAppDispatch, useAppSelector} from '../../store/store';
+import {postforgotPassword, removeErrors} from '../../store/auth/authSlice';
+import {AuthStackNavigationScreenProps} from '../../routes';
 
-export default function ForgotPasswordScreen() {
+interface Props {
+  navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
+}
+
+export default function ForgotPasswordScreen({navigation}: Props) {
   const theme = useTheme();
+
+  const dispatch = useAppDispatch();
+
+  const isLoading = useAppSelector(state => state.authState.isLoading);
+  const errorMes = useAppSelector(state => state.authState.errorMes);
 
   const colors = useMemo(() => theme.colors, [theme]);
 
@@ -18,12 +30,31 @@ export default function ForgotPasswordScreen() {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      email: '',
+      email: 'tms1932k1@gmail.com',
     },
   });
 
+  // Remove errorMes before navigate
+  useEffect(() => {
+    navigation.addListener('transitionStart', event => {
+      dispatch(removeErrors());
+    });
+    navigation.addListener('beforeRemove', event => {
+      dispatch(removeErrors());
+    });
+  }, [navigation]);
+
   // Handle get password by email input
-  const onGetPasswordByEmail = handleSubmit(data => {});
+  const onGetPasswordByEmail = handleSubmit(data => {
+    dispatch(postforgotPassword(data))
+      .unwrap()
+      .then(result => {
+        if (!result) {
+          dispatch(removeErrors());
+          navigation.navigate('SignInScreen');
+        }
+      });
+  });
 
   const statusBar = useMemo(
     () => (
@@ -76,15 +107,19 @@ export default function ForgotPasswordScreen() {
           )}
         />
       </View>
-      <Translation>
-        {t => (
-          <ContainedButton
-            onPress={onGetPasswordByEmail}
-            style={styles.continueBtn}>
-            {t('continue')}
-          </ContainedButton>
-        )}
-      </Translation>
+      {!isLoading && (
+        <Translation>
+          {t => (
+            <ButtonSection
+              errorMes={errorMes}
+              onPress={onGetPasswordByEmail}
+              style={styles.submitContainer}>
+              {t('continue')}
+            </ButtonSection>
+          )}
+        </Translation>
+      )}
+      {isLoading && <ActivityIndicator animating={true} />}
     </View>
   );
 }
@@ -99,7 +134,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: MyDimensions.paddingLarge,
   },
-  continueBtn: {
+  submitContainer: {
     marginTop: MyDimensions.paddingLarge,
   },
 });

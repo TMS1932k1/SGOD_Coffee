@@ -7,6 +7,7 @@ import SignUpInputs from './auth/SignUpInputs';
 import TermsModal from './auth/TermsModal';
 import Line from './common/Line';
 import OtpInputsSection from './auth/OtpInputsSection';
+import ButtonSection from './auth/ButtonSection';
 
 export {
   WelcomeSection,
@@ -18,4 +19,5 @@ export {
   TermsModal,
   Line,
   OtpInputsSection,
+  ButtonSection,
 };

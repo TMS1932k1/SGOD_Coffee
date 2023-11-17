@@ -11,15 +11,19 @@ import {
 } from '../../routes';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {otpInputHelper} from '../../utils';
+import {useAppDispatch} from '../../store/store';
+import {postVerification} from '../../store/auth/authSlice';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'VerificationOtpScreen'>;
 }
 
 export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
+  const dispatch = useAppDispatch();
+
   const route = useRoute<AuthStackRouteScreenProps<'VerificationOtpScreen'>>();
 
-  const [seconds, setSeconds] = useState(30);
+  const [seconds, setSeconds] = useState(60);
 
   useEffect(() => {
     // Decrease the countdown every second
@@ -41,11 +45,13 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
 
   const email = useMemo(() => route.params.email, [route]);
 
-  // Check fullfill input otp codes to pop [SignUpScreen]
+  // Check fullfill to verify otp codes and pop [SignUpScreen]
   const onChangeOtpCodes = useCallback(
     (otp: Array<string | undefined>) => {
       if (otpInputHelper.checkFullfillOtp(otp)) {
-        console.log('Handle verification code');
+        // Verify otp codes with otp codes and email
+        dispatch(postVerification({otp: otp.join(''), email: email}));
+
         // Navigate to [SignUpScreen]
         naviagtion.navigate('SignUpScreen', {otp: otp.join('')});
       }
