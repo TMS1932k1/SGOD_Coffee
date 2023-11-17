@@ -37,7 +37,9 @@ export default function SignInScreen({navigation}: Props) {
   });
 
   // Navigate to [ForgotPasswordScreen]
-  const navigateForgotPasswordScreen = useCallback(() => {}, []);
+  const navigateForgotPasswordScreen = useCallback(() => {
+    navigation.navigate('ForgotPasswordScreen');
+  }, []);
 
   // Navigate to [SignUpScreen]
   const navigateSignUpScreen = useCallback(() => {

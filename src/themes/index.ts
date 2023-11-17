@@ -1,3 +1,4 @@
 import MyThemes from './themes';
+import {fontFamily} from './fonts';
 
-export {MyThemes};
+export {MyThemes, fontFamily};

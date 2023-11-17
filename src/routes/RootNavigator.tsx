@@ -10,7 +10,13 @@ import {
   RootNavigatorParamList,
   RootStackRoutesType,
 } from './routeConfig';
-import {OnboardingScreen, SignInScreen, SignUpScreen} from '../screens';
+import {
+  ForgotPasswordScreen,
+  OnboardingScreen,
+  SignInScreen,
+  SignUpScreen,
+  VerificationOtpScreen,
+} from '../screens';
 import {useTheme} from 'react-native-paper';
 import HomeScreen from '../screens/home/HomeScreen';
 
@@ -25,6 +31,8 @@ const authStackRoutes: AuthStackRoutesType = [
   {name: 'OnboardingScreen', component: OnboardingScreen},
   {name: 'SignInScreen', component: SignInScreen},
   {name: 'SignUpScreen', component: SignUpScreen},
+  {name: 'ForgotPasswordScreen', component: ForgotPasswordScreen},
+  {name: 'VerificationOtpScreen', component: VerificationOtpScreen},
 ];
 
 export default function RootNavigator() {

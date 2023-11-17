@@ -1,7 +1,7 @@
 import {Platform} from 'react-native';
 import {configureFonts} from 'react-native-paper';
 
-const fontFamily = {
+export const fontFamily = {
   mulishRegular: 'mulish_regular',
   mulishBold: 'mulish_bold',
   mulishSemiBold: 'mulish_semi_bold',

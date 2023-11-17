@@ -30,7 +30,9 @@ export type RootNavigatorParamList = {
 export type AuthNavigatorParamList = {
   OnboardingScreen: undefined;
   SignInScreen: undefined;
-  SignUpScreen: undefined;
+  SignUpScreen: {otp: string} | undefined;
+  ForgotPasswordScreen: undefined;
+  VerificationOtpScreen: {email: string};
 };
 
 // Declare type of root navigation props with generic

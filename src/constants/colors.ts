@@ -7,7 +7,7 @@ export const MyColors = {
   black: '#000000',
   active: '#2F2D2C',
   warning: '#FBBE21',
-  line: '##EAEAEA',
+  line: '#EAEAEA',
   weak: '#2F4B4E',
   error: '#E94242',
 };

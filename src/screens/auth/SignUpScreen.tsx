@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useLayoutEffect, useMemo, useState} from 'react';
 import {Translation} from 'react-i18next';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import {Button, useTheme} from 'react-native-paper';
@@ -12,13 +12,19 @@ import {
 } from '../../components';
 import {MyDimensions} from '../../constants';
 import {useForm} from 'react-hook-form';
-import {AuthStackNavigationScreenProps} from '../../routes';
+import {
+  AuthStackNavigationScreenProps,
+  AuthStackRouteScreenProps,
+} from '../../routes';
+import {useRoute} from '@react-navigation/native';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
 }
 
 export default function SignUpScreen({navigation}: Props) {
+  const route = useRoute<AuthStackRouteScreenProps<'SignUpScreen'>>();
+
   const theme = useTheme();
 
   const [visible, setVisible] = useState(false);
@@ -33,12 +39,19 @@ export default function SignUpScreen({navigation}: Props) {
     formState: {errors},
   } = useForm({
     defaultValues: {
-      username: '',
-      phone: '',
-      email: '',
-      password: '',
+      username: 'Son',
+      phone: '0932782114',
+      email: 'tms1932k1@gmail.com',
+      password: 'dt0932782114',
     },
   });
+
+  useLayoutEffect(() => {
+    const otp = route.params?.otp;
+    if (otp) {
+      // Start loading to post to sign up account
+    }
+  }, [route]);
 
   // Show term of use modal view
   const showTermOfUseModal = useCallback(() => setVisible(true), []);
@@ -48,7 +61,7 @@ export default function SignUpScreen({navigation}: Props) {
 
   // Handle sign up account
   const signUpWithEmailPasword = handleSubmit(data => {
-    console.log({data});
+    navigation.navigate('VerificationOtpScreen', {email: data.email});
   });
 
   // Navigate pop to [SignInScreen]
@@ -108,17 +121,12 @@ export default function SignUpScreen({navigation}: Props) {
     [],
   );
 
-  const inputsView = useMemo(
-    () => <SignUpInputs control={control} errors={errors} />,
-    [errors, control],
-  );
-
   return (
     <View style={styles.container}>
       {statusBar}
       {headerSection}
       <ScrollView style={styles.inputsContainer}>
-        {inputsView}
+        <SignUpInputs control={control} errors={errors} />
         {termsBtn}
         {signInBtn}
       </ScrollView>

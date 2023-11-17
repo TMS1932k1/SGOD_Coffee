@@ -4,9 +4,6 @@ import {View, StyleSheet} from 'react-native';
 import InputSection from './InputSection';
 import {SignUpForm} from '../../types';
 import {regexFormatHelper} from '../../utils';
-import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {useMemo} from 'react';
-import {useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 
 interface Props {
