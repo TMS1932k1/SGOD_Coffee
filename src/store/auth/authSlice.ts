@@ -1,5 +1,5 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {delayTimeHelper} from '../../utils';
+import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {asyncStorageHelper, delayTimeHelper} from '../../utils';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 import {
   ForgotForm,
@@ -60,6 +60,9 @@ export const postSignUp = createAsyncThunk(
   },
 );
 
+// POST forgot password api: request create new password to account from email
+//  Return undefine when requesting is sucessfull
+//  Return errors when requesting is failured
 export const postforgotPassword = createAsyncThunk(
   'auth/forgot',
   async (data: ForgotForm): Promise<string | undefined> => {
@@ -77,16 +80,25 @@ export const authSlice = createSlice({
     removeErrors: state => {
       state.errorMes = undefined;
     },
+    setUser: (state, action: PayloadAction<User>) => {
+      state.user = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
       .addCase(postVerification.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
+        // Save user at local storage
+        if (state.user)
+          asyncStorageHelper.saveObject<User>('@user', state.user);
       })
       .addCase(postSignIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
+        // Save user at local storage
+        if (state.user)
+          asyncStorageHelper.saveObject<User>('@user', state.user);
       })
       .addCase(postSignUp.fulfilled, (state, action) => {
         state.errorMes = action.payload;
@@ -116,5 +128,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const {removeErrors} = authSlice.actions;
+export const {removeErrors, setUser} = authSlice.actions;
 export default authSlice.reducer;

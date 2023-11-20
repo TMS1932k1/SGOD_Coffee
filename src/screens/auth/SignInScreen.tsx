@@ -1,7 +1,6 @@
 import {useCallback, useEffect, useMemo} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
-import {AuthStackNavigationScreenProps} from '../../routes';
 import {
   ButtonSection,
   CustomText,
@@ -15,9 +14,10 @@ import {Controller, useForm} from 'react-hook-form';
 import {regexFormatHelper} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignIn, removeErrors} from '../../store/auth/authSlice';
+import {AuthStackTypes} from '../../types';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
+  navigation: AuthStackTypes.AuthStackNavigationScreenProps<'SignInScreen'>;
 }
 
 export default function SignInScreen({navigation}: Props) {

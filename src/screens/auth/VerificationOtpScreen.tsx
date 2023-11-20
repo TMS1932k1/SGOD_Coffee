@@ -5,14 +5,14 @@ import {Translation} from 'react-i18next';
 import {CustomText, HeaderSection, OtpInputsSection} from '../../components';
 import {MyDimensions} from '../../constants';
 import {useRoute} from '@react-navigation/native';
-import {
-  AuthStackNavigationScreenProps,
-  AuthStackRouteScreenProps,
-} from '../../routes';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {otpInputHelper} from '../../utils';
 import {useAppDispatch} from '../../store/store';
 import {postVerification} from '../../store/auth/authSlice';
+import {
+  AuthStackNavigationScreenProps,
+  AuthStackRouteScreenProps,
+} from '../../types';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'VerificationOtpScreen'>;

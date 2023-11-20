@@ -12,12 +12,12 @@ import {
 } from '../../components';
 import {MyDimensions} from '../../constants';
 import {useForm} from 'react-hook-form';
-import {AuthStackNavigationScreenProps} from '../../routes';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignUp, removeErrors} from '../../store/auth/authSlice';
+import {AuthStackNavigationScreenProps} from '../../types';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
+  navigation: AuthStackNavigationScreenProps<'SignUpScreen'>;
 }
 
 export default function SignUpScreen({navigation}: Props) {

@@ -5,6 +5,8 @@ import {useEffect} from 'react';
 import {asyncStorageHelper} from './utils';
 import {useAppDispatch} from './store/store';
 import {setFirstOpenApp} from './store/app/appSlice';
+import {setUser} from './store/auth/authSlice';
+import {User} from './types';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,8 +16,14 @@ function App(): JSX.Element {
       const isFirstOpenApp = await asyncStorageHelper.getData(
         '@isFirstOpenApp',
       );
+
       if (isFirstOpenApp !== undefined) {
         dispatch(setFirstOpenApp());
+      }
+
+      const user = await asyncStorageHelper.getData<User>('@user');
+      if (user) {
+        dispatch(setUser(user));
       }
     };
 

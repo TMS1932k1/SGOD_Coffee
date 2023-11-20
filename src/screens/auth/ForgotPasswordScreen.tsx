@@ -8,10 +8,10 @@ import {Controller, useForm} from 'react-hook-form';
 import {regexFormatHelper} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postforgotPassword, removeErrors} from '../../store/auth/authSlice';
-import {AuthStackNavigationScreenProps} from '../../routes';
+import {AuthStackNavigationScreenProps} from '../../types';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'OnboardingScreen'>;
+  navigation: AuthStackNavigationScreenProps<'ForgotPasswordScreen'>;
 }
 
 export default function ForgotPasswordScreen({navigation}: Props) {

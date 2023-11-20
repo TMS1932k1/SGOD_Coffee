@@ -6,11 +6,8 @@ import {
 import {useMemo} from 'react';
 import {
   AuthNavigatorParamList,
-  AuthStackRoutesType,
   HomeNavigatorParamList,
-  HomeStackRoutesType,
   OnboardingNavigatorParamList,
-  OnboardingStackRoutesType,
 } from './routeConfig';
 import {
   ForgotPasswordScreen,
@@ -22,6 +19,11 @@ import {
 import {useTheme} from 'react-native-paper';
 import HomeScreen from '../screens/home/HomeScreen';
 import {useAppSelector} from '../store/store';
+import {
+  AuthStackRoutesType,
+  HomeStackRoutesType,
+  OnboardingStackRoutesType,
+} from '../types';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 const AuthStack = createNativeStackNavigator<AuthNavigatorParamList>();

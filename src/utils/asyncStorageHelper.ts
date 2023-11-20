@@ -11,15 +11,15 @@ const saveString = async (key: string, value: string) => {
   }
 };
 
-const saveObject = async (key: string, value: object) => {
+const saveObject = async <T>(key: string, value: T) => {
   const jsonValue = JSON.stringify(value);
   return await saveString(key, jsonValue);
 };
 
-const getData = async (key: string) => {
+const getData = async <T>(key: string) => {
   try {
     const jsonValue = await AsyncStorage.getItem(key);
-    return jsonValue != null ? JSON.parse(jsonValue) : undefined;
+    return jsonValue != null ? (JSON.parse(jsonValue) as T) : undefined;
   } catch (e) {
     // error reading value
     console.log('AsyncStorage: Failed in get: ', e);
