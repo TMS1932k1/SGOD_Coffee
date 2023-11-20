@@ -11,7 +11,7 @@ interface Props {
   subtitle: string;
 }
 
-export default function HeaderSection({title, subtitle, style}: Props) {
+export default function AuthHeaderSection({title, subtitle, style}: Props) {
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);

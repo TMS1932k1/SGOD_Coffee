@@ -4,7 +4,7 @@ import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {
   ButtonSection,
   CustomText,
-  HeaderSection,
+  AuthHeaderSection,
   InputSection,
 } from '../../components';
 import {Translation} from 'react-i18next';
@@ -14,10 +14,10 @@ import {Controller, useForm} from 'react-hook-form';
 import {regexFormatHelper} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignIn, removeErrors} from '../../store/auth/authSlice';
-import {AuthStackTypes} from '../../types';
+import {AuthStackNavigationScreenProps} from '../../types';
 
 interface Props {
-  navigation: AuthStackTypes.AuthStackNavigationScreenProps<'SignInScreen'>;
+  navigation: AuthStackNavigationScreenProps<'SignInScreen'>;
 }
 
 export default function SignInScreen({navigation}: Props) {
@@ -81,7 +81,9 @@ export default function SignInScreen({navigation}: Props) {
   const headerSection = useMemo(
     () => (
       <Translation>
-        {t => <HeaderSection title={t('signin')} subtitle={t('signinSub')} />}
+        {t => (
+          <AuthHeaderSection title={t('signin')} subtitle={t('signinSub')} />
+        )}
       </Translation>
     ),
     [],

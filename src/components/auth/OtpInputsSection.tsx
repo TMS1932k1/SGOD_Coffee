@@ -78,6 +78,7 @@ export default function OtpInputsSection({
               inputRef.current = [...inputRef.current, ref];
             }
           }}
+          cursorColor={colors.primary}
           testID={`OTP${index}`}
           key={index}
           style={[styles.input]}

@@ -6,3 +6,4 @@ export type * from './auth/ForgotForm';
 export type * from './stack/AuthStack';
 export type * from './stack/HomeStack';
 export type * from './stack/OnboardingStack';
+export type * from './stack/TabStack';

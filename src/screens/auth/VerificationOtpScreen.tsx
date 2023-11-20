@@ -2,7 +2,11 @@ import {View, StatusBar, StyleSheet} from 'react-native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {Button, useTheme} from 'react-native-paper';
 import {Translation} from 'react-i18next';
-import {CustomText, HeaderSection, OtpInputsSection} from '../../components';
+import {
+  CustomText,
+  AuthHeaderSection,
+  OtpInputsSection,
+} from '../../components';
 import {MyDimensions} from '../../constants';
 import {useRoute} from '@react-navigation/native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
@@ -77,7 +81,7 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
     () => (
       <Translation>
         {t => (
-          <HeaderSection
+          <AuthHeaderSection
             title={t('verification')}
             subtitle={t('verificationSub', {email: email})}
           />

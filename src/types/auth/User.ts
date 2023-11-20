@@ -5,4 +5,5 @@ export type User = {
   phone: string;
   refreshToken: string;
   role: string;
+  point: number;
 };

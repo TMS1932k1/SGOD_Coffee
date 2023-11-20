@@ -4,5 +4,6 @@
   "name": "Son",
   "phone": "0932782114",
   "refreshToken": "12312312324345233",
-  "role": "user"
+  "role": "user",
+  "point": "5000"
 }

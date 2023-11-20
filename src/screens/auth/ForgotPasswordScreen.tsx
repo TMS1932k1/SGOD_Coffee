@@ -3,7 +3,7 @@ import {useEffect, useMemo} from 'react';
 import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
-import {ButtonSection, HeaderSection, InputSection} from '../../components';
+import {AuthHeaderSection, ButtonSection, InputSection} from '../../components';
 import {Controller, useForm} from 'react-hook-form';
 import {regexFormatHelper} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../store/store';
@@ -70,7 +70,7 @@ export default function ForgotPasswordScreen({navigation}: Props) {
     () => (
       <Translation>
         {t => (
-          <HeaderSection
+          <AuthHeaderSection
             title={t('forgotPassword')}
             subtitle={t('forgotPasswordSub')}
           />

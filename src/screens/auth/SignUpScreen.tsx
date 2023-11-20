@@ -6,7 +6,7 @@ import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {
   ButtonSection,
   CustomText,
-  HeaderSection,
+  AuthHeaderSection,
   SignUpInputs,
   TermsModal,
 } from '../../components';
@@ -92,7 +92,9 @@ export default function SignUpScreen({navigation}: Props) {
   const headerSection = useMemo(
     () => (
       <Translation>
-        {t => <HeaderSection title={t('signup')} subtitle={t('signupSub')} />}
+        {t => (
+          <AuthHeaderSection title={t('signup')} subtitle={t('signupSub')} />
+        )}
       </Translation>
     ),
     [],
