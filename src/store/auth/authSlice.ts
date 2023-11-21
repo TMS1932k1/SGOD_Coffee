@@ -21,8 +21,7 @@ const initialState: authState = {
 };
 
 // POST verification api: verify otp codes
-//  Return type user when verification is sucessfull
-//  Return undifine when verification is failured
+// Return user response
 export const postVerification = createAsyncThunk(
   'auth/verification',
   async (data: {otp: string; email: string}): Promise<UserResponse> => {
@@ -34,8 +33,7 @@ export const postVerification = createAsyncThunk(
 );
 
 // POST sign in api: sign in with email and password
-//  Return type user when signing in is sucessfull
-//  Return undifine when signing in is failured
+// Return user response
 export const postSignIn = createAsyncThunk(
   'auth/signin',
   async (data: SignInForm): Promise<UserResponse> => {
@@ -103,23 +101,28 @@ export const authSlice = createSlice({
       .addCase(postVerification.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
+        state.isLoading = false;
         // Save user at local storage
         if (state.user) saveString('@userToken', state.user.refreshToken);
       })
       .addCase(postSignIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
+        state.isLoading = false;
         // Save user at local storage
         if (state.user) saveString('@userToken', state.user.refreshToken);
       })
       .addCase(postSignUp.fulfilled, (state, action) => {
         state.errorMes = action.payload;
+        state.isLoading = false;
       })
       .addCase(postforgotPassword.fulfilled, (state, action) => {
         state.errorMes = action.payload;
+        state.isLoading = false;
       })
       .addCase(postfetchUserByToken.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.isLoading = false;
       })
       .addMatcher<PendingAction>(
         action => action.type.endsWith('/pending'),
@@ -131,12 +134,6 @@ export const authSlice = createSlice({
         action => action.type.endsWith('/rejected'),
         (state, action) => {
           state.user = undefined;
-          state.isLoading = false;
-        },
-      )
-      .addMatcher<FulfilledAction>(
-        action => action.type.endsWith('/fulfilled'),
-        (state, action) => {
           state.isLoading = false;
         },
       );

@@ -3,15 +3,19 @@ import {useEffect, useMemo} from 'react';
 import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
-import {AuthHeaderSection, ButtonSection, InputSection} from '../../components';
 import {Controller, useForm} from 'react-hook-form';
-import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postforgotPassword, removeErrors} from '../../store/auth/authSlice';
 import {regEmail} from '../../utils/regexFormat';
-import {AuthStackNavigationScreenProps} from '../../types/stack';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {HomeStackNavigationScreenProps} from '../../types/stack';
+import {
+  AuthHeaderSection,
+  ButtonSection,
+  InputSection,
+} from '../../components/auth';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'ForgotPasswordScreen'>;
+  navigation: HomeStackNavigationScreenProps<'ForgotPasswordScreen'>;
 }
 
 export default function ForgotPasswordScreen({navigation}: Props) {

@@ -7,9 +7,13 @@ import {
   NoticeScreen,
 } from '../../screens/home';
 import {MyDimensions} from '../../constants';
-import {TabItem} from '../../components';
 import {useTheme} from 'react-native-paper';
-import {TabStackRoutesType} from '../../types/stack';
+import {
+  HomeStackNavigationScreenProps,
+  TabStackRoutesType,
+} from '../../types/stack';
+import {useLayoutEffect} from 'react';
+import {TabItem} from '../../components/tabs';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
@@ -24,8 +28,19 @@ const tabScreens = tabRoutes.map(tabRoute => (
   <Tab.Screen key={tabRoute.name} {...tabRoute} />
 ));
 
-export function HomeTabNavigator() {
+interface Props {
+  navigation: HomeStackNavigationScreenProps<'HomeTabNavigator'>;
+}
+
+export function HomeTabNavigator({navigation}: Props) {
   const colors = useTheme().colors;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerShown: false,
+      navigationBarColor: colors.surface,
+    });
+  }, [navigation, colors]);
 
   return (
     <Tab.Navigator

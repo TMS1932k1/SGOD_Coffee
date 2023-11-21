@@ -3,7 +3,6 @@ import {
   BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
 import {
-  NavigatorScreenParams,
   ParamListBase,
   RouteConfig,
   StackNavigationState,
@@ -42,11 +41,7 @@ export type OnboardingNavigatorParamList = {
 
 // Declare home navigator param list
 export type HomeNavigatorParamList = {
-  HomeTabNavigator: NavigatorScreenParams<TabNavigatorParamList>;
-};
-
-// Declare auth navigator param list
-export type AuthNavigatorParamList = {
+  HomeTabNavigator: undefined;
   SignInScreen: undefined;
   SignUpScreen: {otp: string} | undefined;
   ForgotPasswordScreen: undefined;

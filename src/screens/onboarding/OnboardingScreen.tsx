@@ -1,10 +1,10 @@
 import {Image, StatusBar, StyleSheet, View} from 'react-native';
 import {useCallback, useEffect, useMemo} from 'react';
-import {WelcomeSection} from '../../components';
 import {MyColors} from '../../constants';
-import {useAppDispatch} from '../../store/store';
 import {setFirstOpenApp} from '../../store/app/appSlice';
 import {getData, saveObject} from '../../utils/asyncStorage';
+import {useAppDispatch} from '../../store/hooks';
+import {WelcomeSection} from '../../components/onboarding';
 
 export default function OnboardingScreen() {
   const dispatch = useAppDispatch();

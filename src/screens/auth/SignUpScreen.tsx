@@ -3,21 +3,21 @@ import {Translation} from 'react-i18next';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {
-  ButtonSection,
-  CustomText,
-  AuthHeaderSection,
-  SignUpInputs,
-  TermsModal,
-} from '../../components';
 import {MyDimensions} from '../../constants';
 import {useForm} from 'react-hook-form';
-import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignUp, removeErrors} from '../../store/auth/authSlice';
-import {AuthStackNavigationScreenProps} from '../../types/stack';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {HomeStackNavigationScreenProps} from '../../types/stack';
+import {
+  AuthHeaderSection,
+  ButtonSection,
+  SignUpInputs,
+  TermsModal,
+} from '../../components/auth';
+import {CustomText} from '../../components/common';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'SignUpScreen'>;
+  navigation: HomeStackNavigationScreenProps<'SignUpScreen'>;
 }
 
 export default function SignUpScreen({navigation}: Props) {

@@ -1,26 +1,28 @@
 import {useCallback, useEffect, useMemo} from 'react';
 import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
-import {
-  ButtonSection,
-  CustomText,
-  AuthHeaderSection,
-  InputSection,
-} from '../../components';
 import {Translation} from 'react-i18next';
 import {MyDimensions} from '../../constants';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {Controller, useForm} from 'react-hook-form';
-import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignIn, removeErrors} from '../../store/auth/authSlice';
 import {regEmail, regPassword} from '../../utils/regexFormat';
-import {AuthStackNavigationScreenProps} from '../../types/stack';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {HomeStackNavigationScreenProps} from '../../types/stack';
+import {
+  AuthHeaderSection,
+  ButtonSection,
+  InputSection,
+} from '../../components/auth';
+import {CustomText} from '../../components/common';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'SignInScreen'>;
+  navigation: HomeStackNavigationScreenProps<'SignInScreen'>;
 }
 
 export default function SignInScreen({navigation}: Props) {
+  const user = useAppSelector(state => state.authState.user);
+
   const theme = useTheme();
 
   const dispatch = useAppDispatch();
@@ -67,6 +69,13 @@ export default function SignInScreen({navigation}: Props) {
   const signInWithEmailPasword = handleSubmit(data => {
     dispatch(postSignIn(data));
   });
+
+  // Will navigate to HomeScreen when have user
+  useEffect(() => {
+    if (user) {
+      navigation.navigate('HomeTabNavigator');
+    }
+  }, [navigation, user]);
 
   const statusBar = useMemo(
     () => (

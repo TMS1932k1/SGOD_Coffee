@@ -1,17 +1,20 @@
 import {SafeAreaView, StyleSheet} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
 import {useEffect} from 'react';
-import {useAppDispatch} from './store/store';
 import {setFirstOpenApp} from './store/app/appSlice';
 import {postfetchUserByToken} from './store/auth/authSlice';
 import {getData} from './utils/asyncStorage';
 import RootNavigator from './routes/RootNavigator';
+import {useAppDispatch} from './store/hooks';
+import {getEvents} from './store/home/eventsSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const init = async () => {
+      dispatch(getEvents());
+
       const isFirstOpenApp = await getData('@isFirstOpenApp');
 
       if (isFirstOpenApp !== undefined) {
@@ -20,7 +23,7 @@ function App(): JSX.Element {
 
       const userToken = await getData<string>('@userToken');
       if (userToken) {
-        await dispatch(postfetchUserByToken(userToken)).unwrap();
+        dispatch(postfetchUserByToken(userToken));
       }
     };
 

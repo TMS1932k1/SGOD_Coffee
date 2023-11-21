@@ -1,8 +1,8 @@
 import {useMemo} from 'react';
-import {View, StatusBar, StyleSheet, ScrollView} from 'react-native';
+import {StatusBar, StyleSheet, ScrollView} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {HomeHeaderSection} from '../../components';
+import {HomeHeaderSection} from '../../components/tabs/home';
 
 export default function HomeScreen() {
   const colors = useTheme().colors;

@@ -2,30 +2,27 @@ import {View, StatusBar, StyleSheet} from 'react-native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {Button, useTheme} from 'react-native-paper';
 import {Translation} from 'react-i18next';
-import {
-  CustomText,
-  AuthHeaderSection,
-  OtpInputsSection,
-} from '../../components';
 import {MyDimensions} from '../../constants';
 import {useRoute} from '@react-navigation/native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {useAppDispatch} from '../../store/store';
 import {postVerification} from '../../store/auth/authSlice';
 import {checkFullfillOtp} from '../../utils/otpInput';
+import {useAppDispatch} from '../../store/hooks';
 import {
-  AuthStackNavigationScreenProps,
-  AuthStackRouteScreenProps,
+  HomeStackNavigationScreenProps,
+  HomeStackRouteScreenProps,
 } from '../../types/stack';
+import {AuthHeaderSection, OtpInputsSection} from '../../components/auth';
+import {CustomText} from '../../components/common';
 
 interface Props {
-  navigation: AuthStackNavigationScreenProps<'VerificationOtpScreen'>;
+  navigation: HomeStackNavigationScreenProps<'VerificationOtpScreen'>;
 }
 
 export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
   const dispatch = useAppDispatch();
 
-  const route = useRoute<AuthStackRouteScreenProps<'VerificationOtpScreen'>>();
+  const route = useRoute<HomeStackRouteScreenProps<'VerificationOtpScreen'>>();
 
   const [seconds, setSeconds] = useState(60);
 
