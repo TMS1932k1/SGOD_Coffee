@@ -2,19 +2,19 @@ import {Image, StatusBar, StyleSheet, View} from 'react-native';
 import {useCallback, useEffect, useMemo} from 'react';
 import {WelcomeSection} from '../../components';
 import {MyColors} from '../../constants';
-import {asyncStorageHelper} from '../../utils';
 import {useAppDispatch} from '../../store/store';
 import {setFirstOpenApp} from '../../store/app/appSlice';
+import {getData, saveObject} from '../../utils/asyncStorage';
 
 export default function OnboardingScreen() {
   const dispatch = useAppDispatch();
 
   // Set isFirstOpenApp in local storage
   const saveFirstOpenApp = useCallback(async () => {
-    const isFirstOpenApp = await asyncStorageHelper.getData('@isFirstOpenApp');
+    const isFirstOpenApp = await getData('@isFirstOpenApp');
     if (isFirstOpenApp === undefined) {
       console.log('First');
-      await asyncStorageHelper.saveObject('@isFirstOpenApp', {open: 'opened'});
+      await saveObject('@isFirstOpenApp', {open: 'opened'});
     }
   }, []);
 

@@ -10,6 +10,7 @@ import OtpInputsSection from './auth/OtpInputsSection';
 import ButtonSection from './auth/ButtonSection';
 import TabItem from './tabs/TabItem';
 import HomeHeaderSection from './tabs/home/HomeHeaderSection';
+import InfoUser from './tabs/home/InfoUser';
 
 export {
   WelcomeSection,
@@ -24,4 +25,5 @@ export {
   ButtonSection,
   TabItem,
   HomeHeaderSection,
+  InfoUser,
 };

@@ -9,22 +9,21 @@ import {
   HomeNavigatorParamList,
   OnboardingNavigatorParamList,
 } from './routeConfig';
-import {
-  ForgotPasswordScreen,
-  OnboardingScreen,
-  SignInScreen,
-  SignUpScreen,
-  VerificationOtpScreen,
-} from '../screens';
 import {useTheme} from 'react-native-paper';
 import {useAppSelector} from '../store/store';
+import {HomeTabNavigator} from './home/HomeTabNavigator';
 import {
   AuthStackRoutesType,
   HomeStackRoutesType,
   OnboardingStackRoutesType,
-} from '../types';
-import {} from '../screens';
-import {HomeTabNavigator} from './home/HomeTabNavigator';
+} from '../types/stack';
+import {
+  ForgotPasswordScreen,
+  SignInScreen,
+  SignUpScreen,
+  VerificationOtpScreen,
+} from '../screens/auth';
+import {OnboardingScreen} from '../screens/onboarding';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 const AuthStack = createNativeStackNavigator<AuthNavigatorParamList>();

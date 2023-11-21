@@ -1,4 +1,3 @@
-import {MyColors} from './colors';
-import {MyDimensions} from './dimensions';
-
-export {MyColors, MyDimensions};
+export * from './colors';
+export * from './dimensions';
+export * from './app';

@@ -10,13 +10,13 @@ import {
 import {MyDimensions} from '../../constants';
 import {useRoute} from '@react-navigation/native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {otpInputHelper} from '../../utils';
 import {useAppDispatch} from '../../store/store';
 import {postVerification} from '../../store/auth/authSlice';
+import {checkFullfillOtp} from '../../utils/otpInput';
 import {
   AuthStackNavigationScreenProps,
   AuthStackRouteScreenProps,
-} from '../../types';
+} from '../../types/stack';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'VerificationOtpScreen'>;
@@ -52,7 +52,7 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
   // Check fullfill to verify otp codes and pop [SignUpScreen]
   const onChangeOtpCodes = useCallback(
     (otp: Array<string | undefined>) => {
-      if (otpInputHelper.checkFullfillOtp(otp)) {
+      if (checkFullfillOtp(otp)) {
         // Verify otp codes with otp codes and email
         dispatch(postVerification({otp: otp.join(''), email: email}));
 

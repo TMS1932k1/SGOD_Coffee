@@ -3,6 +3,7 @@ import {View, StyleSheet, Image} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../../constants';
+import InfoUser from './InfoUser';
 
 export default function HomeHeaderSection() {
   const colors = useTheme().colors;
@@ -11,7 +12,9 @@ export default function HomeHeaderSection() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
+      <View style={styles.header}>
+        <InfoUser />
+      </View>
       {/* Carousel section */}
       <View style={styles.carouselView}>
         <Image
@@ -34,8 +37,10 @@ const styling = (colors: MD3Colors) =>
     header: {
       width: '100%',
       height: 275,
+      justifyContent: 'flex-end',
       backgroundColor: colors.tertiary,
-      padding: 90,
+      paddingHorizontal: MyDimensions.paddingLarge,
+      paddingBottom: 75 + MyDimensions.paddingLarge,
     },
     carouselView: {
       position: 'absolute',

@@ -10,4 +10,8 @@ export const MyColors = {
   line: '#EAEAEA',
   weak: '#212121',
   error: '#E94242',
+  bronze: '#f59531',
+  silver: '#c3ccd2',
+  gold: '#ffb912',
+  diamond: '#639ebc',
 };

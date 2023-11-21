@@ -11,10 +11,10 @@ import {Translation} from 'react-i18next';
 import {MyDimensions} from '../../constants';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {Controller, useForm} from 'react-hook-form';
-import {regexFormatHelper} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignIn, removeErrors} from '../../store/auth/authSlice';
-import {AuthStackNavigationScreenProps} from '../../types';
+import {regEmail, regPassword} from '../../utils/regexFormat';
+import {AuthStackNavigationScreenProps} from '../../types/stack';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'SignInScreen'>;
@@ -134,7 +134,7 @@ export default function SignInScreen({navigation}: Props) {
           control={control}
           rules={{
             required: true,
-            pattern: regexFormatHelper.regEmail,
+            pattern: regEmail,
           }}
           render={({field: {onChange, value}}) => (
             <Translation>
@@ -155,7 +155,7 @@ export default function SignInScreen({navigation}: Props) {
           control={control}
           rules={{
             required: true,
-            pattern: regexFormatHelper.regPassword,
+            pattern: regPassword,
           }}
           render={({field: {onChange, value}}) => (
             <Translation>

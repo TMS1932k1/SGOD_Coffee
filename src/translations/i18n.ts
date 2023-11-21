@@ -35,6 +35,7 @@ i18n.use(initReactI18next).init({
         verificationSub: 'Enter the OTP code we sent to\n{{email}}',
         resendCountDown: 'Resend in {{time}}s',
         resendTitle: 'Resend OTP code',
+        hi: 'Hi, {{name}}',
       },
     },
   },

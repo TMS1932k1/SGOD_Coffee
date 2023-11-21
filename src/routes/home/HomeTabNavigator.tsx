@@ -1,15 +1,15 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {TabNavigatorParamList} from '../routeConfig';
-import {TabStackRoutesType} from '../../types';
 import {
   CartScreen,
   FavoritesScreen,
   HomeScreen,
   NoticeScreen,
-} from '../../screens';
+} from '../../screens/home';
 import {MyDimensions} from '../../constants';
 import {TabItem} from '../../components';
 import {useTheme} from 'react-native-paper';
+import {TabStackRoutesType} from '../../types/stack';
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 

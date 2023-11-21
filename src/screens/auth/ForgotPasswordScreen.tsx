@@ -5,10 +5,10 @@ import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
 import {AuthHeaderSection, ButtonSection, InputSection} from '../../components';
 import {Controller, useForm} from 'react-hook-form';
-import {regexFormatHelper} from '../../utils';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postforgotPassword, removeErrors} from '../../store/auth/authSlice';
-import {AuthStackNavigationScreenProps} from '../../types';
+import {regEmail} from '../../utils/regexFormat';
+import {AuthStackNavigationScreenProps} from '../../types/stack';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'ForgotPasswordScreen'>;
@@ -90,7 +90,7 @@ export default function ForgotPasswordScreen({navigation}: Props) {
           control={control}
           rules={{
             required: true,
-            pattern: regexFormatHelper.regEmail,
+            pattern: regEmail,
           }}
           render={({field: {onChange, value}}) => (
             <Translation>

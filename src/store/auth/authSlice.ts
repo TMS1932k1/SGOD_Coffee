@@ -1,13 +1,14 @@
 import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {asyncStorageHelper, delayTimeHelper} from '../../utils';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
+import {delayTime} from '../../utils/delayTime';
+import {saveString} from '../../utils/asyncStorage';
 import {
   ForgotForm,
   SignInForm,
   SignUpForm,
   User,
   UserResponse,
-} from '../../types';
+} from '../../types/auth';
 
 interface authState {
   user?: User;
@@ -25,7 +26,7 @@ const initialState: authState = {
 export const postVerification = createAsyncThunk(
   'auth/verification',
   async (data: {otp: string; email: string}): Promise<UserResponse> => {
-    await delayTimeHelper.delayTime(2000);
+    await delayTime(2000);
     return data.otp === '1234' && data.email === 'tms1932k1@gmail.com'
       ? {user: require('../../assets/data/dummy_user.json') as User}
       : {error: 'Verification is failured!'};
@@ -38,7 +39,7 @@ export const postVerification = createAsyncThunk(
 export const postSignIn = createAsyncThunk(
   'auth/signin',
   async (data: SignInForm): Promise<UserResponse> => {
-    await delayTimeHelper.delayTime(2000);
+    await delayTime(2000);
     return data.password === 'dt0932782114' &&
       data.email === 'tms1932k1@gmail.com'
       ? {user: require('../../assets/data/dummy_user.json') as User}
@@ -52,7 +53,7 @@ export const postSignIn = createAsyncThunk(
 export const postSignUp = createAsyncThunk(
   'auth/signup',
   async (data: SignUpForm): Promise<string | undefined> => {
-    await delayTimeHelper.delayTime(2000);
+    await delayTime(2000);
     return data.password === 'dt0932782114' &&
       data.email === 'tms1932k1@gmail.com'
       ? undefined
@@ -66,10 +67,23 @@ export const postSignUp = createAsyncThunk(
 export const postforgotPassword = createAsyncThunk(
   'auth/forgot',
   async (data: ForgotForm): Promise<string | undefined> => {
-    await delayTimeHelper.delayTime(2000);
+    await delayTime(2000);
     return data.email === 'tms1932k1@gmail.com'
       ? undefined
       : 'Request to get password failured!';
+  },
+);
+
+// POST fetch user api: fetch user by userToken
+//  Return user when getting is sucessfull
+//  Return undeefined when not get user
+export const postfetchUserByToken = createAsyncThunk(
+  'auth/me',
+  async (userToken: string) => {
+    await delayTime(2000);
+    return userToken == '12312312324345233'
+      ? (require('../../assets/data/dummy_user.json') as User)
+      : undefined;
   },
 );
 
@@ -90,21 +104,22 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
         // Save user at local storage
-        if (state.user)
-          asyncStorageHelper.saveObject<User>('@user', state.user);
+        if (state.user) saveString('@userToken', state.user.refreshToken);
       })
       .addCase(postSignIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
         // Save user at local storage
-        if (state.user)
-          asyncStorageHelper.saveObject<User>('@user', state.user);
+        if (state.user) saveString('@userToken', state.user.refreshToken);
       })
       .addCase(postSignUp.fulfilled, (state, action) => {
         state.errorMes = action.payload;
       })
       .addCase(postforgotPassword.fulfilled, (state, action) => {
         state.errorMes = action.payload;
+      })
+      .addCase(postfetchUserByToken.fulfilled, (state, action) => {
+        state.user = action.payload;
       })
       .addMatcher<PendingAction>(
         action => action.type.endsWith('/pending'),

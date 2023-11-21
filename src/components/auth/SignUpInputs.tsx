@@ -1,10 +1,10 @@
-import {Control, Controller, FieldErrors, FieldValues} from 'react-hook-form';
+import {Control, Controller, FieldErrors} from 'react-hook-form';
 import {Translation} from 'react-i18next';
 import {View, StyleSheet} from 'react-native';
 import InputSection from './InputSection';
-import {SignUpForm} from '../../types';
-import {regexFormatHelper} from '../../utils';
 import {MyDimensions} from '../../constants';
+import {regEmail, regPassword, regPhone} from '../../utils/regexFormat';
+import {SignUpForm} from '../../types/auth';
 
 interface Props {
   control: Control<SignUpForm>;
@@ -40,7 +40,7 @@ export default function SignUpInputs({control, errors}: Props) {
         control={control}
         rules={{
           required: true,
-          pattern: regexFormatHelper.regPhone,
+          pattern: regPhone,
         }}
         render={({field: {onChange, value}}) => (
           <Translation>
@@ -63,7 +63,7 @@ export default function SignUpInputs({control, errors}: Props) {
         control={control}
         rules={{
           required: true,
-          pattern: regexFormatHelper.regEmail,
+          pattern: regEmail,
         }}
         render={({field: {onChange, value}}) => (
           <Translation>
@@ -85,7 +85,7 @@ export default function SignUpInputs({control, errors}: Props) {
         control={control}
         rules={{
           required: true,
-          pattern: regexFormatHelper.regPassword,
+          pattern: regPassword,
         }}
         render={({field: {onChange, value}}) => (
           <Translation>

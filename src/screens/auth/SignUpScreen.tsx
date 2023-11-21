@@ -14,7 +14,7 @@ import {MyDimensions} from '../../constants';
 import {useForm} from 'react-hook-form';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import {postSignUp, removeErrors} from '../../store/auth/authSlice';
-import {AuthStackNavigationScreenProps} from '../../types';
+import {AuthStackNavigationScreenProps} from '../../types/stack';
 
 interface Props {
   navigation: AuthStackNavigationScreenProps<'SignUpScreen'>;
