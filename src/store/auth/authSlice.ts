@@ -102,6 +102,7 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
         state.isLoading = false;
+
         // Save user at local storage
         if (state.user) saveString('@userToken', state.user.refreshToken);
       })
@@ -109,6 +110,7 @@ export const authSlice = createSlice({
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
         state.isLoading = false;
+
         // Save user at local storage
         if (state.user) saveString('@userToken', state.user.refreshToken);
       })
@@ -125,13 +127,13 @@ export const authSlice = createSlice({
         state.isLoading = false;
       })
       .addMatcher<PendingAction>(
-        action => action.type.endsWith('/pending'),
+        action => action.type.endsWith('pending'),
         (state, action) => {
           state.isLoading = true;
         },
       )
       .addMatcher<RejectedAction>(
-        action => action.type.endsWith('/rejected'),
+        action => action.type.endsWith('rejected'),
         (state, action) => {
           state.user = undefined;
           state.isLoading = false;

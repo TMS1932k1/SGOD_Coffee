@@ -12,6 +12,7 @@ import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../../constants';
 import {getColorOpacity} from '../../../utils/colorOpacity';
 import {fontFamily} from '../../../themes';
+import {Translation} from 'react-i18next';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -56,17 +57,22 @@ export default function SearchSession({style}: Props) {
   return (
     <View style={[styles.container, style]}>
       {icon}
-      <TextInput
-        value={searchText}
-        style={styles.input}
-        placeholder="Search coffee"
-        placeholderTextColor={colors.outline}
-        numberOfLines={1}
-        keyboardType="default"
-        cursorColor={colors.primary}
-        maxLength={30}
-        onChangeText={onChangeText}
-      />
+      <Translation>
+        {t => (
+          <TextInput
+            value={searchText}
+            style={styles.input}
+            placeholder={t('searchPlaceholder')}
+            placeholderTextColor={colors.outline}
+            numberOfLines={1}
+            keyboardType="default"
+            cursorColor={colors.primary}
+            maxLength={30}
+            onChangeText={onChangeText}
+          />
+        )}
+      </Translation>
+
       {searchText.length > 0 && (
         <IconButton
           icon={'close-circle-outline'}

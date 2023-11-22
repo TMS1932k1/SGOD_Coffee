@@ -3,6 +3,7 @@ import InfoUser from './InfoUser';
 import PlaceholderInfoUser from './PlaceholderInfoUser';
 import SearchSession from './SearchSession';
 import CarouselSection from './CarouselSection';
+import EventItem from './EventItem';
 
 export {
   HomeHeaderSection,
@@ -10,4 +11,5 @@ export {
   PlaceholderInfoUser,
   SearchSession,
   CarouselSection,
+  EventItem,
 };

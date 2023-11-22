@@ -1,4 +1,4 @@
-import {View, StatusBar, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {Button, useTheme} from 'react-native-paper';
 import {Translation} from 'react-i18next';
@@ -13,7 +13,7 @@ import {
   HomeStackRouteScreenProps,
 } from '../../types/stack';
 import {AuthHeaderSection, OtpInputsSection} from '../../components/auth';
-import {CustomText} from '../../components/common';
+import {CustomStatusBar, CustomText} from '../../components/common';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'VerificationOtpScreen'>;
@@ -38,9 +38,7 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
     return () => clearInterval(timer);
   }, []);
 
-  const theme = useTheme();
-
-  const colors = useMemo(() => theme.colors, [theme]);
+  const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
@@ -63,16 +61,6 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
   const resendOtp = useCallback(() => {
     setSeconds(30);
   }, []);
-
-  const statusBar = useMemo(
-    () => (
-      <StatusBar
-        barStyle={theme.dark ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
-      />
-    ),
-    [colors, theme],
-  );
 
   const headerSection = useMemo(
     () => (
@@ -101,7 +89,7 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
 
   return (
     <View style={styles.container}>
-      {statusBar}
+      <CustomStatusBar />
       {headerSection}
       {otpInputs}
       <Translation>

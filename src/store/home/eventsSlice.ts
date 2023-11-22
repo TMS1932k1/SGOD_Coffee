@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {Event} from '../../types/event';
 import {delayTime} from '../../utils/delayTime';
-import {PendingAction, RejectedAction} from '../store';
+import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 
 interface eventsState {
   events?: Event[];
@@ -33,14 +33,20 @@ export const eventsSlice = createSlice({
         state.error = action.payload.error;
         state.isLoading = false;
       })
+      .addMatcher<FulfilledAction>(
+        action => action.type.endsWith('fulfilled'),
+        (state, action) => {
+          state.isLoading = false;
+        },
+      )
       .addMatcher<PendingAction>(
-        action => action.type.endsWith('/pending'),
+        action => action.type.endsWith('pending'),
         (state, action) => {
           state.isLoading = true;
         },
       )
       .addMatcher<RejectedAction>(
-        action => action.type.endsWith('/rejected'),
+        action => action.type.endsWith('rejected'),
         (state, action) => {
           state.events = undefined;
           state.isLoading = false;

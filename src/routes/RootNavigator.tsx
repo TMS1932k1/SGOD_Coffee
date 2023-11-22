@@ -19,6 +19,7 @@ import {
 } from '../screens/auth';
 import {OnboardingScreen} from '../screens/onboarding';
 import {useAppSelector} from '../store/hooks';
+import {EventDetailScreen} from '../screens/event';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 
@@ -35,6 +36,7 @@ const homeStackRoutes: HomeStackRoutesType = [
   {name: 'SignUpScreen', component: SignUpScreen},
   {name: 'ForgotPasswordScreen', component: ForgotPasswordScreen},
   {name: 'VerificationOtpScreen', component: VerificationOtpScreen},
+  {name: 'EventDetailScreen', component: EventDetailScreen},
 ];
 
 export default function RootNavigator() {

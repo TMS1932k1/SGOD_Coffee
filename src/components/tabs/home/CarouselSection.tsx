@@ -1,56 +1,81 @@
-import {View, ViewStyle, StyleProp, StyleSheet, Text} from 'react-native';
+import {View, ViewStyle, StyleProp, StyleSheet, Image} from 'react-native';
 import {useAppSelector} from '../../../store/hooks';
-import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useTheme} from 'react-native-paper';
 import {useCallback, useMemo} from 'react';
-import {CustomText} from '../../common';
+import Swiper from 'react-native-swiper';
 import {MyDimensions} from '../../../constants';
+import EventItem from './EventItem';
+import {HomeStackNavigationScreenProps} from '../../../types/stack';
+import {useNavigation} from '@react-navigation/native';
+import {Event} from '../../../types/event';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
 export default function CarouselSection({style}: Props) {
+  const navigation =
+    useNavigation<HomeStackNavigationScreenProps<'HomeTabNavigator'>>();
+
   const events = useAppSelector(state => state.eventsState.events);
 
   const isLoading = useAppSelector(state => state.eventsState.isLoading);
 
   const colors = useTheme().colors;
 
-  const styles = useMemo(() => styling(colors), [colors]);
+  // Navigate to [EventDetailScreen] with [event: Event]
+  const onPressEventItem = useCallback(
+    (event: Event) => {
+      navigation.navigate('EventDetailScreen', {event: event});
+    },
+    [navigation],
+  );
 
-  const placeHolder = useCallback(
-    (mes: string) => (
-      <View style={styles.placeholderContainer}>
-        <CustomText variant="body1">{mes}</CustomText>
+  const placeHolder = useMemo(
+    () => (
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.image}
+          source={require('../../../assets/images/placeholderevent.jpg')}
+        />
       </View>
     ),
-    [styles],
+    [],
   );
 
   return (
-    <View style={[styles.conatainer, style]}>
+    <View style={[styles.container, style]}>
       {isLoading || !events || events.length <= 0 ? (
-        placeHolder(isLoading ? 'Waiting' : 'Empty')
+        placeHolder
       ) : (
-        <View />
+        <Swiper
+          autoplay={true}
+          autoplayTimeout={10}
+          dotColor={colors.outline}
+          activeDotColor={colors.primary}>
+          {events.map(item => (
+            <EventItem key={item.id} event={item} onPress={onPressEventItem} />
+          ))}
+        </Swiper>
       )}
     </View>
   );
 }
 
-const styling = (colors: MD3Colors) =>
-  StyleSheet.create({
-    conatainer: {
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    placeholderContainer: {
-      width: '100%',
-      height: '100%',
-      alignItems: 'center',
-      justifyContent: 'center',
-      borderRadius: MyDimensions.borderRadiusMedium,
-      backgroundColor: colors.outline,
-    },
-  });
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    width: '100%',
+    height: '100%',
+    paddingHorizontal: MyDimensions.paddingLarge,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    borderRadius: MyDimensions.borderRadiusMedium,
+    resizeMode: 'contain',
+  },
+});

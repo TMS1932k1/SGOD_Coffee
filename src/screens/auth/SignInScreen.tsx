@@ -1,5 +1,5 @@
 import {useCallback, useEffect, useMemo} from 'react';
-import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {Translation} from 'react-i18next';
 import {MyDimensions} from '../../constants';
@@ -14,7 +14,7 @@ import {
   ButtonSection,
   InputSection,
 } from '../../components/auth';
-import {CustomText} from '../../components/common';
+import {CustomStatusBar, CustomText} from '../../components/common';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'SignInScreen'>;
@@ -23,14 +23,13 @@ interface Props {
 export default function SignInScreen({navigation}: Props) {
   const user = useAppSelector(state => state.authState.user);
 
-  const theme = useTheme();
-
   const dispatch = useAppDispatch();
 
   const isLoading = useAppSelector(state => state.authState.isLoading);
+
   const errorMes = useAppSelector(state => state.authState.errorMes);
 
-  const colors = useMemo(() => theme.colors, [theme]);
+  const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
@@ -76,16 +75,6 @@ export default function SignInScreen({navigation}: Props) {
       navigation.navigate('HomeTabNavigator');
     }
   }, [navigation, user]);
-
-  const statusBar = useMemo(
-    () => (
-      <StatusBar
-        barStyle={theme.dark ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
-      />
-    ),
-    [colors, theme],
-  );
 
   const headerSection = useMemo(
     () => (
@@ -135,7 +124,7 @@ export default function SignInScreen({navigation}: Props) {
 
   return (
     <View style={styles.container}>
-      {statusBar}
+      <CustomStatusBar />
       {headerSection}
       <ScrollView style={styles.inputsContainer}>
         <Controller

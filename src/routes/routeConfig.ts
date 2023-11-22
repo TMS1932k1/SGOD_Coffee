@@ -11,6 +11,7 @@ import {
   NativeStackNavigationEventMap,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
+import {Event} from '../types/event';
 
 // Declare stack routes array with generic
 export type StackRoutesType<ParamList extends ParamListBase> = Array<
@@ -46,6 +47,7 @@ export type HomeNavigatorParamList = {
   SignUpScreen: {otp: string} | undefined;
   ForgotPasswordScreen: undefined;
   VerificationOtpScreen: {email: string};
+  EventDetailScreen: {event: Event};
 };
 
 // Declare bottom navigation navigator param list

@@ -22,6 +22,7 @@ function App(): JSX.Element {
       }
 
       const userToken = await getData<string>('@userToken');
+
       if (userToken) {
         dispatch(postfetchUserByToken(userToken));
       }

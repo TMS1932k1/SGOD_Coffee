@@ -1,6 +1,6 @@
-import {View, StyleSheet, StatusBar} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useEffect, useMemo} from 'react';
-import {ActivityIndicator, useTheme} from 'react-native-paper';
+import {ActivityIndicator} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
 import {Controller, useForm} from 'react-hook-form';
@@ -13,20 +13,17 @@ import {
   ButtonSection,
   InputSection,
 } from '../../components/auth';
+import {CustomStatusBar} from '../../components/common';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'ForgotPasswordScreen'>;
 }
 
 export default function ForgotPasswordScreen({navigation}: Props) {
-  const theme = useTheme();
-
   const dispatch = useAppDispatch();
 
   const isLoading = useAppSelector(state => state.authState.isLoading);
   const errorMes = useAppSelector(state => state.authState.errorMes);
-
-  const colors = useMemo(() => theme.colors, [theme]);
 
   const {
     control,
@@ -60,16 +57,6 @@ export default function ForgotPasswordScreen({navigation}: Props) {
       });
   });
 
-  const statusBar = useMemo(
-    () => (
-      <StatusBar
-        barStyle={theme.dark ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
-      />
-    ),
-    [colors, theme],
-  );
-
   const headerSection = useMemo(
     () => (
       <Translation>
@@ -86,7 +73,7 @@ export default function ForgotPasswordScreen({navigation}: Props) {
 
   return (
     <View style={styles.container}>
-      {statusBar}
+      <CustomStatusBar />
       {headerSection}
       <View style={styles.inputsContainer}>
         <Controller

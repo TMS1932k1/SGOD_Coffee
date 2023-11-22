@@ -31,12 +31,12 @@ const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     container: {
       width: '100%',
-      height: 350,
+      height: 380,
       alignItems: 'center',
     },
     header: {
       width: '100%',
-      height: 275,
+      height: 285,
       justifyContent: 'flex-end',
       backgroundColor: colors.tertiary,
       paddingHorizontal: MyDimensions.paddingLarge,
@@ -46,11 +46,9 @@ const styling = (colors: MD3Colors) =>
       position: 'absolute',
       bottom: 0,
       width: '100%',
-      height: 150,
-      paddingHorizontal: MyDimensions.paddingLarge,
+      height: 170,
     },
-    carousel: {width: '100%', height: 150},
     search: {
-      marginTop: MyDimensions.paddingMedium,
+      marginTop: MyDimensions.paddingLarge,
     },
   });

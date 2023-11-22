@@ -57,7 +57,7 @@ export default function InfoUser({style}: Props) {
               {t => (
                 <CustomText
                   style={styles.textColor}
-                  variant="body1"
+                  variant="subheading2"
                   numberOfLines={1}>
                   {t('hi', {name: user?.name})}
                 </CustomText>

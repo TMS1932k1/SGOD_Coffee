@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import {Translation} from 'react-i18next';
-import {View, StyleSheet, StatusBar, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../constants';
@@ -14,15 +14,13 @@ import {
   SignUpInputs,
   TermsModal,
 } from '../../components/auth';
-import {CustomText} from '../../components/common';
+import {CustomStatusBar, CustomText} from '../../components/common';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'SignUpScreen'>;
 }
 
 export default function SignUpScreen({navigation}: Props) {
-  const theme = useTheme();
-
   const [visible, setVisible] = useState(false);
 
   const dispatch = useAppDispatch();
@@ -30,7 +28,7 @@ export default function SignUpScreen({navigation}: Props) {
   const isLoading = useAppSelector(state => state.authState.isLoading);
   const errorMes = useAppSelector(state => state.authState.errorMes);
 
-  const colors = useMemo(() => theme.colors, [theme]);
+  const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
@@ -79,16 +77,6 @@ export default function SignUpScreen({navigation}: Props) {
     navigation.navigate('SignInScreen');
   }, [navigation]);
 
-  const statusBar = useMemo(
-    () => (
-      <StatusBar
-        barStyle={theme.dark ? 'light-content' : 'dark-content'}
-        backgroundColor={colors.background}
-      />
-    ),
-    [colors, theme],
-  );
-
   const headerSection = useMemo(
     () => (
       <Translation>
@@ -135,7 +123,7 @@ export default function SignUpScreen({navigation}: Props) {
 
   return (
     <View style={styles.container}>
-      {statusBar}
+      <CustomStatusBar />
       {headerSection}
       <ScrollView style={styles.inputsContainer}>
         <SignUpInputs control={control} errors={errors} />
