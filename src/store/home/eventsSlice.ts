@@ -4,7 +4,7 @@ import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 
 interface eventsState {
-  events?: Event[];
+  events: Event[];
   error?: string;
   isLoading: boolean;
 }
@@ -16,14 +16,14 @@ const initialState: eventsState = {
 
 // GET fetch events array
 // Return event response
-export const getEvents = createAsyncThunk('home/events', async () => {
+export const getEvents = createAsyncThunk('get/events', async () => {
   await delayTime(2000);
   const events = require('../../assets/data/dummy_event.json');
   return true ? {events: events} : {error: 'Fetching events is failured!'};
 });
 
 export const eventsSlice = createSlice({
-  name: 'home',
+  name: 'events',
   initialState,
   reducers: {},
   extraReducers(builder) {
@@ -31,24 +31,23 @@ export const eventsSlice = createSlice({
       .addCase(getEvents.fulfilled, (state, action) => {
         state.events = action.payload.events;
         state.error = action.payload.error;
-        state.isLoading = false;
       })
       .addMatcher<FulfilledAction>(
-        action => action.type.endsWith('fulfilled'),
+        action => action.type.endsWith('/events/fulfilled'),
         (state, action) => {
           state.isLoading = false;
         },
       )
       .addMatcher<PendingAction>(
-        action => action.type.endsWith('pending'),
+        action => action.type.endsWith('/events/pending'),
         (state, action) => {
           state.isLoading = true;
         },
       )
       .addMatcher<RejectedAction>(
-        action => action.type.endsWith('rejected'),
+        action => action.type.endsWith('/events/rejected'),
         (state, action) => {
-          state.events = undefined;
+          state.events = [];
           state.isLoading = false;
         },
       );

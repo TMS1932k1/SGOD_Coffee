@@ -36,17 +36,17 @@ const styling = (colors: MD3Colors) =>
     },
     header: {
       width: '100%',
-      height: 285,
+      height: 300,
       justifyContent: 'flex-end',
       backgroundColor: colors.tertiary,
       paddingHorizontal: MyDimensions.paddingLarge,
-      paddingBottom: 75 + MyDimensions.paddingMedium,
+      paddingBottom: 80 + MyDimensions.paddingMedium,
     },
     carouselView: {
       position: 'absolute',
       bottom: 0,
       width: '100%',
-      height: 170,
+      height: 160,
     },
     search: {
       marginTop: MyDimensions.paddingLarge,

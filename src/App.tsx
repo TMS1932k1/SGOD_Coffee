@@ -7,6 +7,7 @@ import {getData} from './utils/asyncStorage';
 import RootNavigator from './routes/RootNavigator';
 import {useAppDispatch} from './store/hooks';
 import {getEvents} from './store/home/eventsSlice';
+import {getCategories} from './store/home/categoriesSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ function App(): JSX.Element {
   useEffect(() => {
     const init = async () => {
       dispatch(getEvents());
+      dispatch(getCategories());
 
       const isFirstOpenApp = await getData('@isFirstOpenApp');
 

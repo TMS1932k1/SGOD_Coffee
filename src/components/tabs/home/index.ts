@@ -4,6 +4,9 @@ import PlaceholderInfoUser from './PlaceholderInfoUser';
 import SearchSession from './SearchSession';
 import CarouselSection from './CarouselSection';
 import EventItem from './EventItem';
+import CategoriesSection from './CategoriesSection';
+import CategoryItem from './CategoryItem';
+import CoffeeCategorySection from './CoffeeCategorySection';
 
 export {
   HomeHeaderSection,
@@ -12,4 +15,7 @@ export {
   SearchSession,
   CarouselSection,
   EventItem,
+  CategoriesSection,
+  CategoryItem,
+  CoffeeCategorySection,
 };

@@ -1,0 +1,60 @@
+{
+  "page": 1,
+  "totals": 6,
+  "coffees": [
+    {
+      "id": 1,
+      "name": "Machiato",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://media.cooky.vn/images/blog-2016/macchiato-la-gi-tai-sao-lai-duoc-gioi-tre-me-man-di-dau-cung-goi-macchiato-1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Machiato",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://media.cooky.vn/images/blog-2016/macchiato-la-gi-tai-sao-lai-duoc-gioi-tre-me-man-di-dau-cung-goi-macchiato-1.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Machiato",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://media.cooky.vn/images/blog-2016/macchiato-la-gi-tai-sao-lai-duoc-gioi-tre-me-man-di-dau-cung-goi-macchiato-1.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Machiato",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://media.cooky.vn/images/blog-2016/macchiato-la-gi-tai-sao-lai-duoc-gioi-tre-me-man-di-dau-cung-goi-macchiato-1.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Machiato",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://media.cooky.vn/images/blog-2016/macchiato-la-gi-tai-sao-lai-duoc-gioi-tre-me-man-di-dau-cung-goi-macchiato-1.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Machiato",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://media.cooky.vn/images/blog-2016/macchiato-la-gi-tai-sao-lai-duoc-gioi-tre-me-man-di-dau-cung-goi-macchiato-1.jpg"
+    }
+  ]
+}

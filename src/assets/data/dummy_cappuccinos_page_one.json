@@ -1,0 +1,60 @@
+{
+  "page": 1,
+  "totals": 18,
+  "coffees": [
+    {
+      "id": 1,
+      "name": "Cappuchino",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Cappuchino",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Cappuchino",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Cappuchino",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Cappuchino",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Cappuchino",
+      "classify": "With Chocolate",
+      "price": 3.4,
+      "rate": 4.8,
+      "rateCount": 230,
+      "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+    }
+  ]
+}

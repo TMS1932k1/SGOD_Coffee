@@ -2,12 +2,16 @@ import {AsyncThunk, configureStore} from '@reduxjs/toolkit';
 import authSlice from './auth/authSlice';
 import appSlice from './app/appSlice';
 import eventsSlice from './home/eventsSlice';
+import categoriesSlice from './home/categoriesSlice';
+import coffeesSlice from './home/coffeesSlice';
 
 export const store = configureStore({
   reducer: {
     authState: authSlice,
     appState: appSlice,
     eventsState: eventsSlice,
+    categoriesState: categoriesSlice,
+    coffeesState: coffeesSlice,
   },
 });
 

@@ -23,7 +23,7 @@ const initialState: authState = {
 // POST verification api: verify otp codes
 // Return user response
 export const postVerification = createAsyncThunk(
-  'auth/verification',
+  'verification/auth',
   async (data: {otp: string; email: string}): Promise<UserResponse> => {
     await delayTime(2000);
     return data.otp === '1234' && data.email === 'tms1932k1@gmail.com'
@@ -35,7 +35,7 @@ export const postVerification = createAsyncThunk(
 // POST sign in api: sign in with email and password
 // Return user response
 export const postSignIn = createAsyncThunk(
-  'auth/signin',
+  'signin/auth',
   async (data: SignInForm): Promise<UserResponse> => {
     await delayTime(2000);
     return data.password === 'dt0932782114' &&
@@ -49,7 +49,7 @@ export const postSignIn = createAsyncThunk(
 //  Return undefine when signing up is sucessfull
 //  Return errors when signing up is failured
 export const postSignUp = createAsyncThunk(
-  'auth/signup',
+  'signup/auth',
   async (data: SignUpForm): Promise<string | undefined> => {
     await delayTime(2000);
     return data.password === 'dt0932782114' &&
@@ -63,7 +63,7 @@ export const postSignUp = createAsyncThunk(
 //  Return undefine when requesting is sucessfull
 //  Return errors when requesting is failured
 export const postforgotPassword = createAsyncThunk(
-  'auth/forgot',
+  'forgot/auth',
   async (data: ForgotForm): Promise<string | undefined> => {
     await delayTime(2000);
     return data.email === 'tms1932k1@gmail.com'
@@ -76,7 +76,7 @@ export const postforgotPassword = createAsyncThunk(
 //  Return user when getting is sucessfull
 //  Return undeefined when not get user
 export const postfetchUserByToken = createAsyncThunk(
-  'auth/me',
+  'me/auth',
   async (userToken: string) => {
     await delayTime(2000);
     return userToken == '12312312324345233'
@@ -101,7 +101,6 @@ export const authSlice = createSlice({
       .addCase(postVerification.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
-        state.isLoading = false;
 
         // Save user at local storage
         if (state.user) saveString('@userToken', state.user.refreshToken);
@@ -109,31 +108,33 @@ export const authSlice = createSlice({
       .addCase(postSignIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
-        state.isLoading = false;
 
         // Save user at local storage
         if (state.user) saveString('@userToken', state.user.refreshToken);
       })
       .addCase(postSignUp.fulfilled, (state, action) => {
         state.errorMes = action.payload;
-        state.isLoading = false;
       })
       .addCase(postforgotPassword.fulfilled, (state, action) => {
         state.errorMes = action.payload;
-        state.isLoading = false;
       })
       .addCase(postfetchUserByToken.fulfilled, (state, action) => {
         state.user = action.payload;
-        state.isLoading = false;
       })
+      .addMatcher<FulfilledAction>(
+        action => action.type.endsWith('auth/fulfilled'),
+        (state, action) => {
+          state.isLoading = false;
+        },
+      )
       .addMatcher<PendingAction>(
-        action => action.type.endsWith('pending'),
+        action => action.type.endsWith('auth/pending'),
         (state, action) => {
           state.isLoading = true;
         },
       )
       .addMatcher<RejectedAction>(
-        action => action.type.endsWith('rejected'),
+        action => action.type.endsWith('auth/rejected'),
         (state, action) => {
           state.user = undefined;
           state.isLoading = false;

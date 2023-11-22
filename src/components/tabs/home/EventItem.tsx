@@ -28,7 +28,7 @@ export default function EventItem({onPress, event}: Props) {
 const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
-    height: 150,
+    height: '100%',
     paddingHorizontal: MyDimensions.paddingLarge,
   },
   image: {
