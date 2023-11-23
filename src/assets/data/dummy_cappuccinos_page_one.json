@@ -5,7 +5,7 @@
     {
       "id": 1,
       "name": "Cappuchino",
-      "classify": "With Chocolate",
+      "classify": "With Chocolate1",
       "price": 3.4,
       "rate": 4.8,
       "rateCount": 230,
@@ -14,16 +14,15 @@
     {
       "id": 2,
       "name": "Cappuchino",
-      "classify": "With Chocolate",
+      "classify": "With Chocolate2",
       "price": 3.4,
-      "rate": 4.8,
       "rateCount": 230,
       "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
     },
     {
       "id": 3,
       "name": "Cappuchino",
-      "classify": "With Chocolate",
+      "classify": "With Chocolate3",
       "price": 3.4,
       "rate": 4.8,
       "rateCount": 230,
@@ -32,16 +31,15 @@
     {
       "id": 4,
       "name": "Cappuchino",
-      "classify": "With Chocolate",
+      "classify": "With Chocolate4",
       "price": 3.4,
-      "rate": 4.8,
       "rateCount": 230,
       "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
     },
     {
       "id": 5,
       "name": "Cappuchino",
-      "classify": "With Chocolate",
+      "classify": "With Chocolate5",
       "price": 3.4,
       "rate": 4.8,
       "rateCount": 230,
@@ -50,7 +48,7 @@
     {
       "id": 6,
       "name": "Cappuchino",
-      "classify": "With Chocolate",
+      "classify": "With Chocolate6",
       "price": 3.4,
       "rate": 4.8,
       "rateCount": 230,

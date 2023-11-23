@@ -6,6 +6,7 @@ import {
   CategoriesSection,
   CoffeeCategorySection,
   HomeHeaderSection,
+  RecommendSection,
 } from '../../components/tabs/home';
 import {MyDimensions} from '../../constants';
 
@@ -23,9 +24,11 @@ export default function HomeScreen() {
 
   return (
     <ScrollView style={styles.container}>
+      {statusBar}
       <HomeHeaderSection />
-      <CategoriesSection style={styles.categories} />
-      <CoffeeCategorySection style={styles.coffees} />
+      <CategoriesSection style={styles.sectionContainer} />
+      <CoffeeCategorySection style={styles.coffeesCategory} />
+      <RecommendSection style={styles.sectionContainer} />
     </ScrollView>
   );
 }
@@ -36,12 +39,12 @@ const styling = (colors: MD3Colors) =>
       flex: 1,
       backgroundColor: colors.background,
     },
-    categories: {
+    sectionContainer: {
       marginTop: MyDimensions.paddingLarge,
       marginLeft: MyDimensions.paddingLarge,
     },
-    coffees: {
+    coffeesCategory: {
       marginTop: MyDimensions.paddingMedium,
-      marginHorizontal: MyDimensions.paddingLarge,
+      marginLeft: MyDimensions.paddingLarge,
     },
   });

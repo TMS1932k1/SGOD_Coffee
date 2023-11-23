@@ -1,13 +1,13 @@
 import {View, ViewStyle, StyleProp, StyleSheet, Image} from 'react-native';
-import {useAppSelector} from '../../../store/hooks';
+import {useAppSelector} from '../../../../store/hooks';
 import {useTheme} from 'react-native-paper';
 import {useCallback, useMemo} from 'react';
 import Swiper from 'react-native-swiper';
-import {MyDimensions} from '../../../constants';
+import {MyDimensions} from '../../../../constants';
 import EventItem from './EventItem';
-import {HomeStackNavigationScreenProps} from '../../../types/stack';
+import {HomeStackNavigationScreenProps} from '../../../../types/stack';
 import {useNavigation} from '@react-navigation/native';
-import {Event} from '../../../types/event';
+import {Event} from '../../../../types/event';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -36,7 +36,7 @@ export default function CarouselSection({style}: Props) {
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
-          source={require('../../../assets/images/placeholderevent.jpg')}
+          source={require('../../../../assets/images/placeholderevent.jpg')}
         />
       </View>
     ),

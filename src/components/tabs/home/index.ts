@@ -2,11 +2,13 @@ import HomeHeaderSection from './HomeHeaderSection';
 import InfoUser from './InfoUser';
 import PlaceholderInfoUser from './PlaceholderInfoUser';
 import SearchSession from './SearchSession';
-import CarouselSection from './CarouselSection';
-import EventItem from './EventItem';
-import CategoriesSection from './CategoriesSection';
-import CategoryItem from './CategoryItem';
-import CoffeeCategorySection from './CoffeeCategorySection';
+import CarouselSection from './events/CarouselSection';
+import EventItem from './events/EventItem';
+import CategoriesSection from './categories/CategoriesSection';
+import CategoryItem from './categories/CategoryItem';
+import CoffeeCategorySection from './coffees/CoffeeCategorySection';
+import CoffeeItem from './coffees/CoffeeItem';
+import RecommendSection from './recommend/RecommendSection';
 
 export {
   HomeHeaderSection,
@@ -18,4 +20,6 @@ export {
   CategoriesSection,
   CategoryItem,
   CoffeeCategorySection,
+  CoffeeItem,
+  RecommendSection,
 };

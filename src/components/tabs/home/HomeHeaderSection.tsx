@@ -7,7 +7,7 @@ import InfoUser from './InfoUser';
 import {useAppSelector} from '../../../store/hooks';
 import PlaceholderInfoUser from './PlaceholderInfoUser';
 import SearchSession from './SearchSession';
-import CarouselSection from './CarouselSection';
+import CarouselSection from './events/CarouselSection';
 
 export default function HomeHeaderSection() {
   const isLoading = useAppSelector(state => state.authState.isLoading);

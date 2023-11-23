@@ -6,13 +6,14 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import {useAppDispatch, useAppSelector} from '../../../store/hooks';
-import {useCallback, useMemo, useState} from 'react';
+import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useTheme} from 'react-native-paper';
-import {MyDimensions} from '../../../constants';
+import {MyDimensions} from '../../../../constants';
 import CategoryItem from './CategoryItem';
-import {getCoffeesWithCategory} from '../../../store/home/coffeesSlice';
+import {getCoffeesWithCategory} from '../../../../store/home/coffeesCategorySlice';
+import {setCurrentIndex} from '../../../../store/home/categoriesSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -21,7 +22,11 @@ interface Props {
 export default function CategoriesSection({style}: Props) {
   const dispatch = useAppDispatch();
 
-  const [currentIndexCategory, setIndexCategory] = useState(0);
+  const fetchingCoffeesPromise = useRef<any>();
+
+  const currentIndexCategory = useAppSelector(
+    state => state.categoriesState.currentIndex,
+  );
 
   const isLoading = useAppSelector(state => state.categoriesState.isLoading);
 
@@ -33,7 +38,8 @@ export default function CategoriesSection({style}: Props) {
 
   // Set category's current index with [id: string]
   const onPressCategory = useCallback((id: string) => {
-    dispatch(getCoffeesWithCategory({idCategory: id}));
+    fetchingCoffeesPromise.current?.abort();
+    fetchingCoffeesPromise.current = dispatch(getCoffeesWithCategory(id));
   }, []);
 
   const placeholder = useMemo(
@@ -62,7 +68,7 @@ export default function CategoriesSection({style}: Props) {
               category={item}
               isSelected={index === currentIndexCategory}
               onPressItem={() => {
-                setIndexCategory(index);
+                dispatch(setCurrentIndex(index));
                 onPressCategory(item.id);
               }}
             />

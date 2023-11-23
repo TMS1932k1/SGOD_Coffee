@@ -55,7 +55,7 @@ export function HomeTabNavigator({navigation}: Props) {
             return (
               <TabItem
                 icon="home"
-                size={MyDimensions.iconMedium}
+                size={MyDimensions.iconLarge}
                 isCurrent={focused}
               />
             );

@@ -69,7 +69,7 @@ export default function InfoUser({style}: Props) {
             {t => (
               <CustomText
                 style={[styles.textColor, styles.pointNumber]}
-                variant="meta2">
+                variant="meta1">
                 {t('pointProgress', {
                   point: user?.point ?? 0,
                   maxPoint: MyApp.maxPoint,

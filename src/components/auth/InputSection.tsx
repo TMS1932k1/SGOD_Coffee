@@ -33,7 +33,7 @@ export default function InputSection({
   placeholder,
   keyboardType,
   isCanSecureText = false,
-  iconSize = MyDimensions.iconSmall,
+  iconSize = MyDimensions.iconMedium,
 }: Props) {
   const [secureText, setSecureText] = useState(isCanSecureText);
 
@@ -72,7 +72,7 @@ export default function InputSection({
             {isCanSecureText && (
               <IconButton
                 icon={!secureText ? 'eye-off' : 'eye'}
-                size={MyDimensions.iconSmall}
+                size={MyDimensions.iconMedium}
                 iconColor={colors.onBackground}
                 onPress={onChangeMode}
               />
@@ -113,7 +113,7 @@ const styling = (colors: MD3Colors) =>
       flex: 1,
     },
     eyeContainer: {
-      width: MyDimensions.iconSmall,
+      width: MyDimensions.iconMedium,
       justifyContent: 'center',
       alignItems: 'center',
     },

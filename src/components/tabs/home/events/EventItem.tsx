@@ -1,7 +1,7 @@
 import {View, StyleSheet, Pressable} from 'react-native';
-import {Event} from '../../../types/event';
+import {Event} from '../../../../types/event';
 import ImageBlurLoading from 'react-native-image-blur-loading';
-import {MyDimensions} from '../../../constants';
+import {MyDimensions} from '../../../../constants';
 
 interface Props {
   event: Event;
@@ -15,11 +15,7 @@ export default function EventItem({onPress, event}: Props) {
         onPress={() => {
           if (onPress) onPress(event);
         }}>
-        <ImageBlurLoading
-          style={styles.image}
-          source={{uri: event.imageUrl}}
-          thumbnailSource={require('../../../assets/images/placeholderevent.jpg')}
-        />
+        <ImageBlurLoading style={styles.image} source={{uri: event.imageUrl}} />
       </Pressable>
     </View>
   );

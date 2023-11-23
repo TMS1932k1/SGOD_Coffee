@@ -1,7 +1,7 @@
 import {Pressable, StyleSheet} from 'react-native';
-import {CustomText} from '../../common';
-import {Category} from '../../../types/category';
-import {MyDimensions} from '../../../constants';
+import {CustomText} from '../../../common';
+import {Category} from '../../../../types/category';
+import {MyDimensions} from '../../../../constants';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useTheme} from 'react-native-paper';
 import {useMemo} from 'react';

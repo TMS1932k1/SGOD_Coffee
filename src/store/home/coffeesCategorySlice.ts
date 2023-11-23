@@ -3,7 +3,7 @@ import {Coffee, CoffeeResponse} from '../../types/coffee';
 import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 
-interface coffeesState {
+interface coffeesCategoryState {
   coffees: Coffee[];
   totals: number;
   page: number;
@@ -11,7 +11,7 @@ interface coffeesState {
   isLoading: boolean;
 }
 
-const initialState: coffeesState = {
+const initialState: coffeesCategoryState = {
   coffees: [],
   totals: 0,
   page: 0,
@@ -22,31 +22,22 @@ const initialState: coffeesState = {
 // Return event response
 export const getCoffeesWithCategory = createAsyncThunk(
   'get/coffees',
-  async (
-    data: {idCategory: string; page?: number},
-    {dispatch},
-  ): Promise<CoffeeResponse> => {
+  async (idCategory: string): Promise<CoffeeResponse> => {
     await delayTime(2000);
 
-    if (data.idCategory === '1') {
-      if (data.page === 2) {
-        return require('../../assets/data/dummy_cappuccinos_page_two.json') as CoffeeResponse;
-      }
-      if (data.page === 3) {
-        return require('../../assets/data/dummy_cappuccinos_page_three.json') as CoffeeResponse;
-      }
+    if (idCategory === '1') {
       return require('../../assets/data/dummy_cappuccinos_page_one.json') as CoffeeResponse;
     }
 
-    if (data.idCategory === '2') {
+    if (idCategory === '2') {
       return require('../../assets/data/dummy_machiato.json') as CoffeeResponse;
     }
 
-    if (data.idCategory === '3') {
+    if (idCategory === '3') {
       return require('../../assets/data/dummy_latte.json') as CoffeeResponse;
     }
 
-    if (data.idCategory === '4') {
+    if (idCategory === '4') {
       return require('../../assets/data/dummy_mocha.json') as CoffeeResponse;
     }
 
@@ -59,7 +50,34 @@ export const getCoffeesWithCategory = createAsyncThunk(
   },
 );
 
-export const coffeesSlice = createSlice({
+// GET fetch load more coffees with category's id and page
+// Return event response
+export const getLoadMoreCoffees = createAsyncThunk(
+  'more',
+  async (data: {
+    idCategory: string;
+    page?: number;
+  }): Promise<CoffeeResponse> => {
+    await delayTime(2000);
+
+    if (data.idCategory === '1') {
+      if (data.page === 2) {
+        return require('../../assets/data/dummy_cappuccinos_page_two.json') as CoffeeResponse;
+      }
+      if (data.page === 3) {
+        return require('../../assets/data/dummy_cappuccinos_page_three.json') as CoffeeResponse;
+      }
+    }
+
+    return {
+      coffees: [],
+      page: 0,
+      totals: 0,
+    };
+  },
+);
+
+export const coffeesCategorySlice = createSlice({
   name: 'coffees',
   initialState,
   reducers: {},
@@ -67,6 +85,12 @@ export const coffeesSlice = createSlice({
     builder
       .addCase(getCoffeesWithCategory.fulfilled, (state, action) => {
         state.coffees = action.payload.coffees;
+        state.totals = action.payload.totals;
+        state.error = action.payload.error;
+        state.page = action.payload.page;
+      })
+      .addCase(getLoadMoreCoffees.fulfilled, (state, action) => {
+        state.coffees = [...state.coffees, ...action.payload.coffees];
         state.totals = action.payload.totals;
         state.error = action.payload.error;
         state.page = action.payload.page;
@@ -89,11 +113,11 @@ export const coffeesSlice = createSlice({
           state.coffees = [];
           state.totals = 0;
           state.page = 0;
-          state.isLoading = false;
+          if (!action.meta.aborted) state.isLoading = false;
         },
       );
   },
 });
 
-export const {} = coffeesSlice.actions;
-export default coffeesSlice.reducer;
+export const {} = coffeesCategorySlice.actions;
+export default coffeesCategorySlice.reducer;

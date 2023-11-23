@@ -47,7 +47,7 @@ export default function SearchSession({style}: Props) {
     () => (
       <Icon
         source={'magnify'}
-        size={MyDimensions.iconMedium}
+        size={MyDimensions.iconLarge}
         color={colors.background}
       />
     ),
@@ -77,7 +77,7 @@ export default function SearchSession({style}: Props) {
         <IconButton
           icon={'close-circle-outline'}
           iconColor={colors.outline}
-          size={MyDimensions.iconSmall}
+          size={MyDimensions.iconMedium}
           onPress={removeSearchText}
         />
       )}

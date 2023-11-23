@@ -3,7 +3,7 @@ import authSlice from './auth/authSlice';
 import appSlice from './app/appSlice';
 import eventsSlice from './home/eventsSlice';
 import categoriesSlice from './home/categoriesSlice';
-import coffeesSlice from './home/coffeesSlice';
+import coffeesCategorySlice from './home/coffeesCategorySlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
     appState: appSlice,
     eventsState: eventsSlice,
     categoriesState: categoriesSlice,
-    coffeesState: coffeesSlice,
+    coffeesCategoryState: coffeesCategorySlice,
   },
 });
 

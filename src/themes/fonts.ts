@@ -26,7 +26,7 @@ const customVariants = {
     fontSize: 24,
   },
   subheading1: {
-    fontFamily: fontFamily.mulishSemiBold,
+    fontFamily: fontFamily.mulishBold,
     fontSize: 18,
   },
   subheading2: {

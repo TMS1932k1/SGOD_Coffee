@@ -12,7 +12,7 @@ interface Props {
 
 export default function TabItem({
   icon,
-  size = MyDimensions.iconSmall,
+  size = MyDimensions.iconMedium,
   isCurrent = false,
 }: Props) {
   const colors = useTheme().colors;
