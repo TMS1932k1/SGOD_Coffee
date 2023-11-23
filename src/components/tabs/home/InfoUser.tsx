@@ -5,7 +5,11 @@ import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {CustomText} from '../../common/CustomText';
 import {MyApp, MyDimensions} from '../../../constants';
 import {Translation} from 'react-i18next';
-import {getRankColor, getRankTitle} from '../../../utils/rankUser';
+import {
+  getDetailNextRank,
+  getRankColor,
+  getRankTitle,
+} from '../../../utils/rankUser';
 import {useAppSelector} from '../../../store/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {HomeStackNavigationScreenProps} from '../../../types/stack';
@@ -27,9 +31,11 @@ export default function InfoUser({style}: Props) {
   const rank = useMemo(() => {
     let rankTitle = getRankTitle(user?.point ?? 0);
     return (
-      <View style={[styles.rank, {backgroundColor: getRankColor(rankTitle)}]}>
-        <CustomText variant="body1">{rankTitle}</CustomText>
-      </View>
+      rankTitle && (
+        <View style={[styles.rank, {backgroundColor: getRankColor(rankTitle)}]}>
+          <CustomText variant="body1">{rankTitle}</CustomText>
+        </View>
+      )
     );
   }, [user]);
 
@@ -72,14 +78,16 @@ export default function InfoUser({style}: Props) {
                 variant="meta1">
                 {t('pointProgress', {
                   point: user?.point ?? 0,
-                  maxPoint: MyApp.maxPoint,
+                  maxPoint: getDetailNextRank(user?.point ?? 0).maxPoint,
                 })}
               </CustomText>
             )}
           </Translation>
           <ProgressBar
             style={styles.progress}
-            progress={(user?.point ?? 0) / 10000}
+            progress={
+              (user?.point ?? 0) / getDetailNextRank(user?.point ?? 0).maxPoint
+            }
           />
         </View>
         {firstEmail}

@@ -11,7 +11,7 @@ export const MyDimensions = {
   iconLarge: 26,
   borderRadiusSmall: 10,
   borderRadiusMedium: 16,
-  borderRadiusLarge: 32,
+  borderRadiusLarge: 36,
   widthWindow: width,
   heightWindow: height,
 };

@@ -2,15 +2,16 @@ import {ViewStyle, StyleProp, StyleSheet, FlatList, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
 import CoffeeItem from './CoffeeItem';
 import {ActivityIndicator} from 'react-native-paper';
-import {useCallback, useMemo} from 'react';
+import {MutableRefObject, useCallback, useMemo} from 'react';
 import {getLoadMoreCoffees} from '../../../../store/home/coffeesCategorySlice';
 import {MyDimensions} from '../../../../constants';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
+  refFetching?: MutableRefObject<any>;
 }
 
-export default function CoffeeCategorySection({style}: Props) {
+export default function CoffeeCategorySection({style, refFetching}: Props) {
   const dispatch = useAppDispatch();
 
   const coffees = useAppSelector(state => state.coffeesCategoryState.coffees);
@@ -32,11 +33,19 @@ export default function CoffeeCategorySection({style}: Props) {
     [style, styles],
   );
 
+  // When user scroll flatlist endpoint with fetch api get more with category's id and page need load
   const loadMore = useCallback(() => {
     if (coffees.length < totals && currentIdCategory) {
-      dispatch(
-        getLoadMoreCoffees({idCategory: currentIdCategory, page: page + 1}),
-      );
+      if (refFetching) {
+        refFetching.current?.abort();
+        refFetching.current = dispatch(
+          getLoadMoreCoffees({idCategory: currentIdCategory, page: page + 1}),
+        );
+      } else {
+        dispatch(
+          getLoadMoreCoffees({idCategory: currentIdCategory, page: page + 1}),
+        );
+      }
     }
   }, [totals, coffees, currentIdCategory]);
 

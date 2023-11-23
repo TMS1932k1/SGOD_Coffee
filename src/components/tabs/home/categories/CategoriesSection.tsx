@@ -7,7 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
-import {useCallback, useMemo, useRef, useState} from 'react';
+import {MutableRefObject, useCallback, useMemo, useRef, useState} from 'react';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../../../constants';
@@ -17,12 +17,11 @@ import {setCurrentIndex} from '../../../../store/home/categoriesSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
+  refFetching?: MutableRefObject<any>;
 }
 
-export default function CategoriesSection({style}: Props) {
+export default function CategoriesSection({style, refFetching}: Props) {
   const dispatch = useAppDispatch();
-
-  const fetchingCoffeesPromise = useRef<any>();
 
   const currentIndexCategory = useAppSelector(
     state => state.categoriesState.currentIndex,
@@ -38,8 +37,12 @@ export default function CategoriesSection({style}: Props) {
 
   // Set category's current index with [id: string]
   const onPressCategory = useCallback((id: string) => {
-    fetchingCoffeesPromise.current?.abort();
-    fetchingCoffeesPromise.current = dispatch(getCoffeesWithCategory(id));
+    if (refFetching) {
+      refFetching.current?.abort();
+      refFetching.current = dispatch(getCoffeesWithCategory(id));
+    } else {
+      dispatch(getCoffeesWithCategory(id));
+    }
   }, []);
 
   const placeholder = useMemo(

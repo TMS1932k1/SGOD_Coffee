@@ -1,16 +1,20 @@
-import {useMemo} from 'react';
-import {StatusBar, StyleSheet, ScrollView, View} from 'react-native';
+import {useMemo, useRef} from 'react';
+import {StatusBar, StyleSheet, ScrollView, Animated} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {
   CategoriesSection,
   CoffeeCategorySection,
   HomeHeaderSection,
-  RecommendSection,
+  SpecialSection,
 } from '../../components/tabs/home';
 import {MyDimensions} from '../../constants';
 
 export default function HomeScreen() {
+  const fetchingCoffeesCategoryPromise = useRef<any>();
+
+  const scrollOffSetY = useRef(new Animated.Value(0)).current;
+
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
@@ -23,12 +27,18 @@ export default function HomeScreen() {
   );
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {statusBar}
       <HomeHeaderSection />
-      <CategoriesSection style={styles.sectionContainer} />
-      <CoffeeCategorySection style={styles.coffeesCategory} />
-      <RecommendSection style={styles.sectionContainer} />
+      <CategoriesSection
+        style={styles.sectionContainer}
+        refFetching={fetchingCoffeesCategoryPromise}
+      />
+      <CoffeeCategorySection
+        style={styles.coffeesCategory}
+        refFetching={fetchingCoffeesCategoryPromise}
+      />
+      <SpecialSection style={[styles.sectionContainer, styles.coffeeSpecial]} />
     </ScrollView>
   );
 }
@@ -46,5 +56,9 @@ const styling = (colors: MD3Colors) =>
     coffeesCategory: {
       marginTop: MyDimensions.paddingMedium,
       marginLeft: MyDimensions.paddingLarge,
+    },
+    coffeeSpecial: {
+      marginRight: MyDimensions.paddingLarge,
+      marginBottom: 130,
     },
   });

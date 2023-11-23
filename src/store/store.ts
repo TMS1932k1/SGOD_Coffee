@@ -4,6 +4,7 @@ import appSlice from './app/appSlice';
 import eventsSlice from './home/eventsSlice';
 import categoriesSlice from './home/categoriesSlice';
 import coffeesCategorySlice from './home/coffeesCategorySlice';
+import coffeesSpecialSlice from './home/coffeesSpecialSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     eventsState: eventsSlice,
     categoriesState: categoriesSlice,
     coffeesCategoryState: coffeesCategorySlice,
+    coffeesSpecialState: coffeesSpecialSlice,
   },
 });
 

@@ -44,6 +44,7 @@ i18n.use(initReactI18next).init({
         description: 'Description',
         timelineCtx: 'From <{{start}}> to <{{end}}>',
         everyTime: 'Every time',
+        special: 'Special for you',
       },
     },
   },

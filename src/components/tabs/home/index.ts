@@ -8,7 +8,7 @@ import CategoriesSection from './categories/CategoriesSection';
 import CategoryItem from './categories/CategoryItem';
 import CoffeeCategorySection from './coffees/CoffeeCategorySection';
 import CoffeeItem from './coffees/CoffeeItem';
-import RecommendSection from './recommend/RecommendSection';
+import SpecialSection from './special/SpecialSection';
 
 export {
   HomeHeaderSection,
@@ -21,5 +21,5 @@ export {
   CategoryItem,
   CoffeeCategorySection,
   CoffeeItem,
-  RecommendSection,
+  SpecialSection,
 };
