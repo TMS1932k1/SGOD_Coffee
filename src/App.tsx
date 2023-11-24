@@ -8,7 +8,6 @@ import RootNavigator from './routes/RootNavigator';
 import {useAppDispatch} from './store/hooks';
 import {getEvents} from './store/home/eventsSlice';
 import {getCategories} from './store/home/categoriesSlice';
-import {getCoffeesSpecial} from './store/home/coffeesSpecialSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,7 +16,6 @@ function App(): JSX.Element {
     const init = async () => {
       dispatch(getEvents());
       dispatch(getCategories());
-      dispatch(getCoffeesSpecial());
 
       const isFirstOpenApp = await getData('@isFirstOpenApp');
 

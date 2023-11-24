@@ -2,17 +2,17 @@ import {useCallback, useMemo} from 'react';
 import {View, StyleSheet, ViewStyle, StyleProp, Pressable} from 'react-native';
 import {ProgressBar, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {CustomText} from '../../common/CustomText';
-import {MyApp, MyDimensions} from '../../../constants';
+import {CustomText} from '../../../common/CustomText';
+import {MyDimensions} from '../../../../constants';
 import {Translation} from 'react-i18next';
 import {
   getDetailNextRank,
   getRankColor,
   getRankTitle,
-} from '../../../utils/rankUser';
-import {useAppSelector} from '../../../store/hooks';
+} from '../../../../utils/rankUser';
+import {useAppSelector} from '../../../../store/hooks';
 import {useNavigation} from '@react-navigation/native';
-import {HomeStackNavigationScreenProps} from '../../../types/stack';
+import {HomeStackNavigationScreenProps} from '../../../../types/stack';
 
 interface Props {
   style?: StyleProp<ViewStyle>;

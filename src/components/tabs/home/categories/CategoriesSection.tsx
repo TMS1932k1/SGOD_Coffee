@@ -12,7 +12,7 @@ import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../../../constants';
 import CategoryItem from './CategoryItem';
-import {getCoffeesWithCategory} from '../../../../store/home/coffeesCategorySlice';
+import {getProductsWithCategory} from '../../../../store/home/productsCategorySlice';
 import {setCurrentIndex} from '../../../../store/home/categoriesSlice';
 
 interface Props {
@@ -39,9 +39,9 @@ export default function CategoriesSection({style, refFetching}: Props) {
   const onPressCategory = useCallback((id: string) => {
     if (refFetching) {
       refFetching.current?.abort();
-      refFetching.current = dispatch(getCoffeesWithCategory(id));
+      refFetching.current = dispatch(getProductsWithCategory(id));
     } else {
-      dispatch(getCoffeesWithCategory(id));
+      dispatch(getProductsWithCategory(id));
     }
   }, []);
 

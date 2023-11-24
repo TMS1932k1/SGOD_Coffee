@@ -1,5 +1,5 @@
 import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
-import {Coffee} from '../../../../types/coffee';
+import {Product} from '../../../../types/product';
 import ImageBlurLoading from 'react-native-image-blur-loading';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyColors, MyDimensions} from '../../../../constants';
@@ -7,17 +7,18 @@ import {Icon, IconButton, useTheme} from 'react-native-paper';
 import {useMemo} from 'react';
 import {CustomText} from '../../../common';
 import {getColorOpacity} from '../../../../utils/colorOpacity';
+import {Translation} from 'react-i18next';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
-  coffee: Coffee;
-  onPress?: (coffee: Coffee) => void;
-  onPressAddFavorite?: (coffee: Coffee) => void;
+  product: Product;
+  onPress?: (coffee: Product) => void;
+  onPressAddFavorite?: (coffee: Product) => void;
 }
 
-export default function CoffeeItem({
+export default function ProductItem({
   style,
-  coffee,
+  product,
   onPress,
   onPressAddFavorite,
 }: Props) {
@@ -34,10 +35,10 @@ export default function CoffeeItem({
           pressed && styles.pressed,
         ]}
         onPress={() => {
-          if (onPress) onPress(coffee);
+          if (onPress) onPress(product);
         }}>
-        <ImageBlurLoading source={{uri: coffee.image}} style={styles.image} />
-        {coffee.rate && (
+        <ImageBlurLoading source={{uri: product.image}} style={styles.image} />
+        {product.rate && (
           <View style={styles.rate}>
             <Icon
               source={'star'}
@@ -45,35 +46,36 @@ export default function CoffeeItem({
               color={MyColors.warning}
             />
             <CustomText style={styles.rateText} variant="body1">
-              {coffee.rate}
+              {product.rate}
             </CustomText>
           </View>
         )}
 
         <View style={styles.infoContainer}>
-          <CustomText style={styles.name} variant="subheading1">
-            {coffee.name}
-          </CustomText>
-          <CustomText style={styles.classify} variant="body1">
-            {coffee.classify}
+          <CustomText style={styles.name} variant="subheading2">
+            {product.name}
           </CustomText>
           <View style={styles.priceConatainer}>
-            <CustomText style={styles.name} variant="subheading1">
-              {`$ ${coffee.price}`}
-            </CustomText>
+            <Translation>
+              {t => (
+                <CustomText style={styles.name} variant="body1">
+                  {t('price', {price: product.price.toLocaleString()})}
+                </CustomText>
+              )}
+            </Translation>
             <IconButton
               icon={'cards-heart-outline'}
               size={MyDimensions.iconMedium}
               iconColor={colors.primary}
               onPress={() => {
-                if (onPressAddFavorite) onPressAddFavorite(coffee);
+                if (onPressAddFavorite) onPressAddFavorite(product);
               }}
             />
           </View>
         </View>
       </Pressable>
     ),
-    [coffee, onPress, onPressAddFavorite, styles],
+    [product, onPress, onPressAddFavorite, styles],
   );
 
   return item;
@@ -82,9 +84,9 @@ export default function CoffeeItem({
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     container: {
-      width: 149,
+      width: 152,
+      height: 220,
       padding: 4,
-      marginRight: MyDimensions.paddingSmall,
       borderRadius: MyDimensions.borderRadiusMedium,
       backgroundColor: colors.surface,
     },
@@ -118,10 +120,6 @@ const styling = (colors: MD3Colors) =>
     },
     name: {
       color: colors.onBackground,
-      overflow: 'hidden',
-    },
-    classify: {
-      color: colors.outline,
       overflow: 'hidden',
     },
     priceConatainer: {

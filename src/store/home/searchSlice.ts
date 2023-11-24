@@ -1,21 +1,17 @@
 import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {Coffee, CoffeesPageResponse} from '../../types/coffee';
+import {Product, ProductsResponse} from '../../types/product';
 import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 
 interface searchState {
-  coffees: Coffee[];
-  totals: number;
-  page: number;
+  products: Product[];
   error?: string;
   searchText?: string;
   isLoading: boolean;
 }
 
 const initialState: searchState = {
-  coffees: [],
-  totals: 0,
-  page: 0,
+  products: [],
   isLoading: true,
 };
 
@@ -23,39 +19,15 @@ const initialState: searchState = {
 // Return coffees page response
 export const getCoffeesWithSearch = createAsyncThunk(
   'get/search',
-  async (search: string): Promise<CoffeesPageResponse> => {
+  async (search: string): Promise<ProductsResponse> => {
     await delayTime(1000);
 
     return search.length > 0
-      ? (require('../../assets/data/dummy_cappuccinos_page_one.json') as CoffeesPageResponse)
+      ? (require('../../assets/data/dummy_coffee.json') as ProductsResponse)
       : {
           error: 'Fetching get coffee failured!',
-          coffees: [],
-          page: 0,
-          totals: 0,
+          products: [],
         };
-  },
-);
-
-// POST get coffees with search text and page
-// Return coffees page response
-export const getLoadMoreSearchCoffees = createAsyncThunk(
-  'more',
-  async (page: number): Promise<CoffeesPageResponse> => {
-    await delayTime(1000);
-
-    if (page === 2) {
-      return require('../../assets/data/dummy_cappuccinos_page_two.json') as CoffeesPageResponse;
-    }
-    if (page === 3) {
-      return require('../../assets/data/dummy_cappuccinos_page_three.json') as CoffeesPageResponse;
-    }
-
-    return {
-      coffees: [],
-      page: 0,
-      totals: 0,
-    };
   },
 );
 
@@ -70,16 +42,8 @@ export const searchSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getCoffeesWithSearch.fulfilled, (state, action) => {
-        state.coffees = action.payload.coffees;
-        state.totals = action.payload.totals;
+        state.products = action.payload.products;
         state.error = action.payload.error;
-        state.page = action.payload.page;
-      })
-      .addCase(getLoadMoreSearchCoffees.fulfilled, (state, action) => {
-        state.coffees = [...state.coffees, ...action.payload.coffees];
-        state.totals = action.payload.totals;
-        state.error = action.payload.error;
-        state.page = action.payload.page;
       })
       .addMatcher<FulfilledAction>(
         action => action.type.endsWith('/search/fulfilled'),
@@ -96,9 +60,7 @@ export const searchSlice = createSlice({
       .addMatcher<RejectedAction>(
         action => action.type.endsWith('/search/rejected'),
         (state, action) => {
-          state.coffees = [];
-          state.totals = 0;
-          state.page = 0;
+          state.products = [];
           if (!action.meta.aborted) state.isLoading = false;
         },
       );

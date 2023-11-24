@@ -3,8 +3,7 @@ import authSlice from './auth/authSlice';
 import appSlice from './app/appSlice';
 import eventsSlice from './home/eventsSlice';
 import categoriesSlice from './home/categoriesSlice';
-import coffeesCategorySlice from './home/coffeesCategorySlice';
-import coffeesSpecialSlice from './home/coffeesSpecialSlice';
+import productsCategorySlice from './home/productsCategorySlice';
 import searchSlice from './home/searchSlice';
 
 export const store = configureStore({
@@ -13,8 +12,7 @@ export const store = configureStore({
     appState: appSlice,
     eventsState: eventsSlice,
     categoriesState: categoriesSlice,
-    coffeesCategoryState: coffeesCategorySlice,
-    coffeesSpecialState: coffeesSpecialSlice,
+    productsCategoryState: productsCategorySlice,
     searchState: searchSlice,
   },
 });

@@ -2,15 +2,15 @@ import {startTransition, useCallback, useMemo, useState} from 'react';
 import {View, StyleSheet, ViewStyle, StyleProp, TextInput} from 'react-native';
 import {Icon, IconButton, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {MyDimensions} from '../../../constants';
-import {getColorOpacity} from '../../../utils/colorOpacity';
-import {fontFamily} from '../../../themes';
+import {MyDimensions} from '../../../../constants';
+import {getColorOpacity} from '../../../../utils/colorOpacity';
+import {fontFamily} from '../../../../themes';
 import {Translation} from 'react-i18next';
-import {useAppDispatch} from '../../../store/hooks';
+import {useAppDispatch} from '../../../../store/hooks';
 import {
   getCoffeesWithSearch,
   setSearchText,
-} from '../../../store/home/searchSlice';
+} from '../../../../store/home/searchSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;

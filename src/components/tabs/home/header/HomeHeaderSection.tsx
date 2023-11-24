@@ -2,12 +2,12 @@ import {useMemo} from 'react';
 import {View, StyleSheet, ViewStyle, StyleProp} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {MyDimensions} from '../../../constants';
+import {MyDimensions} from '../../../../constants';
 import InfoUser from './InfoUser';
-import {useAppSelector} from '../../../store/hooks';
+import {useAppSelector} from '../../../../store/hooks';
 import PlaceholderInfoUser from './PlaceholderInfoUser';
 import SearchSession from './SearchSession';
-import CarouselSection from './events/CarouselSection';
+import CarouselSection from '../events/CarouselSection';
 
 interface Props {
   style?: StyleProp<ViewStyle>;

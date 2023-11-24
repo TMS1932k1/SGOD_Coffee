@@ -2,7 +2,7 @@ import {CategoriesResponse, Category} from '../../types/category';
 import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
-import {getCoffeesWithCategory} from './coffeesCategorySlice';
+import {getProductsWithCategory} from './productsCategorySlice';
 
 interface categoriesState {
   categories: Category[];
@@ -26,7 +26,7 @@ export const getCategories = createAsyncThunk(
     await delayTime(2000);
     const categories =
       require('../../assets/data/dummy_category.json') as Category[];
-    dispatch(getCoffeesWithCategory(categories[0].id));
+    dispatch(getProductsWithCategory(categories[0].id));
     return true
       ? {categories: categories}
       : {categories: [], error: 'Fetching categories is failured!'};

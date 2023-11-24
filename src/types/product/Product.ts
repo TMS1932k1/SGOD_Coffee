@@ -1,7 +1,7 @@
-export type Coffee = {
+export type Product = {
   id: string;
+  category: string;
   name: string;
-  classify: string;
   price: number;
   rate?: number;
   rateCount: number;

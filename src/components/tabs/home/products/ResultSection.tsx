@@ -3,10 +3,10 @@ import {Translation} from 'react-i18next';
 import {View, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {CustomText} from '../../../common';
-import {useTheme} from 'react-native-paper';
+import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {useAppSelector} from '../../../../store/hooks';
-import CoffeeItem from './CoffeeItem';
 import {MyDimensions} from '../../../../constants';
+import ProductsList from './ProductsList';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -15,7 +15,9 @@ interface Props {
 export default function ResultSection({style}: Props) {
   const searchText = useAppSelector(state => state.searchState.searchText);
 
-  const coffees = useAppSelector(state => state.searchState.coffees);
+  const products = useAppSelector(state => state.searchState.products);
+
+  const isLoading = useAppSelector(state => state.searchState.isLoading);
 
   const colors = useTheme().colors;
 
@@ -34,32 +36,42 @@ export default function ResultSection({style}: Props) {
     [styles, searchText],
   );
 
-  return (
-    <View style={[style]}>
-      {title}
-      <View style={styles.column}>
-        {coffees.map(item => (
-          <CoffeeItem key={item.id} coffee={item} style={styles.item} />
-        ))}
+  const loadingView = useMemo(
+    () => (
+      <View style={styles.loading}>
+        <ActivityIndicator />
       </View>
+    ),
+    [style, styles],
+  );
+
+  return (
+    <View style={[styles.container, style]}>
+      {title}
+      {isLoading ? (
+        loadingView
+      ) : (
+        <ProductsList style={styles.list} products={products} />
+      )}
     </View>
   );
 }
 
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
+    container: {
+      paddingHorizontal: MyDimensions.paddingLarge,
+    },
     title: {
       color: colors.onBackground,
       overflow: 'hidden',
     },
-    column: {
-      flex: 1,
-      flexWrap: 'wrap',
-      flexDirection: 'row',
-      justifyContent: 'space-around',
+    list: {
       marginTop: MyDimensions.paddingMedium,
     },
-    item: {
-      marginBottom: MyDimensions.paddingSmall,
+    loading: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: MyDimensions.paddingLarge,
     },
   });
