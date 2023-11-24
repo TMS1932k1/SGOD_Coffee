@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ViewStyle, StyleProp} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../../constants';
@@ -9,7 +9,11 @@ import PlaceholderInfoUser from './PlaceholderInfoUser';
 import SearchSession from './SearchSession';
 import CarouselSection from './events/CarouselSection';
 
-export default function HomeHeaderSection() {
+interface Props {
+  style?: StyleProp<ViewStyle>;
+}
+
+export default function HomeHeaderSection({style}: Props) {
   const isLoading = useAppSelector(state => state.authState.isLoading);
 
   const colors = useTheme().colors;
@@ -17,7 +21,7 @@ export default function HomeHeaderSection() {
   const styles = useMemo(() => styling(colors), [colors]);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.header}>
         {!isLoading ? <InfoUser /> : <PlaceholderInfoUser />}
         <SearchSession style={styles.search} />

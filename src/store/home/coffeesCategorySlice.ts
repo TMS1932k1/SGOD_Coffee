@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {Coffee, CoffeesCategoryResponse} from '../../types/coffee';
+import {Coffee, CoffeesPageResponse} from '../../types/coffee';
 import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 
@@ -19,26 +19,26 @@ const initialState: coffeesCategoryState = {
 };
 
 // GET fetch coffees with category's id
-// Return event response
+// Return coffees page response
 export const getCoffeesWithCategory = createAsyncThunk(
   'get/coffeesCategory',
-  async (idCategory: string): Promise<CoffeesCategoryResponse> => {
+  async (idCategory: string): Promise<CoffeesPageResponse> => {
     await delayTime(1000);
 
     if (idCategory === '1') {
-      return require('../../assets/data/dummy_cappuccinos_page_one.json') as CoffeesCategoryResponse;
+      return require('../../assets/data/dummy_cappuccinos_page_one.json') as CoffeesPageResponse;
     }
 
     if (idCategory === '2') {
-      return require('../../assets/data/dummy_machiato.json') as CoffeesCategoryResponse;
+      return require('../../assets/data/dummy_machiato.json') as CoffeesPageResponse;
     }
 
     if (idCategory === '3') {
-      return require('../../assets/data/dummy_latte.json') as CoffeesCategoryResponse;
+      return require('../../assets/data/dummy_latte.json') as CoffeesPageResponse;
     }
 
     if (idCategory === '4') {
-      return require('../../assets/data/dummy_mocha.json') as CoffeesCategoryResponse;
+      return require('../../assets/data/dummy_mocha.json') as CoffeesPageResponse;
     }
 
     return {
@@ -51,21 +51,21 @@ export const getCoffeesWithCategory = createAsyncThunk(
 );
 
 // GET fetch load more coffees with category's id and page
-// Return event response
+// Return coffees page response
 export const getLoadMoreCoffees = createAsyncThunk(
   'more',
   async (data: {
     idCategory: string;
     page?: number;
-  }): Promise<CoffeesCategoryResponse> => {
+  }): Promise<CoffeesPageResponse> => {
     await delayTime(1000);
 
     if (data.idCategory === '1') {
       if (data.page === 2) {
-        return require('../../assets/data/dummy_cappuccinos_page_two.json') as CoffeesCategoryResponse;
+        return require('../../assets/data/dummy_cappuccinos_page_two.json') as CoffeesPageResponse;
       }
       if (data.page === 3) {
-        return require('../../assets/data/dummy_cappuccinos_page_three.json') as CoffeesCategoryResponse;
+        return require('../../assets/data/dummy_cappuccinos_page_three.json') as CoffeesPageResponse;
       }
     }
 

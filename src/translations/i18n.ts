@@ -45,6 +45,7 @@ i18n.use(initReactI18next).init({
         timelineCtx: 'From <{{start}}> to <{{end}}>',
         everyTime: 'Every time',
         special: 'Special for you',
+        result: 'Results of "{{searchText}}"',
       },
     },
   },

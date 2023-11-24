@@ -1,25 +1,25 @@
 import {startTransition, useCallback, useMemo, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  ViewStyle,
-  StyleProp,
-  TextInput,
-  Keyboard,
-} from 'react-native';
+import {View, StyleSheet, ViewStyle, StyleProp, TextInput} from 'react-native';
 import {Icon, IconButton, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../../constants';
 import {getColorOpacity} from '../../../utils/colorOpacity';
 import {fontFamily} from '../../../themes';
 import {Translation} from 'react-i18next';
+import {useAppDispatch} from '../../../store/hooks';
+import {
+  getCoffeesWithSearch,
+  setSearchText,
+} from '../../../store/home/searchSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
 export default function SearchSession({style}: Props) {
-  const [searchText, setSearchText] = useState('');
+  const [searchText, setSearch] = useState('');
+
+  const dispatch = useAppDispatch();
 
   const colors = useTheme().colors;
 
@@ -29,17 +29,22 @@ export default function SearchSession({style}: Props) {
   const onChangeText = useCallback(
     (value: string) => {
       startTransition(() => {
-        setSearchText(value);
+        setSearch(value);
       });
       // Code to hanlde search
+      dispatch(setSearchText(value));
+      if (value.length > 0) {
+        dispatch(getCoffeesWithSearch(value));
+      }
     },
-    [setSearchText],
+    [setSearch],
   );
 
   // Remove search text
   const removeSearchText = useCallback(() => {
     startTransition(() => {
-      setSearchText('');
+      setSearch('');
+      dispatch(setSearchText(''));
     });
   }, []);
 
@@ -72,7 +77,6 @@ export default function SearchSession({style}: Props) {
           />
         )}
       </Translation>
-
       {searchText.length > 0 && (
         <IconButton
           icon={'close-circle-outline'}

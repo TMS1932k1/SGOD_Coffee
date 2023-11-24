@@ -1,4 +1,4 @@
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
 import {Coffee} from '../../../../types/coffee';
 import ImageBlurLoading from 'react-native-image-blur-loading';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
@@ -9,12 +9,14 @@ import {CustomText} from '../../../common';
 import {getColorOpacity} from '../../../../utils/colorOpacity';
 
 interface Props {
+  style?: StyleProp<ViewStyle>;
   coffee: Coffee;
   onPress?: (coffee: Coffee) => void;
   onPressAddFavorite?: (coffee: Coffee) => void;
 }
 
 export default function CoffeeItem({
+  style,
   coffee,
   onPress,
   onPressAddFavorite,
@@ -26,7 +28,11 @@ export default function CoffeeItem({
   const item = useMemo(
     () => (
       <Pressable
-        style={({pressed}) => [styles.container, pressed && styles.pressed]}
+        style={({pressed}) => [
+          styles.container,
+          style,
+          pressed && styles.pressed,
+        ]}
         onPress={() => {
           if (onPress) onPress(coffee);
         }}>
@@ -77,7 +83,6 @@ const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     container: {
       width: 149,
-      flex: 1,
       padding: 4,
       marginRight: MyDimensions.paddingSmall,
       borderRadius: MyDimensions.borderRadiusMedium,

@@ -5,6 +5,7 @@ import eventsSlice from './home/eventsSlice';
 import categoriesSlice from './home/categoriesSlice';
 import coffeesCategorySlice from './home/coffeesCategorySlice';
 import coffeesSpecialSlice from './home/coffeesSpecialSlice';
+import searchSlice from './home/searchSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     categoriesState: categoriesSlice,
     coffeesCategoryState: coffeesCategorySlice,
     coffeesSpecialState: coffeesSpecialSlice,
+    searchState: searchSlice,
   },
 });
 

@@ -1,6 +1,6 @@
 import {Coffee} from './Coffee';
 
-export type CoffeesCategoryResponse = {
+export type CoffeesPageResponse = {
   page: number;
   totals: number;
   coffees: Coffee[];

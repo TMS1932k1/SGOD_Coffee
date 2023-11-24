@@ -1,2 +1,2 @@
 export type * from './Coffee';
-export type * from './CoffeesCategoryResponse';
+export type * from './CoffeesPageResponse';

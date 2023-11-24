@@ -47,7 +47,7 @@ export default function CoffeeCategorySection({style, refFetching}: Props) {
         );
       }
     }
-  }, [totals, coffees, currentIdCategory]);
+  }, [totals, coffees, currentIdCategory, page]);
 
   if (isLoading) {
     return loadingView;
@@ -60,7 +60,7 @@ export default function CoffeeCategorySection({style, refFetching}: Props) {
       style={[styles.container, style]}
       data={coffees}
       keyExtractor={item => item.id}
-      onEndReached={loadMore}
+      onEndReached={coffees.length < totals ? loadMore : undefined}
       ListFooterComponent={() =>
         coffees.length < totals && (
           <View style={styles.activityLoading}>
