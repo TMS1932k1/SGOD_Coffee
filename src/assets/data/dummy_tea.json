@@ -7,6 +7,7 @@
       "category": 12,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "drink",
       "image": "https://cdn.shopify.com/s/files/1/0533/6743/9558/t/5/assets/feature_whatiswhitetea-1648138108147.jpg?v=1648138110"
     },
     {
@@ -16,6 +17,7 @@
       "category": 2,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "drink",
       "image": "https://grandgoldhotel.com/wp-content/uploads/2022/08/greentea-3cba398ca5fb481b972d247c7833a720.jpg"
     },
     {
@@ -25,6 +27,7 @@
       "category": 2,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "drink",
       "image": "https://images.healthshots.com/healthshots/en/uploads/2021/01/20175533/oolong-tea.jpg"
     },
     {
@@ -34,6 +37,7 @@
       "category": 2,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "drink",
       "image": "https://www.sharmispassions.com/wp-content/uploads/2021/05/BlackTea4-500x375.jpg"
     }
   ]

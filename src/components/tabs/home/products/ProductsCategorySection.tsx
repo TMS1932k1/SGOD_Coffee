@@ -3,15 +3,28 @@ import {useAppSelector} from '../../../../store/hooks';
 import {ActivityIndicator} from 'react-native-paper';
 import {MyDimensions} from '../../../../constants';
 import ProductsList from './ProductsList';
-import {useMemo} from 'react';
+import {useCallback, useMemo} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {HomeStackNavigationScreenProps} from '../../../../types/stack';
+import {Product} from '../../../../types/product';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
 export default function ProductsCategorySection({style}: Props) {
+  const navigation =
+    useNavigation<HomeStackNavigationScreenProps<'HomeTabNavigator'>>();
+
   const products = useAppSelector(
     state => state.productsCategoryState.products,
+  );
+
+  const onCLickItem = useCallback(
+    (product: Product) => {
+      navigation.navigate('OrderScreen', {product: product});
+    },
+    [navigation],
   );
 
   const isLoading = useAppSelector(
@@ -31,7 +44,9 @@ export default function ProductsCategorySection({style}: Props) {
     return loadingView;
   }
 
-  return <ProductsList products={products} style={style} />;
+  return (
+    <ProductsList products={products} style={style} onPress={onCLickItem} />
+  );
 }
 
 const styles = StyleSheet.create({

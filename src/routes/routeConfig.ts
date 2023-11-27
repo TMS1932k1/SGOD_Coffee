@@ -12,6 +12,7 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import {Event} from '../types/event';
+import {Product} from '../types/product';
 
 // Declare stack routes array with generic
 export type StackRoutesType<ParamList extends ParamListBase> = Array<
@@ -43,6 +44,7 @@ export type OnboardingNavigatorParamList = {
 // Declare home navigator param list
 export type HomeNavigatorParamList = {
   HomeTabNavigator: undefined;
+  OrderScreen: {product: Product};
   SignInScreen: undefined;
   SignUpScreen: {otp: string} | undefined;
   ForgotPasswordScreen: undefined;

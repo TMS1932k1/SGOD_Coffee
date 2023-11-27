@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useMemo} from 'react';
+import {useCallback, useEffect, useLayoutEffect, useMemo} from 'react';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
 import {Translation} from 'react-i18next';
@@ -24,6 +24,12 @@ export default function SignInScreen({navigation}: Props) {
   const user = useAppSelector(state => state.authState.user);
 
   const dispatch = useAppDispatch();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '',
+    });
+  }, [navigation]);
 
   const isLoading = useAppSelector(state => state.authState.isLoading);
 

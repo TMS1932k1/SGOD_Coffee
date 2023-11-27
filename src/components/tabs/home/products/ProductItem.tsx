@@ -8,6 +8,7 @@ import {useMemo} from 'react';
 import {CustomText} from '../../../common';
 import {getColorOpacity} from '../../../../utils/colorOpacity';
 import {Translation} from 'react-i18next';
+import Animated, {ZoomIn} from 'react-native-reanimated';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -28,52 +29,56 @@ export default function ProductItem({
 
   const item = useMemo(
     () => (
-      <Pressable
-        style={({pressed}) => [
-          styles.container,
-          style,
-          pressed && styles.pressed,
-        ]}
-        onPress={() => {
-          if (onPress) onPress(product);
-        }}>
-        <ImageBlurLoading source={{uri: product.image}} style={styles.image} />
-        {product.rate && (
-          <View style={styles.rate}>
-            <Icon
-              source={'star'}
-              size={MyDimensions.iconSmall}
-              color={MyColors.warning}
-            />
-            <CustomText style={styles.rateText} variant="body1">
-              {product.rate}
+      <Animated.View entering={ZoomIn}>
+        <Pressable
+          style={({pressed}) => [
+            styles.container,
+            style,
+            pressed && styles.pressed,
+          ]}
+          onPress={() => {
+            if (onPress) onPress(product);
+          }}>
+          <ImageBlurLoading
+            source={{uri: product.image}}
+            style={styles.image}
+          />
+          {product.rate && (
+            <View style={styles.rate}>
+              <Icon
+                source={'star'}
+                size={MyDimensions.iconSmall}
+                color={MyColors.warning}
+              />
+              <CustomText style={styles.rateText} variant="body1">
+                {product.rate}
+              </CustomText>
+            </View>
+          )}
+          <View style={styles.infoContainer}>
+            <CustomText style={styles.name} variant="subheading2">
+              {product.name}
             </CustomText>
+            <View style={styles.priceConatainer}>
+              <Translation>
+                {t => (
+                  <CustomText style={styles.name} variant="body1">
+                    {t('price', {price: product.price.toLocaleString()})}
+                  </CustomText>
+                )}
+              </Translation>
+              <IconButton
+                icon={'cards-heart-outline'}
+                size={MyDimensions.iconMedium}
+                iconColor={colors.primary}
+                onPress={() => {
+                  if (onPressAddFavorite) onPressAddFavorite(product);
+                }}
+              />
+            </View>
           </View>
-        )}
-
-        <View style={styles.infoContainer}>
-          <CustomText style={styles.name} variant="subheading2">
-            {product.name}
-          </CustomText>
-          <View style={styles.priceConatainer}>
-            <Translation>
-              {t => (
-                <CustomText style={styles.name} variant="body1">
-                  {t('price', {price: product.price.toLocaleString()})}
-                </CustomText>
-              )}
-            </Translation>
-            <IconButton
-              icon={'cards-heart-outline'}
-              size={MyDimensions.iconMedium}
-              iconColor={colors.primary}
-              onPress={() => {
-                if (onPressAddFavorite) onPressAddFavorite(product);
-              }}
-            />
-          </View>
-        </View>
-      </Pressable>
+        </Pressable>
+      </Animated.View>
     ),
     [product, onPress, onPressAddFavorite, styles],
   );

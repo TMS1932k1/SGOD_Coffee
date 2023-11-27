@@ -7,6 +7,7 @@
       "category": 3,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://static.toiimg.com/thumb/53096885.cms?width=1200&height=900"
     },
     {
@@ -16,6 +17,7 @@
       "category": 3,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://www.simplyrecipes.com/thmb/E12bNkvaXdyaSAEEv70dnaZF4jU=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Simply-Recipes-Rainbow-Layer-Cake-Lead-4-ad997425fde94334be5e358daca83d65.jpg"
     },
     {
@@ -25,6 +27,7 @@
       "category": 3,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://www.degrocery.com/de-grocery/2020/08/Cake-Lapis-Oren-Sunkist.jpg"
     },
     {
@@ -34,6 +37,7 @@
       "category": 3,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://www.bowlofdelicious.com/wp-content/uploads/2022/10/Spiced-Apple-Cake-square.jpg"
     },
     {
@@ -43,6 +47,7 @@
       "category": 3,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://img.taste.com.au/IsFcG1PF/taste/2022/07/moist-lemon-cake-180205-2.jpg"
     },
     {
@@ -52,6 +57,7 @@
       "category": 3,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://media.2dep.vn/upload/bunbun/2021/11/23/cach-lam-banh-fruitcake-mon-banh-hoa-qua-cua-mua-giang-sinh-1637670604-11.jpeg"
     }
   ]

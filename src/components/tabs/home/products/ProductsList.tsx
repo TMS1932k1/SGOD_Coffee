@@ -6,13 +6,26 @@ import ProductItem from './ProductItem';
 interface Props {
   style?: StyleProp<ViewStyle>;
   products: Product[];
+  onPress?: (coffee: Product) => void;
+  onPressAddFavorite?: (coffee: Product) => void;
 }
 
-export default function ProductsList({products, style}: Props) {
+export default function ProductsList({
+  products,
+  style,
+  onPress,
+  onPressAddFavorite,
+}: Props) {
   return (
     <View style={[styles.container, style]}>
       {products.map(item => (
-        <ProductItem key={item.id} product={item} style={styles.item} />
+        <ProductItem
+          key={item.id}
+          product={item}
+          style={styles.item}
+          onPress={onPress}
+          onPressAddFavorite={onPressAddFavorite}
+        />
       ))}
     </View>
   );

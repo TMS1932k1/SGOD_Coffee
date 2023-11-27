@@ -1,4 +1,10 @@
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {Translation} from 'react-i18next';
 import {View, StyleSheet, ScrollView} from 'react-native';
 import {ActivityIndicator, Button, useTheme} from 'react-native-paper';
@@ -24,6 +30,12 @@ export default function SignUpScreen({navigation}: Props) {
   const [visible, setVisible] = useState(false);
 
   const dispatch = useAppDispatch();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '',
+    });
+  }, [navigation]);
 
   const isLoading = useAppSelector(state => state.authState.isLoading);
   const errorMes = useAppSelector(state => state.authState.errorMes);

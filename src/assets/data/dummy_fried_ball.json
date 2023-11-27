@@ -7,6 +7,7 @@
       "category": 4,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://cdn.tgdd.vn/Files/2020/06/24/1265161/cach-lam-ca-vien-chien-tai-nha-don-gian-ma-chat-luong-chang-kem-ngoai-tiem-202006240922373460.jpg"
     },
     {
@@ -16,6 +17,7 @@
       "category": 4,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://thucpham388.com/wp-content/uploads/2022/12/d10eed3bf82081a0e64fdf45f962a052.jpg"
     },
     {
@@ -25,6 +27,7 @@
       "category": 4,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://cdn.tgdd.vn/2020/09/CookRecipe/GalleryStep/thanh-pham-1078.jpg"
     },
     {
@@ -34,6 +37,7 @@
       "category": 4,
       "rate": 4.8,
       "rateCount": 230,
+      "type": "food",
       "image": "https://cdn.tgdd.vn/2020/07/CookProduct/124-1200x676.jpg"
     }
   ]

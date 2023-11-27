@@ -20,6 +20,7 @@ import {
 import {OnboardingScreen} from '../screens/onboarding';
 import {useAppSelector} from '../store/hooks';
 import {EventDetailScreen} from '../screens/event';
+import {OrderScreen} from '../screens/home';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 
@@ -37,6 +38,7 @@ const homeStackRoutes: HomeStackRoutesType = [
   {name: 'ForgotPasswordScreen', component: ForgotPasswordScreen},
   {name: 'VerificationOtpScreen', component: VerificationOtpScreen},
   {name: 'EventDetailScreen', component: EventDetailScreen},
+  {name: 'OrderScreen', component: OrderScreen},
 ];
 
 export default function RootNavigator() {
@@ -55,7 +57,6 @@ export default function RootNavigator() {
     () => ({
       orientation: 'portrait',
       headerShadowVisible: false,
-      headerTitle: '',
       headerTintColor: colors.onBackground,
       headerStyle: {
         backgroundColor: colors.background,

@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import {useEffect, useMemo} from 'react';
+import {useEffect, useLayoutEffect, useMemo} from 'react';
 import {ActivityIndicator} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
@@ -21,6 +21,12 @@ interface Props {
 
 export default function ForgotPasswordScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '',
+    });
+  }, [navigation]);
 
   const isLoading = useAppSelector(state => state.authState.isLoading);
   const errorMes = useAppSelector(state => state.authState.errorMes);

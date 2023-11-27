@@ -1,5 +1,11 @@
 import {View, StyleSheet} from 'react-native';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from 'react';
 import {Button, useTheme} from 'react-native-paper';
 import {Translation} from 'react-i18next';
 import {MyDimensions} from '../../constants';
@@ -19,8 +25,14 @@ interface Props {
   navigation: HomeStackNavigationScreenProps<'VerificationOtpScreen'>;
 }
 
-export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
+export default function VerificationOtpScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '',
+    });
+  }, [navigation]);
 
   const route = useRoute<HomeStackRouteScreenProps<'VerificationOtpScreen'>>();
 
@@ -52,10 +64,10 @@ export default function VerificationOtpScreen({navigation: naviagtion}: Props) {
         dispatch(postVerification({otp: otp.join(''), email: email}));
 
         // Navigate to [SignUpScreen]
-        naviagtion.navigate('SignUpScreen', {otp: otp.join('')});
+        navigation.navigate('SignUpScreen', {otp: otp.join('')});
       }
     },
-    [naviagtion],
+    [navigation],
   );
 
   const resendOtp = useCallback(() => {

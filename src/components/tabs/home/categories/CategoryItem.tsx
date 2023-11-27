@@ -62,7 +62,7 @@ export default function CategoryItem({
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     itemContainer: {
-      height: 40,
+      height: 56,
       flexDirection: 'row',
       backgroundColor: colors.surface,
       marginRight: MyDimensions.paddingSmall,
