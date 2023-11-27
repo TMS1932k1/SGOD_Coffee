@@ -6,6 +6,7 @@ import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 interface eventsState {
   events: Event[];
   error?: string;
+  searchText?: string;
   isLoading: boolean;
 }
 

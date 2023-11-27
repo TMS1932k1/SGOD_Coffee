@@ -8,7 +8,7 @@ import {fontFamily} from '../../../../themes';
 import {Translation} from 'react-i18next';
 import {useAppDispatch} from '../../../../store/hooks';
 import {
-  getCoffeesWithSearch,
+  getProductssWithSearch,
   setSearchText,
 } from '../../../../store/home/searchSlice';
 
@@ -34,7 +34,7 @@ export default function SearchSession({style}: Props) {
       // Code to hanlde search
       dispatch(setSearchText(value));
       if (value.length > 0) {
-        dispatch(getCoffeesWithSearch(value));
+        dispatch(getProductssWithSearch(value));
       }
     },
     [setSearch],
