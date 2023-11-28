@@ -53,7 +53,7 @@ export const getProductsWithCategory = createAsyncThunk(
 // GET fetch get more products with category's id and page
 // Return products list
 export const postMoreProductsWithCategory = createAsyncThunk(
-  'more',
+  'moreProductCategory',
   async (data: {idCategory: string; page: number}) => {
     await delayTime(1000);
 

@@ -12,9 +12,9 @@ interface Props {
 }
 
 export default function AmountOption({style, name}: Props) {
-  const colors = useTheme().colors;
-
   const [amount, setAmount] = useState(1);
+
+  const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
@@ -63,7 +63,7 @@ const styling = (colors: MD3Colors) =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       paddingHorizontal: MyDimensions.paddingSmall,
-      marginTop: MyDimensions.paddingMedium,
+      marginTop: MyDimensions.paddingLarge,
       paddingBottom: MyDimensions.paddingSmall,
       borderBottomColor: getColorOpacity(colors.outline, 0.5),
       borderBottomWidth: 1,

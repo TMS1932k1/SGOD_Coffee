@@ -5,6 +5,7 @@ import {CustomText} from './CustomText';
 import {ReactNode} from 'react';
 
 interface Props {
+  disabled?: boolean;
   style?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
   onPress?: () => void;
@@ -13,6 +14,7 @@ interface Props {
 
 export default function ContainedButton({
   style,
+  disabled = false,
   onPress,
   children,
   textStyle,
@@ -21,7 +23,11 @@ export default function ContainedButton({
   const styles = styling(colors);
 
   return (
-    <Button style={[styles.button, style]} mode="contained" onPress={onPress}>
+    <Button
+      style={[styles.button, style]}
+      mode="contained"
+      onPress={onPress}
+      disabled={disabled}>
       <CustomText style={[styles.text, textStyle]} variant="subheading2">
         {children}
       </CustomText>

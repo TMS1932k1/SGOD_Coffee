@@ -70,7 +70,7 @@ export default function HomeScreen() {
         }),
       );
     }
-  }, [categoryId, pageProductCategory, totalProductCategory]);
+  }, [categoryId, pageProductCategory]);
 
   // Load more with search text
   const loadMoreProductSearch = useCallback(() => {
@@ -79,11 +79,11 @@ export default function HomeScreen() {
       fetchingProductsCategoryPromise.current = dispatch(
         postMoreProductsWithSearch({
           search: searchText,
-          page: pageProductCategory + 1,
+          page: pageProductSearch + 1,
         }),
       );
     }
-  }, [searchText, pageProductSearch, totalProductSearch]);
+  }, [searchText, pageProductSearch]);
 
   const statusBar = useMemo(
     () => (

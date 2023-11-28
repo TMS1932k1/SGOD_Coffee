@@ -40,7 +40,7 @@ export const getProductssWithSearch = createAsyncThunk(
 // GET fetch get more products with textd and page
 // Return products list
 export const postMoreProductsWithSearch = createAsyncThunk(
-  'more',
+  'moreSearch',
   async (data: {search: string; page: number}) => {
     await delayTime(1000);
 

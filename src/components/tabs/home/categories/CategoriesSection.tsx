@@ -71,8 +71,10 @@ export default function CategoriesSection({style, refFetching}: Props) {
               category={item}
               isSelected={index === currentIndexCategory}
               onPressItem={() => {
-                dispatch(setCurrentIndex(index));
-                onPressCategory(item.id);
+                if (index !== currentIndexCategory) {
+                  dispatch(setCurrentIndex(index));
+                  onPressCategory(item.id);
+                }
               }}
             />
           )}
