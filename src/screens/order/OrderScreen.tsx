@@ -9,7 +9,7 @@ import {
   HomeStackNavigationScreenProps,
   HomeStackRouteScreenProps,
 } from '../../types/stack';
-import {useCallback, useLayoutEffect, useMemo} from 'react';
+import {useCallback, useEffect, useLayoutEffect, useMemo} from 'react';
 import {
   ContainedButton,
   CustomStatusBar,
@@ -22,13 +22,16 @@ import ImageBlurLoading from 'react-native-image-blur-loading';
 import {useRoute} from '@react-navigation/native';
 import {OptionSection} from '../../components/order';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {useAppSelector} from '../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {getStoresArray, setInitOrder} from '../../store/order/orderSlice';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'OrderScreen'>;
 }
 
 export default function OrderScreen({navigation}: Props) {
+  const dispatch = useAppDispatch();
+
   const user = useAppSelector(state => state.authState.user);
 
   const colors = useTheme().colors;
@@ -54,6 +57,12 @@ export default function OrderScreen({navigation}: Props) {
       ),
     });
   }, [navigation, t]);
+
+  // Set init order
+  useLayoutEffect(() => {
+    dispatch(getStoresArray());
+    dispatch(setInitOrder(product));
+  }, [product]);
 
   // Add or delete product in favorites
   const clickFavorite = useCallback(() => {}, []);
@@ -111,7 +120,8 @@ const styling = (colors: MD3Colors) =>
     },
     submitContainer: {
       flexDirection: 'row',
-      paddingVertical: MyDimensions.paddingLarge,
+      paddingTop: MyDimensions.paddingMedium,
+      paddingBottom: MyDimensions.paddingLarge,
     },
     buyBtn: {
       flex: 2,

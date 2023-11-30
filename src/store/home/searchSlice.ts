@@ -42,7 +42,7 @@ export const getProductssWithSearch = createAsyncThunk(
 export const postMoreProductsWithSearch = createAsyncThunk(
   'moreSearch',
   async (data: {search: string; page: number}) => {
-    await delayTime(1000);
+    await delayTime(500);
 
     if (data.page === 2) {
       return require('../../assets/data/dummy_coffee_two.json') as ProductsResponse;

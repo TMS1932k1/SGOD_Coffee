@@ -1,32 +1,27 @@
 import {View, StyleSheet, Pressable} from 'react-native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {MyDimensions} from '../../constants';
+import {MyDimensions, volumes} from '../../constants';
 import {getColorOpacity} from '../../utils/colorOpacity';
 import {Icon, useTheme} from 'react-native-paper';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo} from 'react';
 import {CustomText} from '../common';
 import {Translation} from 'react-i18next';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Volume} from '../../types/order';
+import {setSize} from '../../store/order/orderSlice';
 
 export default function SizeOption() {
-  const [indexVolume, setIndexVolume] = useState(0);
+  const dispatch = useAppDispatch();
+
+  const volume = useAppSelector(state => state.orderState.size);
 
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
-  const cupIcons: Volume[] = useMemo(
-    () => [
-      {ml: '250', size: 22},
-      {ml: '350', size: 28},
-      {ml: '450', size: 34},
-    ],
-    [],
-  );
-
   // Handle click select sizes option with index
-  const onSelectSize = useCallback((index: number) => {
-    setIndexVolume(index);
+  const onSelectSize = useCallback((item: Volume) => {
+    dispatch(setSize(item));
   }, []);
 
   const title = useMemo(
@@ -46,15 +41,15 @@ export default function SizeOption() {
     <View style={styles.row}>
       {title}
       <View style={styles.sizesContainer}>
-        {cupIcons.map((item, index) => (
+        {volumes.map((item, index) => (
           <Pressable
             style={styles.size}
             key={index}
-            onPress={() => onSelectSize(index)}>
+            onPress={() => onSelectSize(item)}>
             <Icon
               source={'cup'}
               size={item.size}
-              color={indexVolume === index ? colors.primary : colors.outline}
+              color={volume === item ? colors.primary : colors.outline}
             />
             <CustomText style={styles.text} variant="body1">
               {item.ml}

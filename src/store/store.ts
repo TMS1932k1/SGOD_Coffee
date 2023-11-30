@@ -5,6 +5,8 @@ import eventsSlice from './home/eventsSlice';
 import categoriesSlice from './home/categoriesSlice';
 import productsCategorySlice from './home/productsCategorySlice';
 import searchSlice from './home/searchSlice';
+import orderSlice from './order/orderSlice';
+import addressSlice from './order/addressSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ export const store = configureStore({
     categoriesState: categoriesSlice,
     productsCategoryState: productsCategorySlice,
     searchState: searchSlice,
+    orderState: orderSlice,
+    addressState: addressSlice,
   },
 });
 

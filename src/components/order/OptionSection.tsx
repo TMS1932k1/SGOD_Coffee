@@ -1,5 +1,5 @@
 import {View, StyleProp, ViewStyle, StyleSheet} from 'react-native';
-import AddressOption from './AddressOption';
+import AddressOption from './address_option/AddressOption';
 import AmountOption from './AmountOption';
 import SizeOption from './SizeOption';
 import {TypeProduct} from '../../types/product';

@@ -1,0 +1,24 @@
+{
+  "stores": [
+    {
+      "id": 1,
+      "name": "SGarden",
+      "image": "https://i.pinimg.com/736x/84/94/9f/84949fdc009b0f1f211c0d8d39665e96.jpg",
+      "location": {
+        "lat": 10.7839488,
+        "long": 106.676224,
+        "address": "52 Trần Lựu, Quận 2, Thành phố Hồ Chí Minh"
+      }
+    },
+    {
+      "id": 2,
+      "name": "SGarde2",
+      "image": "https://res.cloudinary.com/the-infatuation/image/upload/v1660584238/cms/GiuliaVerdinelli_Hideaway1.jpg",
+      "location": {
+        "lat": 10.7839488,
+        "long": 106.676224,
+        "address": "53 Trần Lựu, Quận 4, Thành phố Hồ Chí Minh"
+      }
+    }
+  ]
+}

@@ -1,10 +1,12 @@
-import {View, Text, StyleSheet, StyleProp, ViewStyle} from 'react-native';
+import {View, StyleSheet, StyleProp, ViewStyle} from 'react-native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../constants';
 import {getColorOpacity} from '../../utils/colorOpacity';
 import {IconButton, useTheme} from 'react-native-paper';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useMemo} from 'react';
 import {CustomText} from '../common';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {setAmount} from '../../store/order/orderSlice';
 
 interface Props {
   name: string;
@@ -12,7 +14,9 @@ interface Props {
 }
 
 export default function AmountOption({style, name}: Props) {
-  const [amount, setAmount] = useState(1);
+  const dispatch = useAppDispatch();
+
+  const amount = useAppSelector(state => state.orderState.amount);
 
   const colors = useTheme().colors;
 
@@ -20,12 +24,14 @@ export default function AmountOption({style, name}: Props) {
 
   // Inscrease amount
   const inscreaseAmount = useCallback(() => {
-    setAmount(amount + 1);
+    dispatch(setAmount(amount + 1));
   }, [amount]);
 
   // Descreate amount, min is 1
   const descreaseAmount = useCallback(() => {
-    if (amount > 1) setAmount(amount - 1);
+    if (amount > 1) {
+      dispatch(setAmount(amount - 1));
+    }
   }, [amount]);
 
   const title = useMemo(

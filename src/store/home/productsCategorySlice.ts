@@ -55,7 +55,7 @@ export const getProductsWithCategory = createAsyncThunk(
 export const postMoreProductsWithCategory = createAsyncThunk(
   'moreProductCategory',
   async (data: {idCategory: string; page: number}) => {
-    await delayTime(1000);
+    await delayTime(500);
 
     if (data.idCategory === '1') {
       if (data.page === 2) {

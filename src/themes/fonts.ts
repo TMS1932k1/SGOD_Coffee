@@ -35,7 +35,7 @@ const customVariants = {
   },
   body1: {
     fontFamily: fontFamily.mulishSemiBold,
-    fontSize: 14,
+    fontSize: 16,
   },
   body2: {
     fontFamily: fontFamily.mulishRegular,

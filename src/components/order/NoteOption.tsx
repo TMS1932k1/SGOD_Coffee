@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useCallback, useMemo} from 'react';
 import {View, StyleSheet, ViewStyle, StyleProp, TextInput} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
@@ -6,18 +6,28 @@ import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
 import {CustomText} from '../common';
 import {fontFamily} from '../../themes';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
+import {setNote} from '../../store/order/orderSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
 export default function NoteOption({style}: Props) {
+  const dispatch = useAppDispatch();
+
+  const note = useAppSelector(state => state.orderState.note);
+
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
-  return (
-    <View style={[styles.container, style]}>
+  const onChangeText = useCallback((value: string) => {
+    dispatch(setNote(value.trim().length <= 0 ? undefined : value));
+  }, []);
+
+  const title = useMemo(
+    () => (
       <Translation>
         {t => (
           <CustomText variant="subheading2" style={styles.title}>
@@ -25,6 +35,13 @@ export default function NoteOption({style}: Props) {
           </CustomText>
         )}
       </Translation>
+    ),
+    [styles],
+  );
+
+  return (
+    <View style={[styles.container, style]}>
+      {title}
       <Translation>
         {t => (
           <TextInput
@@ -36,6 +53,8 @@ export default function NoteOption({style}: Props) {
             keyboardType="default"
             cursorColor={colors.primary}
             maxLength={100}
+            value={note}
+            onChangeText={onChangeText}
           />
         )}
       </Translation>
@@ -48,7 +67,7 @@ const styling = (colors: MD3Colors) =>
     container: {
       paddingHorizontal: MyDimensions.paddingSmall,
       marginTop: MyDimensions.paddingLarge,
-      paddingBottom: MyDimensions.paddingLarge,
+      paddingBottom: MyDimensions.paddingMedium,
     },
     noteInputContainer: {
       borderRadius: MyDimensions.paddingSmall,
