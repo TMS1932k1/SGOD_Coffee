@@ -7,6 +7,7 @@ import ImageBlurLoading from 'react-native-image-blur-loading';
 import {MyDimensions} from '../../../constants';
 import {CustomText, Line} from '../../common';
 import Animated, {FadeIn} from 'react-native-reanimated';
+import {getFullAddressString} from '../../../utils/getFormat';
 
 interface Props {
   store: Store;
@@ -52,9 +53,8 @@ export default function StoreItem({
             </CustomText>
             <CustomText
               style={[styles.text, isSelected && styles.textSelected]}
-              variant="body2"
-              numberOfLines={2}>
-              {store.location.address}
+              variant="body2">
+              {getFullAddressString(store!.location)}
             </CustomText>
           </View>
         </View>
@@ -67,7 +67,6 @@ const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     container: {
       width: '100%',
-      height: 200,
       backgroundColor: colors.surface,
       marginBottom: MyDimensions.paddingMedium,
       borderRadius: MyDimensions.borderRadiusMedium,

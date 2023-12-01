@@ -8,6 +8,7 @@ import {CustomText} from '../common';
 import {fontFamily} from '../../themes';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {setNote} from '../../store/order/orderSlice';
+import {getColorOpacity} from '../../utils/colorOpacity';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -68,6 +69,8 @@ const styling = (colors: MD3Colors) =>
       paddingHorizontal: MyDimensions.paddingSmall,
       marginTop: MyDimensions.paddingLarge,
       paddingBottom: MyDimensions.paddingMedium,
+      borderBottomColor: getColorOpacity(colors.outline, 0.5),
+      borderBottomWidth: 1,
     },
     noteInputContainer: {
       borderRadius: MyDimensions.paddingSmall,

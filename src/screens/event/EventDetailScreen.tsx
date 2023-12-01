@@ -1,7 +1,10 @@
 import {useRoute} from '@react-navigation/native';
 import {StyleSheet, ScrollView, View} from 'react-native';
-import {HomeStackRouteScreenProps} from '../../types/stack';
-import {useMemo} from 'react';
+import {
+  HomeStackNavigationScreenProps,
+  HomeStackRouteScreenProps,
+} from '../../types/stack';
+import {useLayoutEffect, useMemo} from 'react';
 import ImageBlurLoading from 'react-native-image-blur-loading';
 import {MyDimensions} from '../../constants';
 import {CustomStatusBar, CustomText} from '../../components/common';
@@ -10,7 +13,11 @@ import {useTheme} from 'react-native-paper';
 import {TimeItem} from '../../components/event';
 import {Translation} from 'react-i18next';
 
-export default function EventDetailScreen() {
+interface Props {
+  navigation: HomeStackNavigationScreenProps<'EventDetailScreen'>;
+}
+
+export default function EventDetailScreen({navigation}: Props) {
   const route = useRoute<HomeStackRouteScreenProps<'EventDetailScreen'>>();
 
   const colors = useTheme().colors;
@@ -18,6 +25,12 @@ export default function EventDetailScreen() {
   const styles = useMemo(() => styling(colors), [colors]);
 
   const event = useMemo(() => route.params.event, [route]);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: '',
+    });
+  }, [navigation]);
 
   const image = useMemo(
     () => (

@@ -6,7 +6,7 @@ import categoriesSlice from './home/categoriesSlice';
 import productsCategorySlice from './home/productsCategorySlice';
 import searchSlice from './home/searchSlice';
 import orderSlice from './order/orderSlice';
-import addressSlice from './order/addressSlice';
+import addressSlice from './shipto/addressSlice';
 
 export const store = configureStore({
   reducer: {

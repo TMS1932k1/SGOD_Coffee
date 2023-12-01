@@ -7,7 +7,30 @@
       "location": {
         "lat": 10.7839488,
         "long": 106.676224,
-        "address": "52 Trần Lựu, Quận 2, Thành phố Hồ Chí Minh"
+        "province": {
+          "name": "Thành phố Hồ Chí Minh",
+          "code": 79,
+          "division_type": "thành phố trung ương",
+          "codename": "thanh_pho_ho_chi_minh",
+          "phone_code": 28,
+          "districts": []
+        },
+        "ward": {
+          "name": "Phường Thảo Điền",
+          "code": 27088,
+          "division_type": "phường",
+          "codename": "phuong_thao_dien",
+          "district_code": 769
+        },
+        "district": {
+          "name": "Thành phố Thủ Đức",
+          "code": 769,
+          "division_type": "thành phố",
+          "codename": "thanh_pho_thu_duc",
+          "province_code": 79,
+          "wards": []
+        },
+        "address": "52, Trần Lựu"
       }
     },
     {
@@ -17,7 +40,30 @@
       "location": {
         "lat": 10.7839488,
         "long": 106.676224,
-        "address": "53 Trần Lựu, Quận 4, Thành phố Hồ Chí Minh"
+        "province": {
+          "name": "Thành phố Hồ Chí Minh",
+          "code": 79,
+          "division_type": "thành phố trung ương",
+          "codename": "thanh_pho_ho_chi_minh",
+          "phone_code": 28,
+          "districts": []
+        },
+        "ward": {
+          "name": "Phường Thảo Điền",
+          "code": 27088,
+          "division_type": "phường",
+          "codename": "phuong_thao_dien",
+          "district_code": 769
+        },
+        "district": {
+          "name": "Thành phố Thủ Đức",
+          "code": 769,
+          "division_type": "thành phố",
+          "codename": "thanh_pho_thu_duc",
+          "province_code": 79,
+          "wards": []
+        },
+        "address": "52, Trần Lựu"
       }
     }
   ]

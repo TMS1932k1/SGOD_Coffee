@@ -11,13 +11,16 @@ interface orderState {
   size: Volume;
   store?: Store;
   note?: string;
+  isShip: boolean;
   stores?: Store[];
   shipTo?: Location;
+  phone?: string;
   isLoadingStores: boolean;
 }
 
 const initialState: orderState = {
   isLoadingStores: false,
+  isShip: false,
   amount: 1,
   size: volumes[0],
 };
@@ -57,6 +60,12 @@ export const orderSlice = createSlice({
     setShipTo: (state, action: PayloadAction<Location>) => {
       state.shipTo = action.payload;
     },
+    setIsShip: (state, action: PayloadAction<boolean>) => {
+      state.isShip = action.payload;
+    },
+    setPhoneOrder: (state, action: PayloadAction<string>) => {
+      state.phone = action.payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -88,6 +97,14 @@ export const orderSlice = createSlice({
   },
 });
 
-export const {setInitOrder, setAmount, setSize, setNote, setStore, setShipTo} =
-  orderSlice.actions;
+export const {
+  setInitOrder,
+  setAmount,
+  setSize,
+  setNote,
+  setStore,
+  setShipTo,
+  setIsShip,
+  setPhoneOrder,
+} = orderSlice.actions;
 export default orderSlice.reducer;

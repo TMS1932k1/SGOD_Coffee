@@ -4,7 +4,7 @@ import {useTheme} from 'react-native-paper';
 import {useMemo} from 'react';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../constants';
-import {getFormatDate} from '../../utils/formatDatetime';
+import {getFormatDate} from '../../utils/getFormat';
 import {Timeline} from '../../types/event';
 import {Translation} from 'react-i18next';
 

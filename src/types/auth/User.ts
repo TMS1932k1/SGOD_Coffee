@@ -1,3 +1,5 @@
+import {Location} from '../order';
+
 export type User = {
   email: string;
   id: string;
@@ -6,4 +8,5 @@ export type User = {
   refreshToken: string;
   role: string;
   point: number;
+  location?: Location;
 };

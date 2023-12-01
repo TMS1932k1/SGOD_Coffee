@@ -1,15 +1,9 @@
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-} from 'react-native';
+import {View, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {
   HomeStackNavigationScreenProps,
   HomeStackRouteScreenProps,
 } from '../../types/stack';
-import {useCallback, useEffect, useLayoutEffect, useMemo} from 'react';
+import {useCallback, useLayoutEffect, useMemo} from 'react';
 import {
   ContainedButton,
   CustomStatusBar,
@@ -20,10 +14,10 @@ import {MyDimensions} from '../../constants';
 import {Translation, useTranslation} from 'react-i18next';
 import ImageBlurLoading from 'react-native-image-blur-loading';
 import {useRoute} from '@react-navigation/native';
-import {OptionSection} from '../../components/order';
+import {OptionSection, SummarySection} from '../../components/order';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {getStoresArray, setInitOrder} from '../../store/order/orderSlice';
+import {setInitOrder} from '../../store/order/orderSlice';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'OrderScreen'>;
@@ -60,7 +54,6 @@ export default function OrderScreen({navigation}: Props) {
 
   // Set init order
   useLayoutEffect(() => {
-    dispatch(getStoresArray());
     dispatch(setInitOrder(product));
   }, [product]);
 
@@ -77,6 +70,7 @@ export default function OrderScreen({navigation}: Props) {
         showsVerticalScrollIndicator={false}>
         <ImageBlurLoading style={styles.image} source={{uri: product.image}} />
         <OptionSection name={product.name} type={product.type} />
+        <SummarySection />
       </ScrollView>
     ),
     [product],
@@ -90,7 +84,7 @@ export default function OrderScreen({navigation}: Props) {
         <Translation>
           {t => (
             <TextButton style={styles.addCartContainer} onPress={addCart}>
-              {t('addCart')}
+              {t('addList')}
             </TextButton>
           )}
         </Translation>

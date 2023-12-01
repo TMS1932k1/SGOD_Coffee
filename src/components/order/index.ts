@@ -5,7 +5,7 @@ import SizeOption from './SizeOption';
 import NoteOption from './NoteOption';
 import StoresModal from './address_option/StoresModal';
 import StoreItem from './address_option/StoreItem';
-import ShipToModal from './address_option/ShipToModal';
+import SummarySection from './SummarySection';
 
 export {
   OptionSection,
@@ -15,5 +15,5 @@ export {
   NoteOption,
   StoresModal,
   StoreItem,
-  ShipToModal,
+  SummarySection,
 };

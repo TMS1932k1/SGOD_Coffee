@@ -9,7 +9,7 @@ import {
   IconButton,
   useTheme,
 } from 'react-native-paper';
-import {useCallback, useMemo, useState} from 'react';
+import {useCallback, useLayoutEffect, useMemo, useState} from 'react';
 import {Translation} from 'react-i18next';
 import Animated, {
   FadeInUp,
@@ -17,38 +17,52 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {useAppSelector} from '../../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../../store/hooks';
 import StoresModal from './StoresModal';
-import ShipToModal from './ShipToModal';
+import {getFullAddressString} from '../../../utils/getFormat';
+import {getStoresArray, setIsShip} from '../../../store/order/orderSlice';
+import {useNavigation} from '@react-navigation/native';
+import {HomeStackNavigationScreenProps} from '../../../types/stack';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
 export default function AddressOption({style}: Props) {
+  const navigation =
+    useNavigation<HomeStackNavigationScreenProps<'OrderScreen'>>();
+
+  const dispatch = useAppDispatch();
+
   const store = useAppSelector(state => state.orderState.store);
-
+  const stores = useAppSelector(state => state.orderState.stores);
   const shipTo = useAppSelector(state => state.orderState.shipTo);
-
   const isLoading = useAppSelector(state => state.orderState.isLoadingStores);
+  const isShip = useAppSelector(state => state.orderState.isShip);
 
-  const heightAnimation = useSharedValue(150);
-
-  const [isShip, setIsShip] = useState(false);
+  const heightAnimation = useSharedValue(isShip ? 236 : 150);
 
   const [isShowStoresModal, setShowStoresModal] = useState(false);
-
-  const [isShowShipModal, setShowShipModal] = useState(false);
 
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
+  useLayoutEffect(() => {
+    if (!stores) {
+      dispatch(getStoresArray());
+    }
+  }, [stores]);
+
+  const addShipTo = useCallback(() => {
+    navigation.navigate('ShipToScreen');
+  }, [navigation]);
+
   // Handle when on click onsite
   const onClickOnSite = useCallback(() => {
     if (isShip) {
       heightAnimation.value = withTiming(heightAnimation.value - 86);
-      setIsShip(false);
+      dispatch(setIsShip(false));
     }
   }, [isShip]);
 
@@ -56,7 +70,7 @@ export default function AddressOption({style}: Props) {
   const onClickTakeAway = useCallback(() => {
     if (!isShip) {
       heightAnimation.value = withTiming(heightAnimation.value + 86);
-      setIsShip(true);
+      dispatch(setIsShip(true));
     }
   }, [isShip]);
 
@@ -68,16 +82,6 @@ export default function AddressOption({style}: Props) {
   // Dismiss modal to choose store
   const dismissStoreModal = useCallback(() => {
     setShowStoresModal(false);
-  }, []);
-
-  // Show modal to choose add ship to
-  const showShipToModal = useCallback(() => {
-    setShowShipModal(true);
-  }, []);
-
-  // Dismiss modal to choose add ship to
-  const dismissShipToModal = useCallback(() => {
-    setShowShipModal(false);
   }, []);
 
   const tilte = useMemo(
@@ -113,7 +117,7 @@ export default function AddressOption({style}: Props) {
     [onClickOnSite, onClickTakeAway, colors, isShip],
   );
 
-  const addressShop = useMemo(
+  const addressStore = useMemo(
     () => (
       <View>
         <Translation>
@@ -128,13 +132,15 @@ export default function AddressOption({style}: Props) {
             <ActivityIndicator />
           </View>
         ) : (
-          <Pressable style={styles.shopContainer} onPress={showStoresModal}>
-            <CustomText
-              style={styles.textAddress}
-              variant="body1"
-              numberOfLines={1}>
-              {`${store?.name}, ${store?.location.address}`}
-            </CustomText>
+          <Pressable style={styles.storeContainer} onPress={showStoresModal}>
+            {store && (
+              <CustomText
+                style={styles.textAddress}
+                variant="body1"
+                numberOfLines={1}>
+                {`${store!.name}, ${getFullAddressString(store!.location)}`}
+              </CustomText>
+            )}
             <Icon
               source={'map-marker'}
               size={MyDimensions.iconMedium}
@@ -162,7 +168,7 @@ export default function AddressOption({style}: Props) {
           )}
         </Translation>
         <Pressable
-          onPress={showShipToModal}
+          onPress={addShipTo}
           style={({pressed}) => [
             styles.adrressContainer,
             pressed && styles.opacity,
@@ -173,7 +179,7 @@ export default function AddressOption({style}: Props) {
                 style={styles.textAddress}
                 variant="body1"
                 numberOfLines={1}>
-                {!shipTo ? t('addShipTo') : shipTo.address}
+                {!shipTo ? t('addShipTo') : getFullAddressString(shipTo)}
               </CustomText>
             )}
           </Translation>
@@ -183,13 +189,9 @@ export default function AddressOption({style}: Props) {
             color={colors.outline}
           />
         </Pressable>
-        <ShipToModal
-          onHideModal={dismissShipToModal}
-          visible={isShowShipModal}
-        />
       </Animated.View>
     ),
-    [styles, shipTo, isShowShipModal],
+    [styles, shipTo],
   );
 
   return (
@@ -203,7 +205,7 @@ export default function AddressOption({style}: Props) {
         {tilte}
         {optionsView}
       </View>
-      {addressShop}
+      {addressStore}
       {isShip && shipView}
     </Animated.View>
   );
@@ -265,7 +267,7 @@ const styling = (colors: MD3Colors) =>
       color: colors.onBackground,
       marginTop: MyDimensions.paddingSmall,
     },
-    shopContainer: {
+    storeContainer: {
       width: '100%',
       height: 50,
       borderRadius: MyDimensions.borderRadiusSmall,

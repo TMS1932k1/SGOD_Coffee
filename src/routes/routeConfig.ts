@@ -50,6 +50,7 @@ export type HomeNavigatorParamList = {
   ForgotPasswordScreen: undefined;
   VerificationOtpScreen: {email: string};
   EventDetailScreen: {event: Event};
+  ShipToScreen: undefined;
 };
 
 // Declare bottom navigation navigator param list

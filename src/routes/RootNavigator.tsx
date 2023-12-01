@@ -21,6 +21,7 @@ import {OnboardingScreen} from '../screens/onboarding';
 import {useAppSelector} from '../store/hooks';
 import {EventDetailScreen} from '../screens/event';
 import {OrderScreen} from '../screens/home';
+import ShipToScreen from '../screens/shipto/ShipToScreen';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 
@@ -39,6 +40,7 @@ const homeStackRoutes: HomeStackRoutesType = [
   {name: 'VerificationOtpScreen', component: VerificationOtpScreen},
   {name: 'EventDetailScreen', component: EventDetailScreen},
   {name: 'OrderScreen', component: OrderScreen},
+  {name: 'ShipToScreen', component: ShipToScreen},
 ];
 
 export default function RootNavigator() {
