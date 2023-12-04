@@ -1,7 +1,7 @@
 import OptionSection from './OptionSection';
 import AddressOption from './address_option/AddressOption';
 import AmountOption from './AmountOption';
-import SizeOption from './SizeOption';
+import VolumeOption from './VolumeOption';
 import NoteOption from './NoteOption';
 import StoresModal from './address_option/StoresModal';
 import StoreItem from './address_option/StoreItem';
@@ -11,7 +11,7 @@ export {
   OptionSection,
   AddressOption,
   AmountOption,
-  SizeOption,
+  VolumeOption,
   NoteOption,
   StoresModal,
   StoreItem,

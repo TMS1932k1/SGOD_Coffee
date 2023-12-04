@@ -43,6 +43,8 @@ const styling = (colors: MD3Colors) =>
       height: 300,
       justifyContent: 'flex-end',
       backgroundColor: colors.tertiary,
+      borderBottomLeftRadius: MyDimensions.borderRadiusLarge,
+      borderBottomRightRadius: MyDimensions.borderRadiusLarge,
       paddingHorizontal: MyDimensions.paddingLarge,
       paddingBottom: 80 + MyDimensions.paddingMedium,
     },

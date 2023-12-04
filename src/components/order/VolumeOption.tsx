@@ -8,12 +8,12 @@ import {CustomText} from '../common';
 import {Translation} from 'react-i18next';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Volume} from '../../types/order';
-import {setSize} from '../../store/order/orderSlice';
+import {setVolume} from '../../store/order/orderSlice';
 
-export default function SizeOption() {
+export default function VolumeOption() {
   const dispatch = useAppDispatch();
 
-  const volume = useAppSelector(state => state.orderState.size);
+  const volume = useAppSelector(state => state.orderState.volume);
 
   const colors = useTheme().colors;
 
@@ -21,7 +21,7 @@ export default function SizeOption() {
 
   // Handle click select sizes option with index
   const onSelectSize = useCallback((item: Volume) => {
-    dispatch(setSize(item));
+    dispatch(setVolume(item));
   }, []);
 
   const title = useMemo(

@@ -18,6 +18,7 @@ import {OptionSection, SummarySection} from '../../components/order';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {setInitOrder} from '../../store/order/orderSlice';
+import {addOrder} from '../../store/cart/cartSlice';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'OrderScreen'>;
@@ -27,6 +28,9 @@ export default function OrderScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(state => state.authState.user);
+  const isShip = useAppSelector(state => state.orderState.isShip);
+  const shipTo = useAppSelector(state => state.orderState.shipTo);
+  const order = useAppSelector(state => state.orderState.order);
 
   const colors = useTheme().colors;
 
@@ -61,7 +65,9 @@ export default function OrderScreen({navigation}: Props) {
   const clickFavorite = useCallback(() => {}, []);
 
   // Add order to cart
-  const addCart = useCallback(() => {}, []);
+  const addCart = useCallback(() => {
+    if (order) dispatch(addOrder(order));
+  }, [order]);
 
   const productOptions = useMemo(
     () => (
@@ -83,7 +89,10 @@ export default function OrderScreen({navigation}: Props) {
       <View style={styles.submitContainer}>
         <Translation>
           {t => (
-            <TextButton style={styles.addCartContainer} onPress={addCart}>
+            <TextButton
+              style={styles.addCartContainer}
+              onPress={addCart}
+              disable={(isShip && shipTo) || !isShip ? false : true}>
               {t('addList')}
             </TextButton>
           )}
@@ -92,7 +101,7 @@ export default function OrderScreen({navigation}: Props) {
           {t => (
             <ContainedButton
               style={styles.buyBtn}
-              disabled={user ? false : true}>
+              disabled={user && ((isShip && shipTo) || !isShip) ? false : true}>
               {t('buyNow')}
             </ContainedButton>
           )}

@@ -88,9 +88,9 @@ export default function AddressOption({style}: Props) {
     () => (
       <Translation>
         {t => (
-          <CustomText variant="subheading2" style={styles.title}>{`${t(
-            'onSite',
-          )} / ${t('takeAway')}`}</CustomText>
+          <CustomText variant="subheading2" style={styles.title}>
+            {`${t('onSite')} / ${t('ship')}`}
+          </CustomText>
         )}
       </Translation>
     ),

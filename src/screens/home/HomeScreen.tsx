@@ -1,4 +1,4 @@
-import {useCallback, useMemo, useRef} from 'react';
+import {useCallback, useEffect, useMemo, useRef} from 'react';
 import {
   StatusBar,
   StyleSheet,
@@ -114,6 +114,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
+      {statusBar}
       <ScrollView
         showsVerticalScrollIndicator={false}
         onScroll={({nativeEvent}) => {
@@ -132,7 +133,6 @@ export default function HomeScreen() {
             }
           }
         }}>
-        {statusBar}
         {homeheaderView}
         {searchText ? resultView : notSearchView}
       </ScrollView>

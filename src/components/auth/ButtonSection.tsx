@@ -1,5 +1,5 @@
 import {Translation} from 'react-i18next';
-import {View, Text, ViewStyle, StyleProp, StyleSheet} from 'react-native';
+import {View, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 import ContainedButton from '../common/ContainedButton';
 import {ReactNode, useMemo} from 'react';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';

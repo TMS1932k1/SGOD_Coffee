@@ -32,7 +32,12 @@ export default function OtpInputsSection({
 
   const inputRef = useRef<Array<NonNullable<TextInput>>>([]);
 
-  // Callback return new otp array
+  /**
+   * Assign new value into OTP array, then will callback by [onChange]
+   *
+   * @param index - index of array need assign new value
+   * @param text - text to assign to index
+   */
   const updateOtpArray = useCallback(
     (text: string, index: number) => {
       otpArray[index] = text.trim() !== '' ? text : undefined;
@@ -42,20 +47,34 @@ export default function OtpInputsSection({
   );
 
   // Auto focus next input OTP code
+  /**
+   * Assign new value into OTP array by function [updateOtpArray]
+   * Then check length of text, if length > 0 will focus next index else focus previous index by ref [inputRef]
+   *
+   * @param index - index of array need assign new value
+   * @param text - text to assign to index
+   */
   const onChangeText = useCallback(
     (text: string, index: number) => {
-      // Set new otp array
+      // Assign new value into OTP array
       updateOtpArray(text, index);
 
+      // Check length of text to handle focus
       if (text.length > 0) {
-        return inputRef.current[index + 1]?.focus();
+        inputRef.current[index + 1]?.focus();
       }
-      return inputRef.current[index - 1]?.focus();
+      inputRef.current[index - 1]?.focus();
     },
     [inputRef, updateOtpArray],
   );
 
-  // Auto focus previous OTP code when press backspacce
+  /**
+   * Check key press event,
+   * If key is 'Backspace' will call function [onChangeText] with param [''] and [index]
+   *
+   * @param event - Key press events of [TextInput]
+   * @param index - index of array need backspace value
+   */
   const onBackSpace = useCallback(
     (
       event: NativeSyntheticEvent<TextInputKeyPressEventData>,

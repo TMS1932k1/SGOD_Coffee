@@ -1,7 +1,7 @@
 import {View, StyleProp, ViewStyle, StyleSheet} from 'react-native';
 import AddressOption from './address_option/AddressOption';
 import AmountOption from './AmountOption';
-import SizeOption from './SizeOption';
+import VolumeOption from './VolumeOption';
 import {TypeProduct} from '../../types/product';
 import NoteOption from './NoteOption';
 
@@ -15,7 +15,7 @@ export default function OptionSection({style, name, type}: Props) {
   return (
     <View style={[styles.container, style]}>
       <AmountOption name={name} />
-      {type === 'drink' && <SizeOption />}
+      {type === 'drink' && <VolumeOption />}
       <AddressOption />
       <NoteOption />
     </View>
