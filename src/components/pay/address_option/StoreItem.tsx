@@ -1,5 +1,4 @@
 import {View, StyleSheet, Pressable} from 'react-native';
-import {Store} from '../../../types/order';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {IconButton, useTheme} from 'react-native-paper';
 import {useCallback, useMemo} from 'react';
@@ -8,6 +7,7 @@ import {MyDimensions} from '../../../constants';
 import {CustomText, Line} from '../../common';
 import Animated, {FadeIn} from 'react-native-reanimated';
 import {getFullAddressString} from '../../../utils/getFormat';
+import {Store} from '../../../types/store';
 
 interface Props {
   store: Store;

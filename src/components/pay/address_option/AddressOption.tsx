@@ -20,9 +20,9 @@ import Animated, {
 import {useAppDispatch, useAppSelector} from '../../../store/hooks';
 import StoresModal from './StoresModal';
 import {getFullAddressString} from '../../../utils/getFormat';
-import {getStoresArray, setIsShip} from '../../../store/order/orderSlice';
 import {useNavigation} from '@react-navigation/native';
 import {HomeStackNavigationScreenProps} from '../../../types/stack';
+import {getStoresArray, setIsShip} from '../../../store/pay/paySlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -34,11 +34,11 @@ export default function AddressOption({style}: Props) {
 
   const dispatch = useAppDispatch();
 
-  const store = useAppSelector(state => state.orderState.store);
-  const stores = useAppSelector(state => state.orderState.stores);
-  const shipTo = useAppSelector(state => state.orderState.shipTo);
-  const isLoading = useAppSelector(state => state.orderState.isLoadingStores);
-  const isShip = useAppSelector(state => state.orderState.isShip);
+  const store = useAppSelector(state => state.payState.store);
+  const stores = useAppSelector(state => state.payState.stores);
+  const shipTo = useAppSelector(state => state.payState.shipTo);
+  const isLoading = useAppSelector(state => state.payState.isLoadingStores);
+  const isShip = useAppSelector(state => state.payState.isShip);
 
   const heightAnimation = useSharedValue(isShip ? 236 : 150);
 
@@ -214,11 +214,7 @@ export default function AddressOption({style}: Props) {
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     onsiteTakeAwayContainer: {
-      paddingHorizontal: MyDimensions.paddingSmall,
-      marginTop: MyDimensions.paddingLarge,
-      paddingBottom: MyDimensions.paddingSmall,
-      borderBottomColor: getColorOpacity(colors.outline, 0.5),
-      borderBottomWidth: 1,
+      marginTop: MyDimensions.paddingSmall,
     },
     title: {
       color: colors.onBackground,

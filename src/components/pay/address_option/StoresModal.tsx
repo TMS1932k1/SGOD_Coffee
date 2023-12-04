@@ -6,10 +6,10 @@ import {MyDimensions} from '../../../constants';
 import {CustomText, Line} from '../../common';
 import {useAppDispatch, useAppSelector} from '../../../store/hooks';
 import StoreItem from './StoreItem';
-import {Store} from '../../../types/order';
-import {setStore} from '../../../store/order/orderSlice';
 import Animated, {ZoomIn} from 'react-native-reanimated';
 import {Translation} from 'react-i18next';
+import {Store} from '../../../types/store';
+import {setStore} from '../../../store/pay/paySlice';
 
 interface Props {
   visible?: boolean;
@@ -19,10 +19,10 @@ interface Props {
 export default function StoresModal({visible = false, onHideModal}: Props) {
   const dispatch = useAppDispatch();
 
-  const stores = useAppSelector(state => state.orderState.stores);
-  const store = useAppSelector(state => state.orderState.store);
+  const stores = useAppSelector(state => state.payState.stores);
+  const store = useAppSelector(state => state.payState.store);
 
-  const isLoading = useAppSelector(state => state.orderState.isLoadingStores);
+  const isLoading = useAppSelector(state => state.payState.isLoadingStores);
 
   const colors = useTheme().colors;
 

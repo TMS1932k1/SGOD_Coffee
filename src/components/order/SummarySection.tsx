@@ -2,7 +2,7 @@ import {useCallback, useEffect, useMemo} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
-import {MyDimensions, priceShip} from '../../constants';
+import {MyDimensions} from '../../constants';
 import {Translation} from 'react-i18next';
 import {CustomText} from '../common';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
@@ -14,10 +14,7 @@ export default function SummarySection() {
   const product = useAppSelector(state => state.orderState.product);
   const amount = useAppSelector(state => state.orderState.amount);
   const size = useAppSelector(state => state.orderState.volume);
-  const isShip = useAppSelector(state => state.orderState.isShip);
   const note = useAppSelector(state => state.orderState.note);
-  const store = useAppSelector(state => state.orderState.store);
-  const shipTo = useAppSelector(state => state.orderState.shipTo);
   const total = useAppSelector(state => state.orderState.total);
 
   const colors = useTheme().colors;
@@ -27,7 +24,7 @@ export default function SummarySection() {
   // Auto set total to calculate when options are changed
   useEffect(() => {
     dispatch(setTotal());
-  }, [amount, size, isShip, note, store, shipTo]);
+  }, [amount, size, note]);
 
   const title = useMemo(
     () => (
@@ -74,7 +71,8 @@ export default function SummarySection() {
 
   const volumeRow = useMemo(
     () =>
-      product?.type === 'drink' && (
+      product?.type === 'drink' &&
+      size.priceAdd > 0 && (
         <Translation>
           {t =>
             detailRowView(
@@ -85,20 +83,6 @@ export default function SummarySection() {
         </Translation>
       ),
     [size, product, detailRowView],
-  );
-
-  const shipRow = useMemo(
-    () =>
-      isShip && (
-        <View>
-          <Translation>
-            {t =>
-              detailRowView(`${t('ship')}`, `${priceShip.toLocaleString()} đ`)
-            }
-          </Translation>
-        </View>
-      ),
-    [isShip, detailRowView],
   );
 
   const totalRow = useMemo(
@@ -118,7 +102,6 @@ export default function SummarySection() {
         {title}
         {amountRow}
         {volumeRow}
-        {shipRow}
       </View>
       <View style={styles.divideLine} />
       {totalRow}

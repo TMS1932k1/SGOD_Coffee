@@ -28,8 +28,6 @@ export default function OrderScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(state => state.authState.user);
-  const isShip = useAppSelector(state => state.orderState.isShip);
-  const shipTo = useAppSelector(state => state.orderState.shipTo);
   const order = useAppSelector(state => state.orderState.order);
 
   const colors = useTheme().colors;
@@ -66,7 +64,7 @@ export default function OrderScreen({navigation}: Props) {
 
   // Add order to cart
   const addCart = useCallback(() => {
-    if (order) dispatch(addOrder(order));
+    if (order) dispatch(addOrder({...order, id: Date.now().toString()}));
   }, [order]);
 
   const productOptions = useMemo(
@@ -89,10 +87,7 @@ export default function OrderScreen({navigation}: Props) {
       <View style={styles.submitContainer}>
         <Translation>
           {t => (
-            <TextButton
-              style={styles.addCartContainer}
-              onPress={addCart}
-              disable={(isShip && shipTo) || !isShip ? false : true}>
+            <TextButton style={styles.addCartContainer} onPress={addCart}>
               {t('addList')}
             </TextButton>
           )}
@@ -101,7 +96,7 @@ export default function OrderScreen({navigation}: Props) {
           {t => (
             <ContainedButton
               style={styles.buyBtn}
-              disabled={user && ((isShip && shipTo) || !isShip) ? false : true}>
+              disabled={user ? false : true}>
               {t('buyNow')}
             </ContainedButton>
           )}

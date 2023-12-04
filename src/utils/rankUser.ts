@@ -2,27 +2,35 @@ import {MyColors} from '../constants';
 
 export const getRankTitle = (
   point: number,
-): 'Bronze' | 'Silver' | 'Gold' | 'Diamond' | undefined => {
+): 'bronze' | 'silver' | 'gold' | 'diamond' | undefined => {
   if (point < 1000) return undefined;
-  if (point < 2000) return 'Bronze';
-  if (point < 5000) return 'Silver';
-  if (point < 10000) return 'Gold';
-  return 'Diamond';
+  if (point < 2000) return 'bronze';
+  if (point < 5000) return 'silver';
+  if (point < 10000) return 'gold';
+  return 'diamond';
 };
 
 export const getRankColor = (
-  rank?: 'Bronze' | 'Silver' | 'Gold' | 'Diamond',
+  rank?: 'bronze' | 'silver' | 'gold' | 'diamond',
 ) => {
   switch (rank) {
-    case 'Bronze':
+    case 'bronze':
       return MyColors.bronze;
-    case 'Silver':
+    case 'silver':
       return MyColors.silver;
-    case 'Gold':
+    case 'gold':
       return MyColors.gold;
     default:
       return MyColors.diamond;
   }
+};
+
+export const getRankPromo = (point: number) => {
+  if (point < 1000) return 0;
+  if (point < 2000) return 5;
+  if (point < 5000) return 10;
+  if (point < 10000) return 15;
+  return 20;
 };
 
 export const getDetailNextRank = (point: number) => {

@@ -1,6 +1,4 @@
 import {Product} from '../product';
-import {Location} from './Location';
-import {Store} from './Store';
 import {Volume} from './Volume';
 
 export type Order = {
@@ -8,8 +6,6 @@ export type Order = {
   product: Product;
   amount: number;
   volume?: Volume;
-  store: Store;
-  shipTo?: Location;
   note?: string;
   total: number;
 };

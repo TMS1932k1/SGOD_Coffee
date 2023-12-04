@@ -1,4 +1,4 @@
-import {Location} from './Location';
+import {Location} from '../order/Location';
 
 export type Store = {
   id: string;

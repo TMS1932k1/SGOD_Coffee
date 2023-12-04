@@ -33,7 +33,9 @@ export default function InfoUser({style}: Props) {
     return (
       rankTitle && (
         <View style={[styles.rank, {backgroundColor: getRankColor(rankTitle)}]}>
-          <CustomText variant="body1">{rankTitle}</CustomText>
+          <Translation>
+            {t => <CustomText variant="body1">{t(`${rankTitle}`)}</CustomText>}
+          </Translation>
         </View>
       )
     );

@@ -21,8 +21,8 @@ import {Location} from '../../types/order';
 import {LocationDropdown, UserLocation} from '../../components/shipto';
 import {HomeStackNavigationScreenProps} from '../../types/stack';
 import {Controller, useForm} from 'react-hook-form';
-import {setPhoneOrder, setShipTo} from '../../store/order/orderSlice';
 import {regPhone} from '../../utils/regexFormat';
+import {setLocation, setPhone} from '../../store/pay/paySlice';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'ShipToScreen'>;
@@ -34,7 +34,6 @@ export default function ShipToScreen({navigation}: Props) {
     handleSubmit,
     formState: {errors},
     setValue,
-    watch,
   } = useForm<FormShipTo>({
     defaultValues: {},
   });
@@ -42,11 +41,11 @@ export default function ShipToScreen({navigation}: Props) {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(state => state.authState.user);
-  const currentLocation = useAppSelector(state => state.orderState.shipTo);
-  const currentPhone = useAppSelector(state => state.orderState.phone);
   const provinces = useAppSelector(state => state.addressState.provinces);
   const districts = useAppSelector(state => state.addressState.districts);
   const wards = useAppSelector(state => state.addressState.wards);
+  const currentLocation = useAppSelector(state => state.payState.shipTo);
+  const currentPhone = useAppSelector(state => state.payState.phone);
 
   const colors = useTheme().colors;
 
@@ -88,6 +87,8 @@ export default function ShipToScreen({navigation}: Props) {
   const selectProvince = useCallback(
     (province: Province, onchange: (item: Province) => void) => {
       dispatch(setProvince(province));
+      setValue('district', undefined);
+      setValue('ward', undefined);
       onchange(province);
     },
     [],
@@ -97,6 +98,7 @@ export default function ShipToScreen({navigation}: Props) {
   const selectDistrict = useCallback(
     (district: District, onchange: (item: District) => void) => {
       dispatch(setDistrict(district));
+      setValue('ward', undefined);
       onchange(district);
     },
     [],
@@ -105,17 +107,17 @@ export default function ShipToScreen({navigation}: Props) {
   // Handle submit add address
   const onSubmit = handleSubmit(data => {
     navigation.pop();
+    dispatch(setPhone(data.phone!));
     dispatch(
-      setShipTo({
-        address: data.address!,
-        province: data.province!,
-        district: data.district!,
-        ward: data.ward!,
-        long: 0,
+      setLocation({
         lat: 0,
+        long: 0,
+        address: data.address!,
+        district: data.district!,
+        province: data.province!,
+        ward: data.ward!,
       }),
     );
-    dispatch(setPhoneOrder(data.phone!));
   });
 
   const inputHome = useMemo(
