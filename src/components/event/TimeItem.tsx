@@ -4,7 +4,7 @@ import {useTheme} from 'react-native-paper';
 import {useMemo} from 'react';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../constants';
-import {getFormatDate} from '../../utils/getFormat';
+import {getFormatDateWithString} from '../../utils/getFormat';
 import {Timeline} from '../../types/event';
 import {Translation} from 'react-i18next';
 
@@ -24,8 +24,8 @@ export default function TimeItem({timeline}: Props) {
           <CustomText style={styles.text} variant="body2">
             {timeline
               ? t('timelineCtx', {
-                  start: getFormatDate(timeline.start),
-                  end: getFormatDate(timeline.deadline),
+                  start: getFormatDateWithString(timeline.start),
+                  end: getFormatDateWithString(timeline.deadline),
                 })
               : t('everyTime')}
           </CustomText>

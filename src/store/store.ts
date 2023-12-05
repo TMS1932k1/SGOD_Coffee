@@ -8,7 +8,8 @@ import searchSlice from './home/searchSlice';
 import orderSlice from './order/orderSlice';
 import addressSlice from './shipto/addressSlice';
 import cartSlice from './cart/cartSlice';
-import paySlice from './pay/paySlice';
+import confirmSlice from './confirm/confirmSlice';
+import billsSlice from './bill/billsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +22,8 @@ export const store = configureStore({
     orderState: orderSlice,
     addressState: addressSlice,
     cartState: cartSlice,
-    payState: paySlice,
+    confirmState: confirmSlice,
+    billsState: billsSlice,
   },
 });
 

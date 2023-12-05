@@ -46,10 +46,10 @@ const styling = (colors: MD3Colors) =>
       marginBottom: MyDimensions.paddingSmall,
     },
     titleText: {
+      flex: 1,
       marginLeft: MyDimensions.paddingSmall,
     },
     imageContainer: {
-      flex: 1,
       padding: MyDimensions.paddingSmall,
       alignItems: 'flex-end',
     },

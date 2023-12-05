@@ -1,10 +1,10 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {TabNavigatorParamList} from '../routeConfig';
 import {
+  BillsScreen,
   CartScreen,
   FavoritesScreen,
   HomeScreen,
-  NoticeScreen,
 } from '../../screens/home';
 import {MyDimensions} from '../../constants';
 import {useTheme} from 'react-native-paper';
@@ -21,7 +21,7 @@ const tabRoutes: TabStackRoutesType = [
   {name: 'HomeScreen', component: HomeScreen},
   {name: 'FavoritesScreen', component: FavoritesScreen},
   {name: 'CartScreen', component: CartScreen},
-  {name: 'NoticesScreen', component: NoticeScreen},
+  {name: 'BillsScreen', component: BillsScreen},
 ];
 
 const tabScreens = tabRoutes.map(tabRoute => (
@@ -66,8 +66,14 @@ export function HomeTabNavigator({navigation}: Props) {
           if (route.name === 'CartScreen') {
             return <TabItem icon="cart" size={size} isCurrent={focused} />;
           }
-          if (route.name === 'NoticesScreen') {
-            return <TabItem icon="bell-ring" size={size} isCurrent={focused} />;
+          if (route.name === 'BillsScreen') {
+            return (
+              <TabItem
+                icon="clipboard-text-multiple"
+                size={size}
+                isCurrent={focused}
+              />
+            );
           }
         },
         tabBarStyle: {

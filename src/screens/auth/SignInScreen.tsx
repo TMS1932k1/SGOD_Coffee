@@ -78,7 +78,7 @@ export default function SignInScreen({navigation}: Props) {
   // Will navigate to HomeScreen when have user
   useEffect(() => {
     if (user) {
-      navigation.navigate('HomeTabNavigator');
+      navigation.navigate('HomeTabNavigator', {screen: 'HomeScreen'});
     }
   }, [navigation, user]);
 

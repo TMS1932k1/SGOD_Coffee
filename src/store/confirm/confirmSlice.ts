@@ -5,8 +5,9 @@ import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 import {PayMethod} from '../../types/pay';
 import {payMethods} from '../../constants';
+import {getAddPoint} from '../../utils/rankUser';
 
-interface payState {
+interface confirmState {
   orders: Order[];
   isShip: boolean;
   shipTo?: Location;
@@ -17,14 +18,16 @@ interface payState {
   payMetthod: PayMethod;
   total: number;
   errorStores?: string;
+  addPoint: number;
 }
 
-const initialState: payState = {
+const initialState: confirmState = {
   orders: [],
   isShip: false,
   payMetthod: payMethods[0],
   isLoadingStores: false,
   total: 0,
+  addPoint: 0,
 };
 
 // GET fetch all location of stores
@@ -37,7 +40,7 @@ export const getStoresArray = createAsyncThunk(
   },
 );
 
-export const paySlice = createSlice({
+export const confirmSlice = createSlice({
   name: 'pay',
   initialState,
   reducers: {
@@ -61,6 +64,7 @@ export const paySlice = createSlice({
     },
     setTotal: (state, action: PayloadAction<number>) => {
       state.total = action.payload;
+      state.addPoint = getAddPoint(state.total);
     },
   },
   extraReducers(builder) {
@@ -104,5 +108,5 @@ export const {
   setLocation,
   setPayMethhod,
   setTotal,
-} = paySlice.actions;
-export default paySlice.reducer;
+} = confirmSlice.actions;
+export default confirmSlice.reducer;

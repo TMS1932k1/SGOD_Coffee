@@ -1,7 +1,7 @@
 import HomeScreen from './HomeScreen';
 import FavoritesScreen from './FavoritesScreen';
 import CartScreen from './CartScreen';
-import NoticeScreen from './NoticeScreen';
+import BillsScreen from './BillsScreen';
 import OrderScreen from '../order/OrderScreen';
 
-export {CartScreen, FavoritesScreen, HomeScreen, NoticeScreen, OrderScreen};
+export {CartScreen, FavoritesScreen, HomeScreen, BillsScreen, OrderScreen};

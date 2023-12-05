@@ -9,6 +9,7 @@ import {
   User,
   UserResponse,
 } from '../../types/auth';
+import {postGetAllBill} from '../bill/billsSlice';
 
 interface authState {
   user?: User;
@@ -77,11 +78,14 @@ export const postforgotPassword = createAsyncThunk(
 //  Return undeefined when not get user
 export const postfetchUserByToken = createAsyncThunk(
   'me/auth',
-  async (userToken: string) => {
+  async (userToken: string, {dispatch}) => {
     await delayTime(2000);
-    return userToken == '12312312324345233'
-      ? (require('../../assets/data/dummy_user.json') as User)
-      : undefined;
+    if (userToken == '12312312324345233') {
+      let user = require('../../assets/data/dummy_user.json') as User;
+      dispatch(postGetAllBill(user.id));
+      return user;
+    }
+    return undefined;
   },
 );
 

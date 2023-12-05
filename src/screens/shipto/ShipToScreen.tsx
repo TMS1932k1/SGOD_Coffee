@@ -22,7 +22,7 @@ import {LocationDropdown, UserLocation} from '../../components/shipto';
 import {HomeStackNavigationScreenProps} from '../../types/stack';
 import {Controller, useForm} from 'react-hook-form';
 import {regPhone} from '../../utils/regexFormat';
-import {setLocation, setPhone} from '../../store/pay/paySlice';
+import {setLocation, setPhone} from '../../store/confirm/confirmSlice';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'ShipToScreen'>;
@@ -44,8 +44,8 @@ export default function ShipToScreen({navigation}: Props) {
   const provinces = useAppSelector(state => state.addressState.provinces);
   const districts = useAppSelector(state => state.addressState.districts);
   const wards = useAppSelector(state => state.addressState.wards);
-  const currentLocation = useAppSelector(state => state.payState.shipTo);
-  const currentPhone = useAppSelector(state => state.payState.phone);
+  const currentLocation = useAppSelector(state => state.confirmState.shipTo);
+  const currentPhone = useAppSelector(state => state.confirmState.phone);
 
   const colors = useTheme().colors;
 

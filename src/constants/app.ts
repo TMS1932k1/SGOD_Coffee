@@ -1,3 +1,4 @@
+import {StatusBill} from '../types/bill';
 import {Volume} from '../types/order';
 import {PayMethod} from '../types/pay';
 
@@ -27,5 +28,24 @@ export const payMethods: PayMethod[] = [
       'https://cdn.haitrieu.com/wp-content/uploads/2022/10/Logo-MoMo-Square.png',
     title: 'Momo',
     type: 'momo',
+  },
+];
+
+export const billStatus: StatusBill[] = [
+  {
+    icon: 'credit-card',
+    title: 'payStatus',
+  },
+  {
+    icon: 'clipboard-check-multiple',
+    title: 'confirmStatus',
+  },
+  {
+    icon: 'truck-fast',
+    title: 'shipStatus',
+  },
+  {
+    icon: 'check-circle-outline',
+    title: 'doneStatus',
   },
 ];

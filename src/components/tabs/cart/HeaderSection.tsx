@@ -23,7 +23,7 @@ export default function HeaderSection() {
 
   // Navigate to [PayScreen] with [selects]
   const onPay = useCallback(() => {
-    navigation.navigate('PayScreen', {orders: selects});
+    navigation.navigate('ConfirmScreen', {orders: selects});
   }, [navigation, selects]);
 
   return (
@@ -36,7 +36,7 @@ export default function HeaderSection() {
             </CustomText>
             <TextButton
               onPress={selects.length <= 0 || !user ? undefined : onPay}>
-              {t('pay')}
+              {t('buyNow')}
             </TextButton>
           </View>
         )}

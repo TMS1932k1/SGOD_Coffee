@@ -9,7 +9,7 @@ import StoreItem from './StoreItem';
 import Animated, {ZoomIn} from 'react-native-reanimated';
 import {Translation} from 'react-i18next';
 import {Store} from '../../../types/store';
-import {setStore} from '../../../store/pay/paySlice';
+import {setStore} from '../../../store/confirm/confirmSlice';
 
 interface Props {
   visible?: boolean;
@@ -19,10 +19,10 @@ interface Props {
 export default function StoresModal({visible = false, onHideModal}: Props) {
   const dispatch = useAppDispatch();
 
-  const stores = useAppSelector(state => state.payState.stores);
-  const store = useAppSelector(state => state.payState.store);
+  const stores = useAppSelector(state => state.confirmState.stores);
+  const store = useAppSelector(state => state.confirmState.store);
 
-  const isLoading = useAppSelector(state => state.payState.isLoadingStores);
+  const isLoading = useAppSelector(state => state.confirmState.isLoadingStores);
 
   const colors = useTheme().colors;
 

@@ -19,6 +19,7 @@ import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {setInitOrder} from '../../store/order/orderSlice';
 import {addOrder} from '../../store/cart/cartSlice';
+import {Order} from '../../types/order';
 
 interface Props {
   navigation: HomeStackNavigationScreenProps<'OrderScreen'>;
@@ -62,6 +63,13 @@ export default function OrderScreen({navigation}: Props) {
   // Add or delete product in favorites
   const clickFavorite = useCallback(() => {}, []);
 
+  // Navigate to [PayScreen]
+  const buyNow = useCallback(() => {
+    navigation.navigate('ConfirmScreen', {
+      orders: [{...order, id: Date.now().toString()} as Order],
+    });
+  }, [order]);
+
   // Add order to cart
   const addCart = useCallback(() => {
     if (order) dispatch(addOrder({...order, id: Date.now().toString()}));
@@ -96,6 +104,7 @@ export default function OrderScreen({navigation}: Props) {
           {t => (
             <ContainedButton
               style={styles.buyBtn}
+              onPress={buyNow}
               disabled={user ? false : true}>
               {t('buyNow')}
             </ContainedButton>

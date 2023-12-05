@@ -14,6 +14,7 @@ import {
   updateSelects,
 } from '../../../store/cart/cartSlice';
 import {Order} from '../../../types/order';
+import {useIsFocused} from '@react-navigation/native';
 
 export default function ListCartSection() {
   const dispatch = useAppDispatch();
@@ -21,11 +22,20 @@ export default function ListCartSection() {
   const selects = useAppSelector(state => state.cartState.selects);
   const user = useAppSelector(state => state.authState.user);
 
+  const isFocus = useIsFocused();
+
   const [selectType, setSelectType] = useState<SelectType>('none');
 
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
+
+  useEffect(() => {
+    if (!isFocus) {
+      setSelectType('none');
+      dispatch(cancleSelect());
+    }
+  }, [isFocus]);
 
   const onPressSelect = useCallback((selectType: SelectType) => {
     setSelectType(selectType);

@@ -7,7 +7,7 @@ import {Translation} from 'react-i18next';
 import {CustomText} from '../common';
 import PayMethodItem from './PayMethodItem';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {setPayMethhod} from '../../store/pay/paySlice';
+import {setPayMethhod} from '../../store/confirm/confirmSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -15,7 +15,7 @@ interface Props {
 
 export default function PaySection({style}: Props) {
   const dispatch = useAppDispatch();
-  const payMethod = useAppSelector(state => state.payState.payMetthod);
+  const payMethod = useAppSelector(state => state.confirmState.payMetthod);
 
   const colors = useTheme().colors;
 

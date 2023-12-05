@@ -6,6 +6,7 @@ import PaySection from './PaySection';
 import PayMethodItem from './PayMethodItem';
 import PointPromoSection from './PointPromoSection';
 import SummaryPaySection from './SummaryPaySection';
+import PointPlusSection from './PointPlusSection';
 
 export {
   OrderPayItem,
@@ -16,4 +17,5 @@ export {
   PayMethodItem,
   PointPromoSection,
   SummaryPaySection,
+  PointPlusSection,
 };

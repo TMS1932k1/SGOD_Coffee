@@ -22,7 +22,7 @@ import StoresModal from './StoresModal';
 import {getFullAddressString} from '../../../utils/getFormat';
 import {useNavigation} from '@react-navigation/native';
 import {HomeStackNavigationScreenProps} from '../../../types/stack';
-import {getStoresArray, setIsShip} from '../../../store/pay/paySlice';
+import {getStoresArray, setIsShip} from '../../../store/confirm/confirmSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -34,11 +34,11 @@ export default function AddressOption({style}: Props) {
 
   const dispatch = useAppDispatch();
 
-  const store = useAppSelector(state => state.payState.store);
-  const stores = useAppSelector(state => state.payState.stores);
-  const shipTo = useAppSelector(state => state.payState.shipTo);
-  const isLoading = useAppSelector(state => state.payState.isLoadingStores);
-  const isShip = useAppSelector(state => state.payState.isShip);
+  const store = useAppSelector(state => state.confirmState.store);
+  const stores = useAppSelector(state => state.confirmState.stores);
+  const shipTo = useAppSelector(state => state.confirmState.shipTo);
+  const isLoading = useAppSelector(state => state.confirmState.isLoadingStores);
+  const isShip = useAppSelector(state => state.confirmState.isShip);
 
   const heightAnimation = useSharedValue(isShip ? 236 : 150);
 

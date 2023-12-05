@@ -20,6 +20,13 @@ export const cartSlice = createSlice({
     addOrder: (state, action: PayloadAction<Order>) => {
       state.cart = [action.payload, ...state.cart];
     },
+    removeOrder: (state, action: PayloadAction<Order[]>) => {
+      state.cart = [
+        ...state.cart.filter(item => {
+          return action.payload.findIndex(order => order.id === item.id) === -1;
+        }),
+      ];
+    },
     setAllSelects: state => {
       state.selects = state.cart;
     },
@@ -41,6 +48,11 @@ export const cartSlice = createSlice({
   },
 });
 
-export const {addOrder, setAllSelects, cancleSelect, updateSelects} =
-  cartSlice.actions;
+export const {
+  addOrder,
+  setAllSelects,
+  cancleSelect,
+  updateSelects,
+  removeOrder,
+} = cartSlice.actions;
 export default cartSlice.reducer;

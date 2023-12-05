@@ -33,6 +33,10 @@ export const getRankPromo = (point: number) => {
   return 20;
 };
 
+export const getAddPoint = (price: number) => {
+  return price / 10000;
+};
+
 export const getDetailNextRank = (point: number) => {
   let maxPoint = 10000;
   if (point < 1000) {

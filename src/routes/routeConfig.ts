@@ -3,6 +3,7 @@ import {
   BottomTabNavigationOptions,
 } from '@react-navigation/bottom-tabs';
 import {
+  NavigatorScreenParams,
   ParamListBase,
   RouteConfig,
   StackNavigationState,
@@ -44,7 +45,7 @@ export type OnboardingNavigatorParamList = {
 
 // Declare home navigator param list
 export type HomeNavigatorParamList = {
-  HomeTabNavigator: undefined;
+  HomeTabNavigator: NavigatorScreenParams<TabNavigatorParamList>;
   OrderScreen: {product: Product};
   SignInScreen: undefined;
   SignUpScreen: {otp: string} | undefined;
@@ -52,7 +53,7 @@ export type HomeNavigatorParamList = {
   VerificationOtpScreen: {email: string};
   EventDetailScreen: {event: Event};
   ShipToScreen: undefined;
-  PayScreen: {orders: Order[]};
+  ConfirmScreen: {orders: Order[]};
 };
 
 // Declare bottom navigation navigator param list
@@ -60,5 +61,5 @@ export type TabNavigatorParamList = {
   HomeScreen: undefined;
   FavoritesScreen: undefined;
   CartScreen: undefined;
-  NoticesScreen: undefined;
+  BillsScreen: undefined;
 };

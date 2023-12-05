@@ -7,7 +7,8 @@ import {CustomText} from '../common';
 import {MyDimensions, priceShip} from '../../constants';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {getRankPromo} from '../../utils/rankUser';
-import {setTotal} from '../../store/pay/paySlice';
+import {setTotal} from '../../store/confirm/confirmSlice';
+import PointPlusSection from './PointPlusSection';
 
 interface Props {
   point: number;
@@ -16,9 +17,9 @@ interface Props {
 
 export default function SummaryPaySection({style, point}: Props) {
   const dispatch = useAppDispatch();
-  const orders = useAppSelector(state => state.payState.orders);
-  const isShip = useAppSelector(state => state.payState.isShip);
-  const total = useAppSelector(state => state.payState.total);
+  const orders = useAppSelector(state => state.confirmState.orders);
+  const isShip = useAppSelector(state => state.confirmState.isShip);
+  const total = useAppSelector(state => state.confirmState.total);
 
   const colors = useTheme().colors;
 
@@ -120,6 +121,7 @@ export default function SummaryPaySection({style, point}: Props) {
             t('total'),
             t('price', {price: total.toLocaleString()}),
           )}
+          <PointPlusSection style={styles.pointplus} />
         </View>
       )}
     </Translation>
@@ -151,5 +153,8 @@ const styling = (colors: MD3Colors) =>
       borderBottomColor: colors.outline,
       borderBottomWidth: 1,
       borderStyle: 'dashed',
+    },
+    pointplus: {
+      marginTop: MyDimensions.paddingMedium,
     },
   });
