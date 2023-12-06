@@ -64,7 +64,7 @@ export const confirmSlice = createSlice({
     },
     setTotal: (state, action: PayloadAction<number>) => {
       state.total = action.payload;
-      state.addPoint = getAddPoint(state.total);
+      state.addPoint = Math.round(getAddPoint(state.total));
     },
   },
   extraReducers(builder) {

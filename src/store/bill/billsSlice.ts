@@ -3,6 +3,7 @@ import {billStatus} from '../../constants';
 import {Bill, StatusBill} from '../../types/bill';
 import {delayTime} from '../../utils/delayTime';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
+import {addPointAuth} from '../auth/authSlice';
 
 interface billsState {
   bills: Bill[];
@@ -37,10 +38,14 @@ export const postGetAllBill = createAsyncThunk(
 
 // Post pay bill
 // Return bill response
-export const postPayBill = createAsyncThunk('pay/bills', async (bill: Bill) => {
-  await delayTime(1000);
-  return {...bill, status: billStatus[1]};
-});
+export const postPayBill = createAsyncThunk(
+  'pay/bills',
+  async (bill: Bill, {dispatch}) => {
+    await delayTime(1000);
+    dispatch(addPointAuth(bill.addPoint));
+    return {...bill, status: billStatus[1]};
+  },
+);
 
 export const billsSlice = createSlice({
   name: 'bills',
@@ -48,6 +53,16 @@ export const billsSlice = createSlice({
   reducers: {
     setFilterStatus: (state, action: PayloadAction<StatusBill>) => {
       state.filterStatus = action.payload;
+      state.billsFilter = state.bills.filter(
+        item => item.status.title === state.filterStatus.title,
+      );
+    },
+    removeBill: (state, action: PayloadAction<Bill[]>) => {
+      state.bills = [
+        ...state.bills.filter(item => {
+          return action.payload.findIndex(order => order.id === item.id) === -1;
+        }),
+      ];
       state.billsFilter = state.bills.filter(
         item => item.status.title === state.filterStatus.title,
       );
@@ -102,5 +117,5 @@ export const billsSlice = createSlice({
   },
 });
 
-export const {setFilterStatus} = billsSlice.actions;
+export const {setFilterStatus, removeBill} = billsSlice.actions;
 export default billsSlice.reducer;

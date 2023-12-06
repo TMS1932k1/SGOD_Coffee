@@ -20,9 +20,11 @@ import {
 import {OnboardingScreen} from '../screens/onboarding';
 import {useAppSelector} from '../store/hooks';
 import {EventDetailScreen} from '../screens/event';
-import {OrderScreen} from '../screens/home';
 import {ConfirmScreen} from '../screens/confirm';
 import {ShipToScreen} from '../screens/shipto';
+import {OrderScreen} from '../screens/order';
+import {PayScreen} from '../screens/pay';
+import {ScanScreen} from '../screens/scan';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 
@@ -43,6 +45,8 @@ const homeStackRoutes: HomeStackRoutesType = [
   {name: 'OrderScreen', component: OrderScreen},
   {name: 'ShipToScreen', component: ShipToScreen},
   {name: 'ConfirmScreen', component: ConfirmScreen},
+  {name: 'PayScreen', component: PayScreen},
+  {name: 'ScanScreen', component: ScanScreen},
 ];
 
 export default function RootNavigator() {

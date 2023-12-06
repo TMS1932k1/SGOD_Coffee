@@ -4,12 +4,14 @@ import {useCallback, useEffect, useMemo, useState} from 'react';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {Icon, useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../../constants';
-import {CustomText, Line, TextButton} from '../../common';
+import {ConfirmModal, CustomText, Line, TextButton} from '../../common';
 import {Translation} from 'react-i18next';
 import OrderItem from './OrderItem';
 import {SelectType} from '../../../types/cart';
 import {
   cancleSelect,
+  removeOrder,
+  removeSelects,
   setAllSelects,
   updateSelects,
 } from '../../../store/cart/cartSlice';
@@ -25,6 +27,7 @@ export default function ListCartSection() {
   const isFocus = useIsFocused();
 
   const [selectType, setSelectType] = useState<SelectType>('none');
+  const [showConfirmDialog, setConfigDialog] = useState(false);
 
   const colors = useTheme().colors;
 
@@ -46,8 +49,24 @@ export default function ListCartSection() {
     }
   }, []);
 
+  const onRemoveSelects = useCallback(() => {
+    dispatch(removeSelects());
+  }, []);
+
+  const onShowDialog = useCallback(() => {
+    setConfigDialog(true);
+  }, []);
+
+  const hideShowDialog = useCallback(() => {
+    setConfigDialog(false);
+  }, []);
+
   const onPressCheckboxItem = useCallback((order: Order) => {
     dispatch(updateSelects(order));
+  }, []);
+
+  const onPressDelItem = useCallback((order: Order) => {
+    dispatch(removeOrder([order]));
   }, []);
 
   const emptyView = useMemo(
@@ -85,6 +104,17 @@ export default function ListCartSection() {
   const selectView = useMemo(
     () => (
       <View style={[styles.filter]}>
+        {selectType !== 'none' ? (
+          <Translation>
+            {t => (
+              <TextButton onPress={onShowDialog} disable={selects.length <= 0}>
+                {t('remove')}
+              </TextButton>
+            )}
+          </Translation>
+        ) : (
+          <View />
+        )}
         <Translation>
           {t => (
             <View style={styles.selectContainer}>
@@ -105,7 +135,7 @@ export default function ListCartSection() {
         </Translation>
       </View>
     ),
-    [selectType, styles, onPressSelect],
+    [selectType, styles, onPressSelect, selects],
   );
 
   const listView = useMemo(
@@ -120,11 +150,29 @@ export default function ListCartSection() {
             isSelect={selects.includes(item)}
             isShowCheckbox={selectType !== 'none'}
             onPressCheckbox={onPressCheckboxItem}
+            onPressDel={onPressDelItem}
           />
         )}
       />
     ),
     [styles, cart, selectType, onPressCheckboxItem, selects],
+  );
+
+  const confirmDialog = useMemo(
+    () => (
+      <Translation>
+        {t => (
+          <ConfirmModal
+            title={t('confirm')}
+            content={t('confirmTitle')}
+            visible={showConfirmDialog}
+            onHideModal={hideShowDialog}
+            onConfirm={onRemoveSelects}
+          />
+        )}
+      </Translation>
+    ),
+    [showConfirmDialog, onRemoveSelects, hideShowDialog],
   );
 
   return (
@@ -136,6 +184,7 @@ export default function ListCartSection() {
           {noteAuthView}
           {selectView}
           {listView}
+          {confirmDialog}
         </View>
       )}
     </View>
@@ -164,7 +213,7 @@ const styling = (colors: MD3Colors) =>
     filter: {
       width: '100%',
       flexDirection: 'row',
-      justifyContent: 'flex-end',
+      justifyContent: 'space-between',
       marginTop: MyDimensions.paddingLarge,
       paddingHorizontal: MyDimensions.paddingLarge,
     },

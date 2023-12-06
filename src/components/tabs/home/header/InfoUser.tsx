@@ -1,6 +1,6 @@
 import {useCallback, useMemo} from 'react';
 import {View, StyleSheet, ViewStyle, StyleProp, Pressable} from 'react-native';
-import {ProgressBar, useTheme} from 'react-native-paper';
+import {IconButton, ProgressBar, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {CustomText} from '../../../common/CustomText';
 import {MyDimensions} from '../../../../constants';
@@ -28,6 +28,10 @@ export default function InfoUser({style}: Props) {
 
   const styles = useMemo(() => styling(colors), [colors]);
 
+  const onScanQR = useCallback(() => {
+    navigation.navigate('ScanScreen');
+  }, [navigation]);
+
   const rank = useMemo(() => {
     let rankTitle = getRankTitle(user?.point ?? 0);
     return (
@@ -44,17 +48,6 @@ export default function InfoUser({style}: Props) {
   const navigateToSignIn = useCallback(() => {
     navigation.navigate('SignInScreen');
   }, [navigation]);
-
-  const firstEmail = useMemo(
-    () => (
-      <View style={styles.firstEmailContainer}>
-        <CustomText style={styles.textColor} variant="heading2">
-          {user?.email.charAt(0).toUpperCase()}
-        </CustomText>
-      </View>
-    ),
-    [colors, user],
-  );
 
   const contentHaveUser = useMemo(
     () => (
@@ -79,7 +72,10 @@ export default function InfoUser({style}: Props) {
                 style={[styles.textColor, styles.pointNumber]}
                 variant="meta1">
                 {t('pointProgress', {
-                  point: user?.point ?? 0,
+                  point: Math.min(
+                    user?.point ?? 0,
+                    getDetailNextRank(user?.point ?? 0).maxPoint,
+                  ),
                   maxPoint: getDetailNextRank(user?.point ?? 0).maxPoint,
                 })}
               </CustomText>
@@ -92,7 +88,12 @@ export default function InfoUser({style}: Props) {
             }
           />
         </View>
-        {firstEmail}
+        <IconButton
+          icon={'qrcode-scan'}
+          size={MyDimensions.iconLarge}
+          onPress={onScanQR}
+          iconColor={colors.background}
+        />
       </View>
     ),
     [styles, user],
@@ -133,7 +134,7 @@ const styling = (colors: MD3Colors) =>
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'center',
+      alignItems: 'flex-start',
     },
     pointContainer: {
       width: 240,

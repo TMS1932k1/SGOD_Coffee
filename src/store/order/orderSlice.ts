@@ -40,7 +40,7 @@ export const orderSlice = createSlice({
     setTotal: state => {
       let total = state.product!.price * state.amount;
       if (state.product!.type === 'drink') {
-        total += state.volume.priceAdd;
+        total += state.volume.priceAdd * state.amount;
       }
       state.total = total;
       state.order = {

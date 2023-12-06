@@ -13,7 +13,7 @@ export default function SummarySection() {
 
   const product = useAppSelector(state => state.orderState.product);
   const amount = useAppSelector(state => state.orderState.amount);
-  const size = useAppSelector(state => state.orderState.volume);
+  const volume = useAppSelector(state => state.orderState.volume);
   const note = useAppSelector(state => state.orderState.note);
   const total = useAppSelector(state => state.orderState.total);
 
@@ -24,7 +24,7 @@ export default function SummarySection() {
   // Auto set total to calculate when options are changed
   useEffect(() => {
     dispatch(setTotal());
-  }, [amount, size, note]);
+  }, [amount, volume, note]);
 
   const title = useMemo(
     () => (
@@ -72,17 +72,17 @@ export default function SummarySection() {
   const volumeRow = useMemo(
     () =>
       product?.type === 'drink' &&
-      size.priceAdd > 0 && (
+      volume.priceAdd > 0 && (
         <Translation>
           {t =>
             detailRowView(
-              `${t('volume').replace(', ml', ` (${size.ml} ml)`)}`,
-              `${size.priceAdd.toLocaleString()} đ`,
+              `${t('volume').replace(', ml', ` (${volume.ml} ml)`)}`,
+              `${volume.priceAdd.toLocaleString()} đ x${amount}`,
             )
           }
         </Translation>
       ),
-    [size, product, detailRowView],
+    [volume, product, detailRowView, amount],
   );
 
   const totalRow = useMemo(

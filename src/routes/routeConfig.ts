@@ -15,6 +15,7 @@ import {
 import {Event} from '../types/event';
 import {Product} from '../types/product';
 import {Order} from '../types/order';
+import {Bill} from '../types/bill';
 
 // Declare stack routes array with generic
 export type StackRoutesType<ParamList extends ParamListBase> = Array<
@@ -54,6 +55,8 @@ export type HomeNavigatorParamList = {
   EventDetailScreen: {event: Event};
   ShipToScreen: undefined;
   ConfirmScreen: {orders: Order[]};
+  PayScreen: {bill: Bill};
+  ScanScreen: undefined;
 };
 
 // Declare bottom navigation navigator param list

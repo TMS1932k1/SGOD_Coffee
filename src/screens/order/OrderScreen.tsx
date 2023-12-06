@@ -3,18 +3,23 @@ import {
   HomeStackNavigationScreenProps,
   HomeStackRouteScreenProps,
 } from '../../types/stack';
-import {useCallback, useLayoutEffect, useMemo} from 'react';
+import {useCallback, useLayoutEffect, useMemo, useState} from 'react';
 import {
   ContainedButton,
   CustomStatusBar,
   TextButton,
 } from '../../components/common';
-import {IconButton, useTheme} from 'react-native-paper';
+import {useTheme} from 'react-native-paper';
 import {MyDimensions} from '../../constants';
 import {Translation, useTranslation} from 'react-i18next';
 import ImageBlurLoading from 'react-native-image-blur-loading';
 import {useRoute} from '@react-navigation/native';
-import {OptionSection, SummarySection} from '../../components/order';
+import {
+  CartActionIcon,
+  OptionSection,
+  OrderNoteModal,
+  SummarySection,
+} from '../../components/order';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {setInitOrder} from '../../store/order/orderSlice';
@@ -31,6 +36,8 @@ export default function OrderScreen({navigation}: Props) {
   const user = useAppSelector(state => state.authState.user);
   const order = useAppSelector(state => state.orderState.order);
 
+  const [visible, setVisible] = useState(false);
+
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
@@ -45,13 +52,7 @@ export default function OrderScreen({navigation}: Props) {
     navigation.setOptions({
       title: t('order'),
       headerTitleAlign: 'center',
-      headerRight: () => (
-        <IconButton
-          icon={'cards-heart-outline'}
-          size={MyDimensions.iconLarge}
-          onPress={clickFavorite}
-        />
-      ),
+      headerRight: () => <CartActionIcon />,
     });
   }, [navigation, t]);
 
@@ -72,7 +73,10 @@ export default function OrderScreen({navigation}: Props) {
 
   // Add order to cart
   const addCart = useCallback(() => {
-    if (order) dispatch(addOrder({...order, id: Date.now().toString()}));
+    if (order) {
+      dispatch(addOrder({...order, id: Date.now().toString()}));
+      setVisible(true);
+    }
   }, [order]);
 
   const productOptions = useMemo(
@@ -88,10 +92,8 @@ export default function OrderScreen({navigation}: Props) {
     [product],
   );
 
-  return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <CustomStatusBar />
-      {productOptions}
+  const submitsView = useMemo(
+    () => (
       <View style={styles.submitContainer}>
         <Translation>
           {t => (
@@ -111,6 +113,16 @@ export default function OrderScreen({navigation}: Props) {
           )}
         </Translation>
       </View>
+    ),
+    [order, styles, user],
+  );
+
+  return (
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
+      <CustomStatusBar />
+      {productOptions}
+      {submitsView}
+      <OrderNoteModal visible={visible} onHideModal={() => setVisible(false)} />
     </KeyboardAvoidingView>
   );
 }

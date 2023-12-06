@@ -49,8 +49,6 @@ export default function NoteOption({style}: Props) {
             style={styles.noteInputContainer}
             placeholder={t('optional')}
             placeholderTextColor={colors.outline}
-            multiline={true}
-            numberOfLines={4}
             keyboardType="default"
             cursorColor={colors.primary}
             maxLength={100}
@@ -80,7 +78,6 @@ const styling = (colors: MD3Colors) =>
       color: colors.onBackground,
       fontFamily: fontFamily.mulishSemiBold,
       fontSize: 14,
-      textAlignVertical: 'top',
     },
     title: {
       color: colors.onBackground,

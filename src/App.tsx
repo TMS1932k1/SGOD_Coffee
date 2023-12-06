@@ -8,6 +8,8 @@ import RootNavigator from './routes/RootNavigator';
 import {useAppDispatch} from './store/hooks';
 import {getEvents} from './store/home/eventsSlice';
 import {getCategories} from './store/home/categoriesSlice';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {loadStorageCart} from './store/cart/cartSlice';
 
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ function App(): JSX.Element {
     const init = async () => {
       dispatch(getEvents());
       dispatch(getCategories());
+      dispatch(loadStorageCart());
 
       const isFirstOpenApp = await getData('@isFirstOpenApp');
 
@@ -36,9 +39,11 @@ function App(): JSX.Element {
   }, []);
 
   return (
-    <SafeAreaView style={styles.rootContainer}>
-      <RootNavigator />
-    </SafeAreaView>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <SafeAreaView style={styles.rootContainer}>
+        <RootNavigator />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 

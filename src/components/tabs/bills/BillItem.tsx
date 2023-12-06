@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Pressable} from 'react-native';
 import {Bill} from '../../../types/bill';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useTheme} from 'react-native-paper';
@@ -12,9 +12,10 @@ import Animated, {ZoomIn} from 'react-native-reanimated';
 interface Props {
   bill: Bill;
   onPressPay?: (bill: Bill) => void;
+  onPressRemove?: (bill: Bill) => void;
 }
 
-export default function BillItem({bill, onPressPay}: Props) {
+export default function BillItem({bill, onPressPay, onPressRemove}: Props) {
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
@@ -70,6 +71,15 @@ export default function BillItem({bill, onPressPay}: Props) {
                   {t('doneStatus')}
                 </CustomText>
               )}
+              {bill.status === billStatus[0] && (
+                <Pressable
+                  style={styles.cancleBtn}
+                  onPress={() => onPressRemove?.(bill)}>
+                  <CustomText style={styles.disableText} variant="body1">
+                    {t('cancle')}
+                  </CustomText>
+                </Pressable>
+              )}
             </View>
           </View>
         )}
@@ -88,7 +98,7 @@ const styling = (colors: MD3Colors) =>
       marginBottom: MyDimensions.paddingSmall,
     },
     idBillText: {
-      marginBottom: MyDimensions.paddingSmall,
+      marginBottom: MyDimensions.paddingMedium,
       color: colors.onBackground,
     },
     lineDashed: {
@@ -109,10 +119,11 @@ const styling = (colors: MD3Colors) =>
     priceText: {
       flex: 3,
       color: colors.primary,
+      overflow: 'hidden',
     },
     payBtnContainer: {
       flex: 4,
-      alignItems: 'flex-end',
+      alignItems: 'center',
     },
     payBtn: {
       height: 40,
@@ -120,5 +131,8 @@ const styling = (colors: MD3Colors) =>
     },
     disableText: {
       color: colors.outline,
+    },
+    cancleBtn: {
+      marginTop: MyDimensions.paddingSmall,
     },
   });

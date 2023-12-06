@@ -99,6 +99,14 @@ export const authSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    addPointAuth: (state, action: PayloadAction<number>) => {
+      state.user = {
+        ...state.user!,
+        point:
+          parseFloat(state.user!.point.toString()) +
+          parseFloat(action.payload.toString()),
+      };
+    },
   },
   extraReducers: builder => {
     builder
@@ -147,5 +155,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const {removeErrors, setUser} = authSlice.actions;
+export const {removeErrors, setUser, addPointAuth} = authSlice.actions;
 export default authSlice.reducer;

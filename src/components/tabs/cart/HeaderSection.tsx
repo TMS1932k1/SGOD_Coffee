@@ -55,7 +55,7 @@ const styling = (colors: MD3Colors) =>
       borderBottomLeftRadius: MyDimensions.borderRadiusLarge,
       borderBottomRightRadius: MyDimensions.borderRadiusLarge,
       paddingHorizontal: MyDimensions.paddingLarge,
-      paddingBottom: MyDimensions.paddingMedium,
+      paddingBottom: MyDimensions.paddingLarge,
     },
     titleText: {
       color: colors.background,
