@@ -38,6 +38,9 @@ export default function ConfirmScreen({navigation}: Props) {
   const total = useAppSelector(state => state.confirmState.total);
   const addPoint = useAppSelector(state => state.confirmState.addPoint);
   const isLoading = useAppSelector(state => state.billsState.isLoading);
+  const isLoadingStore = useAppSelector(
+    state => state.confirmState.isLoadingStores,
+  );
 
   const route = useRoute<HomeStackRouteScreenProps<'ConfirmScreen'>>();
 
@@ -105,7 +108,7 @@ export default function ConfirmScreen({navigation}: Props) {
     <ScrollView style={styles.constainer} showsVerticalScrollIndicator={false}>
       <CustomStatusBar />
       {contentView}
-      {isLoading ? (
+      {isLoading || isLoadingStore ? (
         viewLoading
       ) : (
         <Translation>

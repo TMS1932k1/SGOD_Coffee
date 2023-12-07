@@ -51,7 +51,7 @@ export default function HeaderSection() {
             }}>
             <Icon
               source={status.icon}
-              size={MyDimensions.iconMedium}
+              size={MyDimensions.iconLarge}
               color={colors.primary}
             />
             {indexCurrent === index && (

@@ -21,10 +21,16 @@ const initialState: billsState = {
 
 // POST bill to user's bill in DB
 // Return bill response
-export const postAddBill = createAsyncThunk('add/bills', async (bill: Bill) => {
-  await delayTime(1000);
-  return bill;
-});
+export const postAddBill = createAsyncThunk(
+  'add/bills',
+  async (bill: Bill, {dispatch}) => {
+    await delayTime(1000);
+    if (bill.status.title !== billStatus[0].title) {
+      dispatch(addPointAuth(bill.addPoint));
+    }
+    return bill;
+  },
+);
 
 // POST get all user's bill in DB with user'id
 // Return bill response

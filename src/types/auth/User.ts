@@ -8,5 +8,6 @@ export type User = {
   refreshToken: string;
   role: string;
   point: number;
+  idFavorites: string[];
   location?: Location;
 };

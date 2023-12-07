@@ -6,7 +6,7 @@ import {StatusBill} from './StatusBill';
 
 export type Bill = {
   id: string;
-  user: User;
+  user?: User;
   orders: Order[];
   shipTo?: Location;
   phone?: string;

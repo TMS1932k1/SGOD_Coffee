@@ -9,8 +9,13 @@ import {ConfirmModal, CustomText} from '../../common';
 import BillItem from './BillItem';
 import {Bill} from '../../../types/bill';
 import {postPayBill, removeBill} from '../../../store/bill/billsSlice';
+import {useNavigation} from '@react-navigation/native';
+import {HomeStackNavigationScreenProps} from '../../../types/stack';
 
 export default function ListBillsSection() {
+  const navigation =
+    useNavigation<HomeStackNavigationScreenProps<'HomeTabNavigator'>>();
+
   const dispatch = useAppDispatch();
 
   const bills = useAppSelector(state => state.billsState.billsFilter);
@@ -42,6 +47,13 @@ export default function ListBillsSection() {
     setConfigData({isShow: false});
   }, []);
 
+  const onDetail = useCallback(
+    (bill: Bill) => {
+      navigation.navigate('DetailBillScreen', {bill: bill});
+    },
+    [navigation],
+  );
+
   const emptyView = useMemo(
     () => (
       <View style={styles.emptyContainer}>
@@ -69,6 +81,7 @@ export default function ListBillsSection() {
             bill={bill}
             onPressPay={onPayBill}
             onPressRemove={onShowModal}
+            onDetail={onDetail}
           />
         ))}
       </ScrollView>

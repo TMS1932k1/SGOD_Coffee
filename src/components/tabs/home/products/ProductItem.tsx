@@ -9,6 +9,7 @@ import {CustomText} from '../../../common';
 import {getColorOpacity} from '../../../../utils/colorOpacity';
 import {Translation} from 'react-i18next';
 import Animated, {ZoomIn} from 'react-native-reanimated';
+import {useAppSelector} from '../../../../store/hooks';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -23,9 +24,29 @@ export default function ProductItem({
   onPress,
   onPressAddFavorite,
 }: Props) {
+  const user = useAppSelector(state => state.authState.user);
+
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
+
+  const iconFavorite = useMemo(
+    () => (
+      <IconButton
+        icon={
+          user?.idFavorites.includes(product.id)
+            ? 'cards-heart'
+            : 'cards-heart-outline'
+        }
+        size={MyDimensions.iconMedium}
+        iconColor={colors.primary}
+        onPress={() => {
+          if (onPressAddFavorite) onPressAddFavorite(product);
+        }}
+      />
+    ),
+    [user],
+  );
 
   const item = useMemo(
     () => (
@@ -67,14 +88,7 @@ export default function ProductItem({
                   </CustomText>
                 )}
               </Translation>
-              <IconButton
-                icon={'cards-heart-outline'}
-                size={MyDimensions.iconMedium}
-                iconColor={colors.primary}
-                onPress={() => {
-                  if (onPressAddFavorite) onPressAddFavorite(product);
-                }}
-              />
+              {iconFavorite}
             </View>
           </View>
         </Pressable>

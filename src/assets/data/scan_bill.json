@@ -1,0 +1,98 @@
+{
+  "addPoint": 12,
+  "createAt": 1701917651841,
+  "id": "1701917651841",
+  "orders": [
+    {
+      "amount": 1,
+      "id": "1701917643991",
+      "product": {
+        "category": 3,
+        "id": 13,
+        "image": "https://static.toiimg.com/thumb/53096885.cms?width=1200&height=900",
+        "name": "Chocalate Cake",
+        "price": 35000,
+        "rate": 4.8,
+        "rateCount": 230,
+        "type": "food"
+      },
+      "total": 35000
+    },
+    {
+      "amount": 10,
+      "id": "1701917637508",
+      "product": {
+        "category": 4,
+        "id": 19,
+        "image": "https://cdn.tgdd.vn/Files/2020/06/24/1265161/cach-lam-ca-vien-chien-tai-nha-don-gian-ma-chat-luong-chang-kem-ngoai-tiem-202006240922373460.jpg",
+        "name": "Cá Viên",
+        "price": 5000,
+        "rate": 4.8,
+        "rateCount": 230,
+        "type": "food"
+      },
+      "total": 50000
+    },
+    {
+      "amount": 1,
+      "id": "1701917626959",
+      "product": {
+        "category": 1,
+        "id": 1,
+        "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg",
+        "name": "Cappuchino",
+        "price": 32000,
+        "rate": 4.6,
+        "rateCount": 230,
+        "type": "drink"
+      },
+      "total": 32000,
+      "volume": {"ml": "250", "priceAdd": 0, "size": 22}
+    }
+  ],
+  "payMetthod": {
+    "id": "1",
+    "image": "https://static-00.iconduck.com/assets.00/mastercard-icon-2048x1225-3kb6axel.png",
+    "title": "MasterCard",
+    "type": "mastercard"
+  },
+  "status": {
+    "icon": "check-circle-outline",
+    "title": "doneStatus"
+  },
+  "store": {
+    "id": 1,
+    "name": "SGarden",
+    "image": "https://i.pinimg.com/736x/84/94/9f/84949fdc009b0f1f211c0d8d39665e96.jpg",
+    "location": {
+      "lat": 10.7839488,
+      "long": 106.676224,
+      "address": "52, Trần Lựu",
+      "district": {
+        "code": 769,
+        "codename": "thanh_pho_thu_duc",
+        "division_type": "thành phố",
+        "name": "Thành phố Thủ Đức",
+        "province_code": 79,
+        "wards": []
+      },
+      "province": {
+        "code": 79,
+        "codename": "thanh_pho_ho_chi_minh",
+        "districts": [],
+        "division_type": "thành phố trung ương",
+        "name": "Thành phố Hồ Chí Minh",
+        "phone_code": 28
+      },
+      "ward": {
+        "code": 27088,
+        "codename": "phuong_thao_dien",
+        "district_code": 769,
+        "division_type": "phường",
+        "name": "Phường Thảo Điền"
+      }
+    }
+  },
+  "phone": "0932782114",
+  "total": 117000
+}

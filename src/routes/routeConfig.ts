@@ -57,6 +57,7 @@ export type HomeNavigatorParamList = {
   ConfirmScreen: {orders: Order[]};
   PayScreen: {bill: Bill};
   ScanScreen: undefined;
+  DetailBillScreen: {bill: Bill};
 };
 
 // Declare bottom navigation navigator param list
@@ -64,5 +65,5 @@ export type TabNavigatorParamList = {
   HomeScreen: undefined;
   FavoritesScreen: undefined;
   CartScreen: undefined;
-  BillsScreen: undefined;
+  BillsScreen: {index: number} | undefined;
 };

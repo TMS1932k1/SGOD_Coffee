@@ -10,6 +10,7 @@ import addressSlice from './shipto/addressSlice';
 import cartSlice from './cart/cartSlice';
 import confirmSlice from './confirm/confirmSlice';
 import billsSlice from './bill/billsSlice';
+import scanSlice from './scan/scanSlice';
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     cartState: cartSlice,
     confirmState: confirmSlice,
     billsState: billsSlice,
+    scanState: scanSlice,
   },
 });
 
