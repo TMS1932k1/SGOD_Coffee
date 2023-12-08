@@ -1,0 +1,31 @@
+[
+  {
+    "id": "1",
+    "name": "Cappuchino",
+    "price": 32000,
+    "category": "1",
+    "rate": 4.6,
+    "rateCount": 230,
+    "type": "drink",
+    "image": "https://quancaphe.vn/wp-content/uploads/2022/03/Cappuccino-la-gi-Nguon-goc-cua-ca-phe-Cappuccino-scaled-1.jpg"
+  },
+  {
+    "id": "19",
+    "name": "Cá Viên",
+    "price": 5000,
+    "category": 4,
+    "rate": 4.8,
+    "rateCount": 230,
+    "type": "food",
+    "image": "https://cdn.tgdd.vn/Files/2020/06/24/1265161/cach-lam-ca-vien-chien-tai-nha-don-gian-ma-chat-luong-chang-kem-ngoai-tiem-202006240922373460.jpg"
+  },
+  {
+    "id": "2",
+    "name": "Latte",
+    "category": "1",
+    "price": 30000,
+    "rateCount": 230,
+    "type": "drink",
+    "image": "https://www.foodandwine.com/thmb/CCe2JUHfjCQ44L0YTbCu97ukUzA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Partners-Latte-FT-BLOG0523-09569880de524fe487831d95184495cc.jpg"
+  }
+]

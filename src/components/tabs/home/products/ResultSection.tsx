@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useCallback, useMemo} from 'react';
 import {Translation} from 'react-i18next';
 import {View, ViewStyle, StyleProp, StyleSheet} from 'react-native';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
@@ -7,12 +7,18 @@ import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {useAppSelector} from '../../../../store/hooks';
 import {MyDimensions} from '../../../../constants';
 import ProductsList from './ProductsList';
+import {Product} from '../../../../types/product';
+import {useNavigation} from '@react-navigation/native';
+import {HomeStackNavigationScreenProps} from '../../../../types/stack';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
 }
 
 export default function ResultSection({style}: Props) {
+  const navigation =
+    useNavigation<HomeStackNavigationScreenProps<'HomeTabNavigator'>>();
+
   const searchText = useAppSelector(state => state.searchState.searchText);
 
   const products = useAppSelector(state => state.searchState.products);
@@ -22,6 +28,13 @@ export default function ResultSection({style}: Props) {
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
+
+  const onCLickItem = useCallback(
+    (product: Product) => {
+      navigation.navigate('OrderScreen', {product: product});
+    },
+    [navigation],
+  );
 
   const title = useMemo(
     () => (
@@ -51,7 +64,11 @@ export default function ResultSection({style}: Props) {
       {isLoading ? (
         loadingView
       ) : (
-        <ProductsList style={styles.list} products={products} />
+        <ProductsList
+          style={styles.list}
+          products={products}
+          onPress={onCLickItem}
+        />
       )}
     </View>
   );

@@ -1,7 +1,7 @@
 import {PayloadAction, createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {FulfilledAction, PendingAction, RejectedAction} from '../store';
 import {delayTime} from '../../utils/delayTime';
-import {saveString} from '../../utils/asyncStorage';
+import {removeData, saveString} from '../../utils/asyncStorage';
 import {
   ForgotForm,
   SignInForm,
@@ -10,6 +10,7 @@ import {
   UserResponse,
 } from '../../types/auth';
 import {postGetAllBill} from '../bill/billsSlice';
+import {getAllFavorites} from '../favorite/favoriteSlice';
 
 interface authState {
   user?: User;
@@ -37,12 +38,19 @@ export const postVerification = createAsyncThunk(
 // Return user response
 export const postSignIn = createAsyncThunk(
   'signin/auth',
-  async (data: SignInForm): Promise<UserResponse> => {
+  async (data: SignInForm, {dispatch}): Promise<UserResponse> => {
     await delayTime(2000);
-    return data.password === 'dt0932782114' &&
+    if (
+      data.password === 'dt0932782114' &&
       data.email === 'tms1932k1@gmail.com'
-      ? {user: require('../../assets/data/dummy_user.json') as User}
-      : {error: 'Sign in is failured!'};
+    ) {
+      const user = require('../../assets/data/dummy_user.json') as User;
+      dispatch(postGetAllBill(user.id));
+      dispatch(getAllFavorites(user.id));
+      return {user: user};
+    } else {
+      return {error: 'Sign in is failured!'};
+    }
   },
 );
 
@@ -83,9 +91,18 @@ export const postfetchUserByToken = createAsyncThunk(
     if (userToken == '12312312324345233') {
       let user = require('../../assets/data/dummy_user.json') as User;
       dispatch(postGetAllBill(user.id));
+      dispatch(getAllFavorites(user.id));
       return user;
     }
     return undefined;
+  },
+);
+
+export const updateFavoriteAuth = createAsyncThunk(
+  'favorites',
+  async (data: {userId: string; favorites: string[]}) => {
+    await delayTime(2000);
+    return data.favorites;
   },
 );
 
@@ -99,6 +116,10 @@ export const authSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
     },
+    logoutAuth: state => {
+      state.user = undefined;
+      removeData('@userToken');
+    },
     addPointAuth: (state, action: PayloadAction<number>) => {
       state.user = {
         ...state.user!,
@@ -110,6 +131,11 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     builder
+      .addCase(updateFavoriteAuth.fulfilled, (state, action) => {
+        if (state.user) {
+          state.user = {...state.user, idFavorites: action.payload};
+        }
+      })
       .addCase(postVerification.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.errorMes = action.payload.error;
@@ -155,5 +181,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const {removeErrors, setUser, addPointAuth} = authSlice.actions;
+export const {removeErrors, setUser, addPointAuth, logoutAuth} =
+  authSlice.actions;
 export default authSlice.reducer;

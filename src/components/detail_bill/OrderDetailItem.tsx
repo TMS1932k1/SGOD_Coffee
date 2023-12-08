@@ -32,9 +32,9 @@ export default function OrderDetailItem({order}: Props) {
               <Line style={styles.lineVertical} type="vertical" />
             )}
             {order.product.type === 'drink' && (
-              <CustomText variant="body2">{`${
-                order.volume!.ml
-              } ml`}</CustomText>
+              <CustomText variant="body2">
+                {`${order.volume!.ml} ml`}
+              </CustomText>
             )}
           </View>
         </View>

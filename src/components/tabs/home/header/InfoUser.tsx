@@ -32,6 +32,10 @@ export default function InfoUser({style}: Props) {
     navigation.navigate('ScanScreen');
   }, [navigation]);
 
+  const onEditProfile = useCallback(() => {
+    navigation.navigate('ProfileScreen');
+  }, [navigation]);
+
   const rank = useMemo(() => {
     let rankTitle = getRankTitle(user?.point ?? 0);
     return (
@@ -65,6 +69,12 @@ export default function InfoUser({style}: Props) {
               )}
             </Translation>
             {rank}
+            <IconButton
+              icon={'square-edit-outline'}
+              size={MyDimensions.iconMedium}
+              iconColor={colors.background}
+              onPress={onEditProfile}
+            />
           </View>
           <Translation>
             {t => (
@@ -134,13 +144,14 @@ const styling = (colors: MD3Colors) =>
       width: '100%',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'flex-start',
+      alignItems: 'flex-end',
     },
     pointContainer: {
       width: 240,
     },
     rankContainer: {
       flexDirection: 'row',
+      alignItems: 'center',
     },
     firstEmailContainer: {
       width: 44,

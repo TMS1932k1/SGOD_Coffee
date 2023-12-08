@@ -26,3 +26,7 @@ export const getData = async <T>(key: string) => {
     return undefined;
   }
 };
+
+export const removeData = async (key: string) => {
+  return AsyncStorage.removeItem(key);
+};

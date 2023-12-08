@@ -11,6 +11,7 @@ import cartSlice from './cart/cartSlice';
 import confirmSlice from './confirm/confirmSlice';
 import billsSlice from './bill/billsSlice';
 import scanSlice from './scan/scanSlice';
+import favoriteSlice from './favorite/favoriteSlice';
 
 export const store = configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export const store = configureStore({
     confirmState: confirmSlice,
     billsState: billsSlice,
     scanState: scanSlice,
+    favoriteState: favoriteSlice,
   },
 });
 

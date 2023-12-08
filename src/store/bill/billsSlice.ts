@@ -73,6 +73,9 @@ export const billsSlice = createSlice({
         item => item.status.title === state.filterStatus.title,
       );
     },
+    removeAllBills: state => {
+      state.bills = [];
+    },
   },
   extraReducers(builder) {
     builder
@@ -123,5 +126,5 @@ export const billsSlice = createSlice({
   },
 });
 
-export const {setFilterStatus, removeBill} = billsSlice.actions;
+export const {setFilterStatus, removeBill, removeAllBills} = billsSlice.actions;
 export default billsSlice.reducer;

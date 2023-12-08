@@ -35,7 +35,7 @@ export default function BillsScreen() {
         <Translation>
           {t => (
             <CustomText style={styles.textNote} variant="body1">
-              {t('billNotUser')}
+              {t('notUser')}
             </CustomText>
           )}
         </Translation>

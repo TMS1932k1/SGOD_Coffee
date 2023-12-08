@@ -3,49 +3,100 @@ import {Product} from '../../../../types/product';
 import ImageBlurLoading from 'react-native-image-blur-loading';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyColors, MyDimensions} from '../../../../constants';
-import {Icon, IconButton, useTheme} from 'react-native-paper';
-import {useMemo} from 'react';
+import {
+  ActivityIndicator,
+  Icon,
+  IconButton,
+  useTheme,
+} from 'react-native-paper';
+import {useCallback, useMemo, useState} from 'react';
 import {CustomText} from '../../../common';
 import {getColorOpacity} from '../../../../utils/colorOpacity';
 import {Translation} from 'react-i18next';
 import Animated, {ZoomIn} from 'react-native-reanimated';
-import {useAppSelector} from '../../../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
+import {updateFavoriteAuth} from '../../../../store/auth/authSlice';
+import {
+  addFavorite,
+  removeFavorite,
+} from '../../../../store/favorite/favoriteSlice';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
   product: Product;
-  onPress?: (coffee: Product) => void;
-  onPressAddFavorite?: (coffee: Product) => void;
+  onPress?: (product: Product) => void;
 }
 
-export default function ProductItem({
-  style,
-  product,
-  onPress,
-  onPressAddFavorite,
-}: Props) {
+export default function ProductItem({style, product, onPress}: Props) {
+  const [isLoadinhIcon, setLoadingIcon] = useState(false);
+
+  const dispatch = useAppDispatch();
+
   const user = useAppSelector(state => state.authState.user);
+  const isLoadingAuth = useAppSelector(state => state.authState.isLoading);
+
+  const isFavorited = useMemo(
+    () => user?.idFavorites.includes(product.id) ?? false,
+    [user, product],
+  );
+
+  const onChangeFavorite = useCallback(() => {
+    setLoadingIcon(true);
+    const updateFavoriteUser = () => {
+      return isFavorited
+        ? dispatch(
+            updateFavoriteAuth({
+              userId: user!.id,
+              favorites: [
+                ...user!.idFavorites.filter(item => item !== product.id),
+              ],
+            }),
+          )
+        : dispatch(
+            updateFavoriteAuth({
+              userId: user!.id,
+              favorites: [product.id, ...user!.idFavorites],
+            }),
+          );
+    };
+
+    updateFavoriteUser()
+      .unwrap()
+      .then(
+        () => {
+          // On fullfill
+          dispatch(
+            isFavorited ? removeFavorite(product.id) : addFavorite(product),
+          );
+          setLoadingIcon(false);
+        },
+        () => {
+          // On rejected
+          setLoadingIcon(false);
+        },
+      );
+  }, [isFavorited, user, product]);
 
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
 
   const iconFavorite = useMemo(
-    () => (
-      <IconButton
-        icon={
-          user?.idFavorites.includes(product.id)
-            ? 'cards-heart'
-            : 'cards-heart-outline'
-        }
-        size={MyDimensions.iconMedium}
-        iconColor={colors.primary}
-        onPress={() => {
-          if (onPressAddFavorite) onPressAddFavorite(product);
-        }}
-      />
-    ),
-    [user],
+    () =>
+      isLoadingAuth || isLoadinhIcon ? (
+        <ActivityIndicator
+          style={styles.loading}
+          size={MyDimensions.iconMedium}
+        />
+      ) : (
+        <IconButton
+          icon={isFavorited && user ? 'cards-heart' : 'cards-heart-outline'}
+          size={MyDimensions.iconMedium}
+          iconColor={colors.primary}
+          onPress={user ? onChangeFavorite : undefined}
+        />
+      ),
+    [isLoadingAuth, isFavorited, onChangeFavorite, isLoadinhIcon],
   );
 
   const item = useMemo(
@@ -94,7 +145,7 @@ export default function ProductItem({
         </Pressable>
       </Animated.View>
     ),
-    [product, onPress, onPressAddFavorite, styles],
+    [product, onPress, styles, iconFavorite],
   );
 
   return item;
@@ -146,6 +197,9 @@ const styling = (colors: MD3Colors) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+    },
+    loading: {
+      padding: MyDimensions.paddingSmall,
     },
     pressed: {
       opacity: 0.7,

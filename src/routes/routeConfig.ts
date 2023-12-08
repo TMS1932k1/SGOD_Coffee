@@ -58,6 +58,7 @@ export type HomeNavigatorParamList = {
   PayScreen: {bill: Bill};
   ScanScreen: undefined;
   DetailBillScreen: {bill: Bill};
+  ProfileScreen: undefined;
 };
 
 // Declare bottom navigation navigator param list

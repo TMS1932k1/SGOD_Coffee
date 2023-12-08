@@ -3,7 +3,7 @@
   "totalPage": 1,
   "products": [
     {
-      "id": 19,
+      "id": "19",
       "name": "Cá Viên",
       "price": 5000,
       "category": 4,
@@ -13,7 +13,7 @@
       "image": "https://cdn.tgdd.vn/Files/2020/06/24/1265161/cach-lam-ca-vien-chien-tai-nha-don-gian-ma-chat-luong-chang-kem-ngoai-tiem-202006240922373460.jpg"
     },
     {
-      "id": 20,
+      "id": "20",
       "name": "Tôm Viên",
       "price": 8000,
       "category": 4,
@@ -23,7 +23,7 @@
       "image": "https://thucpham388.com/wp-content/uploads/2022/12/d10eed3bf82081a0e64fdf45f962a052.jpg"
     },
     {
-      "id": 21,
+      "id": "21",
       "name": "Bò Viên",
       "price": 8000,
       "category": 4,
@@ -33,7 +33,7 @@
       "image": "https://cdn.tgdd.vn/2020/09/CookRecipe/GalleryStep/thanh-pham-1078.jpg"
     },
     {
-      "id": 22,
+      "id": "22",
       "name": "Bơ Chiên",
       "price": 10000,
       "category": 4,
