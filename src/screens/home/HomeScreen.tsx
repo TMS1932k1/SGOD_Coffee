@@ -99,7 +99,7 @@ export default function HomeScreen() {
           style={styles.sectionContainer}
           refFetching={fetchingProductsCategoryPromise}
         />
-        <ProductsCategorySection style={styles.productsCategory} />
+        <ProductsCategorySection />
       </View>
     ),
     [styles, fetchingProductsCategoryPromise],
@@ -145,14 +145,11 @@ const styling = (colors: MD3Colors) =>
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      paddingBottom: 110,
+      paddingBottom: 110 + MyDimensions.navbarHeight,
     },
     sectionContainer: {
       marginTop: MyDimensions.paddingLarge,
       marginLeft: MyDimensions.paddingLarge,
-    },
-    productsCategory: {
-      paddingHorizontal: MyDimensions.paddingLarge,
     },
     resultSection: {
       marginTop: MyDimensions.paddingLarge,

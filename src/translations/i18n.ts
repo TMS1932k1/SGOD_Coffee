@@ -124,6 +124,7 @@ i18n.use(initReactI18next).init({
         rank: 'Rank',
         emptyRank: 'None',
         logout: 'Log out',
+        qr: 'QR code',
       },
     },
     vi: {
@@ -246,6 +247,7 @@ i18n.use(initReactI18next).init({
         rank: 'Hạng',
         emptyRank: 'Chưa có',
         logout: 'Đăng xuất',
+        qr: 'Mã QR',
       },
     },
   },

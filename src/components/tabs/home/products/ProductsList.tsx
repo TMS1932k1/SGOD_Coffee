@@ -26,11 +26,11 @@ export default function ProductsList({products, style, onPress}: Props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     marginTop: MyDimensions.paddingMedium,
+    marginHorizontal: MyDimensions.paddingLarge,
   },
   item: {
     marginBottom: MyDimensions.paddingMedium,

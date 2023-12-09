@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react';
-import {View, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable, Image} from 'react-native';
 import {Icon, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {MyDimensions} from '../../constants';
@@ -8,14 +8,23 @@ import {Translation} from 'react-i18next';
 import {useAppSelector} from '../../store/hooks';
 import {getFullAddressString} from '../../utils/getFormat';
 import {getRankTitle} from '../../utils/rankUser';
+import {useNavigation} from '@react-navigation/native';
+import {HomeStackNavigationScreenProps} from '../../types/stack';
 
 export default function InfoSection() {
+  const navigation =
+    useNavigation<HomeStackNavigationScreenProps<'ProfileScreen'>>();
+
   const user = useAppSelector(state => state.authState.user);
   const bills = useAppSelector(state => state.billsState.bills);
 
   const colors = useTheme().colors;
 
   const styles = useMemo(() => styling(colors), [colors]);
+
+  const onEditProfile = useCallback(() => {
+    navigation.navigate('EditProfileScreen', {user: user!});
+  }, [navigation]);
 
   const detailRowView = useCallback(
     (title: String, priceAdd: string) => {
@@ -41,7 +50,7 @@ export default function InfoSection() {
             <CustomText variant="subheading2" style={styles.sectionText}>
               {t('profile')}
             </CustomText>
-            <Pressable>
+            <Pressable onPress={onEditProfile}>
               <Icon
                 source={'account-edit'}
                 size={MyDimensions.iconMedium}
@@ -52,30 +61,25 @@ export default function InfoSection() {
           {detailRowView(t('placeholderUsername'), user!.name)}
           {detailRowView(t('placeholderEmail'), user!.email)}
           {detailRowView(t('placeholderPhone'), user!.phone)}
-          <View style={styles.addressContainer}>
-            <CustomText style={styles.textColor} variant="body1">
-              {t('address')}:
-            </CustomText>
-            <Pressable
-              style={({pressed}) => [
-                styles.addAddressContainer,
-                pressed && styles.opacity,
-              ]}
-              onPress={() => {}}>
-              <Icon
-                source={'map'}
-                size={MyDimensions.iconMedium}
-                color={colors.primary}
-              />
-              <CustomText
-                variant="body1"
-                style={[styles.textColor, styles.addressText]}>
-                {user!.location
-                  ? getFullAddressString(user!.location!)
-                  : t('addShipTo')}
+          {!user!.location && (
+            <View style={styles.columnContainer}>
+              <CustomText style={styles.textColor} variant="body1">
+                {t('address')}:
               </CustomText>
-            </Pressable>
-          </View>
+              <View style={styles.addAddressContainer}>
+                <Icon
+                  source={'map'}
+                  size={MyDimensions.iconMedium}
+                  color={colors.primary}
+                />
+                <CustomText
+                  variant="body1"
+                  style={[styles.textColor, styles.addressText]}>
+                  {getFullAddressString(user!.location!)}
+                </CustomText>
+              </View>
+            </View>
+          )}
           <View style={styles.section}>
             <CustomText variant="subheading2" style={styles.sectionText}>
               {t('member')}
@@ -84,12 +88,23 @@ export default function InfoSection() {
           {detailRowView(t('memberPoint'), t('point', {point: user!.point}))}
           {detailRowView(
             t('rank'),
-            getRankTitle(user!.point) ?? t('emptyRank'),
+            t(`${getRankTitle(user!.point)}`) ?? t('emptyRank'),
           )}
           {detailRowView(
             t('countBillTitle'),
             t('countBill', {count: bills.length}),
           )}
+          <View style={styles.columnContainer}>
+            <CustomText style={styles.textColor} variant="body1">
+              {t('qr')}:
+            </CustomText>
+            <View style={styles.qrContainer}>
+              <Image
+                source={require('../../assets/images/qr.jpg')}
+                style={styles.qrImage}
+              />
+            </View>
+          </View>
         </View>
       )}
     </Translation>
@@ -100,7 +115,7 @@ const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     container: {
       paddingHorizontal: MyDimensions.paddingLarge,
-      paddingVertical: MyDimensions.paddingMedium,
+      paddingBottom: MyDimensions.paddingMedium,
     },
     section: {
       flexDirection: 'row',
@@ -108,6 +123,7 @@ const styling = (colors: MD3Colors) =>
       borderBottomWidth: 1,
       paddingBottom: 2,
       borderColor: colors.outline,
+      marginTop: MyDimensions.paddingLarge,
     },
     sectionText: {
       color: colors.outline,
@@ -122,7 +138,7 @@ const styling = (colors: MD3Colors) =>
     textColor: {
       color: colors.onBackground,
     },
-    addressContainer: {
+    columnContainer: {
       marginTop: MyDimensions.paddingMedium,
       marginBottom: MyDimensions.paddingLarge,
     },
@@ -141,7 +157,13 @@ const styling = (colors: MD3Colors) =>
       alignItems: 'center',
       flexDirection: 'row',
     },
-    opacity: {
-      opacity: 0.7,
+    qrContainer: {
+      width: '100%',
+      alignItems: 'center',
+      marginTop: MyDimensions.paddingMedium,
+    },
+    qrImage: {
+      width: 200,
+      height: 200,
     },
   });

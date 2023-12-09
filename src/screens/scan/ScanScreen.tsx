@@ -58,33 +58,23 @@ export default function ScanScreen({navigation}: Props) {
         flashMode={RNCamera.Constants.FlashMode.torch}
         topContent={
           <View style={styles.topContainer}>
-            <Icon source={'qrcode-scan'} size={50} color={colors.background} />
-            <Translation>
-              {t => (
-                <CustomText style={styles.titleText} variant="subheading2">
-                  {t('qrTitle').toUpperCase()}
-                </CustomText>
-              )}
-            </Translation>
+            {isScanned ? (
+              <BottomShowResult
+                style={styles.topContainer}
+                onSetScan={setScanAgain}
+              />
+            ) : (
+              <View style={styles.topContainer}>
+                <Translation>
+                  {t => (
+                    <CustomText style={styles.titleText} variant="body1">
+                      {t('qrIntroduce')}
+                    </CustomText>
+                  )}
+                </Translation>
+              </View>
+            )}
           </View>
-        }
-        bottomContent={
-          isScanned ? (
-            <BottomShowResult
-              style={styles.topContainer}
-              onSetScan={setScanAgain}
-            />
-          ) : (
-            <View style={styles.bottomContainer}>
-              <Translation>
-                {t => (
-                  <CustomText style={styles.titleText} variant="body1">
-                    {t('qrIntroduce')}
-                  </CustomText>
-                )}
-              </Translation>
-            </View>
-          )
         }
       />
     ),
@@ -103,16 +93,10 @@ const styling = (colors: MD3Colors) =>
     topContainer: {
       flex: 1,
       padding: MyDimensions.paddingMedium,
+      justifyContent: 'center',
       alignItems: 'center',
     },
     titleText: {
-      marginTop: MyDimensions.paddingLarge,
       color: colors.background,
-    },
-    bottomContainer: {
-      flex: 1,
-      justifyContent: 'flex-end',
-      paddingBottom: 60,
-      alignItems: 'center',
     },
   });

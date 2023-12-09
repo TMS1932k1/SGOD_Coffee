@@ -143,6 +143,6 @@ const styles = StyleSheet.create({
     marginBottom: MyDimensions.paddingLarge,
   },
   submit: {
-    marginBottom: 60,
+    marginBottom: MyDimensions.paddingLarge + MyDimensions.navbarHeight,
   },
 });

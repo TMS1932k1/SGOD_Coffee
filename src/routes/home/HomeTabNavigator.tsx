@@ -77,7 +77,7 @@ export function HomeTabNavigator({navigation}: Props) {
           }
         },
         tabBarStyle: {
-          height: 99,
+          height: 99 + MyDimensions.navbarHeight,
           borderTopStartRadius: MyDimensions.borderRadiusLarge,
           borderTopEndRadius: MyDimensions.borderRadiusLarge,
           backgroundColor: colors.surface,

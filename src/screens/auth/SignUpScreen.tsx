@@ -154,7 +154,9 @@ export default function SignUpScreen({navigation}: Props) {
           )}
         </Translation>
       )}
-      {isLoading && <ActivityIndicator animating={true} />}
+      {isLoading && (
+        <ActivityIndicator style={styles.submitContainer} animating={true} />
+      )}
       <TermsModal visible={visible} onHideModal={hideTermOfUseModal} />
     </View>
   );
@@ -185,5 +187,6 @@ const styling = (colors: MD3Colors) =>
     },
     submitContainer: {
       marginTop: MyDimensions.paddingLarge,
+      paddingBottom: MyDimensions.navbarHeight,
     },
   });

@@ -140,7 +140,7 @@ const styling = (colors: MD3Colors) =>
     submitContainer: {
       flexDirection: 'row',
       paddingTop: MyDimensions.paddingMedium,
-      paddingBottom: MyDimensions.paddingLarge,
+      paddingBottom: MyDimensions.navbarHeight + MyDimensions.paddingMedium,
     },
     buyBtn: {
       flex: 2,

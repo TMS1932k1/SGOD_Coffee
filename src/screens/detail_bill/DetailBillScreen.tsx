@@ -175,7 +175,8 @@ const styling = (colors: MD3Colors) =>
     container: {
       flex: 1,
       paddingHorizontal: MyDimensions.paddingLarge,
-      paddingVertical: MyDimensions.paddingMedium,
+      paddingTop: MyDimensions.paddingMedium,
+      paddingBottom: MyDimensions.paddingMedium + MyDimensions.navbarHeight,
     },
     scrollContainer: {
       flex: 1,

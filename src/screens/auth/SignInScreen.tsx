@@ -192,7 +192,9 @@ export default function SignInScreen({navigation}: Props) {
           )}
         </Translation>
       )}
-      {isLoading && <ActivityIndicator animating={true} />}
+      {isLoading && (
+        <ActivityIndicator style={styles.submitContainer} animating={true} />
+      )}
     </View>
   );
 }
@@ -225,5 +227,6 @@ const styling = (colors: MD3Colors) =>
     },
     submitContainer: {
       marginTop: MyDimensions.paddingLarge,
+      paddingBottom: MyDimensions.navbarHeight,
     },
   });

@@ -116,7 +116,9 @@ export default function ForgotPasswordScreen({navigation}: Props) {
           )}
         </Translation>
       )}
-      {isLoading && <ActivityIndicator animating={true} />}
+      {isLoading && (
+        <ActivityIndicator style={styles.submitContainer} animating={true} />
+      )}
     </View>
   );
 }
@@ -133,5 +135,6 @@ const styles = StyleSheet.create({
   },
   submitContainer: {
     marginTop: MyDimensions.paddingLarge,
+    paddingBottom: MyDimensions.navbarHeight,
   },
 });

@@ -4,6 +4,7 @@ import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {HeaderSection, ListCartSection} from '../../components/tabs/cart';
 import {useAppSelector} from '../../store/hooks';
+import {MyDimensions} from '../../constants';
 
 export default function CartScreen() {
   const isLoading = useAppSelector(state => state.cartState.isLoading);
@@ -34,7 +35,7 @@ const styling = (colors: MD3Colors) =>
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      paddingBottom: 110,
+      paddingBottom: 160 + MyDimensions.navbarHeight,
     },
     loadingContainer: {
       flex: 1,

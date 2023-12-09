@@ -154,7 +154,7 @@ export default function ProductItem({style, product, onPress}: Props) {
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
     container: {
-      width: 152,
+      width: 150,
       height: 220,
       padding: 4,
       borderRadius: MyDimensions.borderRadiusMedium,

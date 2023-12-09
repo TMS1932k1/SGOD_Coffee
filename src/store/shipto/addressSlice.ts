@@ -22,14 +22,14 @@ export const addressSlice = createSlice({
       state.provinces =
         require('../../assets/data/provinces.json') as Province[];
       if (action.payload) {
-        state.districts = (
-          require('../../assets/data/districts.json') as District[]
-        ).filter(
-          district => district.province_code === action.payload!.province.code,
-        );
-        state.wards = (
-          require('../../assets/data/wards.json') as Ward[]
-        ).filter(ward => ward.district_code === action.payload!.district.code);
+        addressSlice.caseReducers.setProvince(state, {
+          payload: action.payload!.province,
+          type: action.type,
+        });
+        addressSlice.caseReducers.setDistrict(state, {
+          payload: action.payload!.district,
+          type: action.type,
+        });
       } else {
         state.districts = [];
         state.wards = [];

@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexWrap: 'wrap',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     marginTop: MyDimensions.paddingMedium,
   },
   item: {

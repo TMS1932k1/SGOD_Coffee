@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 580,
+    height: '80%',
   },
   welcome: {
     position: 'absolute',
-    height: 362,
+    height: '40%',
     bottom: 0,
   },
 });

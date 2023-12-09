@@ -59,7 +59,7 @@ export default function ResultSection({style}: Props) {
   );
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[style]}>
       {title}
       {isLoading ? (
         loadingView
@@ -76,12 +76,10 @@ export default function ResultSection({style}: Props) {
 
 const styling = (colors: MD3Colors) =>
   StyleSheet.create({
-    container: {
-      paddingHorizontal: MyDimensions.paddingLarge,
-    },
     title: {
       color: colors.onBackground,
       overflow: 'hidden',
+      marginHorizontal: MyDimensions.paddingLarge,
     },
     list: {
       marginTop: MyDimensions.paddingMedium,

@@ -1,5 +1,5 @@
 import {useMemo} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {ActivityIndicator, useTheme} from 'react-native-paper';
 import {MD3Colors} from 'react-native-paper/lib/typescript/types';
 import {useAppSelector} from '../../store/hooks';
@@ -50,7 +50,9 @@ export default function Favoritescreen() {
       {isLoadingUser || isLoading ? (
         loadingView
       ) : user ? (
-        <ListFavoritesSection style={styles.listView} />
+        <ScrollView>
+          <ListFavoritesSection />
+        </ScrollView>
       ) : (
         notUserView
       )}
@@ -63,15 +65,12 @@ const styling = (colors: MD3Colors) =>
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      paddingBottom: 110,
+      paddingBottom: 110 + MyDimensions.navbarHeight,
     },
     loadingContainer: {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-    },
-    listView: {
-      paddingHorizontal: MyDimensions.paddingLarge,
     },
     centerContainer: {
       flex: 1,

@@ -6,6 +6,7 @@ import {HeaderSection, ListBillsSection} from '../../components/tabs/bills';
 import {useAppSelector} from '../../store/hooks';
 import {CustomText} from '../../components/common';
 import {Translation} from 'react-i18next';
+import {MyDimensions} from '../../constants';
 
 export default function BillsScreen() {
   const isLoading = useAppSelector(state => state.billsState.isLoading);
@@ -59,7 +60,7 @@ const styling = (colors: MD3Colors) =>
     container: {
       flex: 1,
       backgroundColor: colors.background,
-      paddingBottom: 110,
+      paddingBottom: 110 + MyDimensions.navbarHeight,
     },
     centerContainer: {
       flex: 1,

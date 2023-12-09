@@ -27,6 +27,7 @@ import {PayScreen} from '../screens/pay';
 import {ScanScreen} from '../screens/scan';
 import {DetailBillScreen} from '../screens/detail_bill';
 import {ProfileScreen} from '../screens/profile';
+import {EditProfileScreen} from '../screens/edit_profile';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 
@@ -51,6 +52,7 @@ const homeStackRoutes: HomeStackRoutesType = [
   {name: 'ScanScreen', component: ScanScreen},
   {name: 'DetailBillScreen', component: DetailBillScreen},
   {name: 'ProfileScreen', component: ProfileScreen},
+  {name: 'EditProfileScreen', component: EditProfileScreen},
 ];
 
 export default function RootNavigator() {
