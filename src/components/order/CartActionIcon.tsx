@@ -7,6 +7,7 @@ import {CustomText} from '../common';
 import {useAppSelector} from '../../store/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {HomeStackNavigationScreenProps} from '../../types/stack';
+import Animated, {ZoomIn} from 'react-native-reanimated';
 
 export default function CartActionIcon() {
   const navigation =
@@ -28,11 +29,11 @@ export default function CartActionIcon() {
         }}
       />
       {cart.length > 0 && (
-        <View style={styles.badgeContainer}>
+        <Animated.View style={styles.badgeContainer} entering={ZoomIn}>
           <CustomText style={styles.text} variant="meta1">
             {cart.length}
           </CustomText>
-        </View>
+        </Animated.View>
       )}
     </View>
   );

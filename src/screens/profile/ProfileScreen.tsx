@@ -59,7 +59,9 @@ export default function ProfileScreen({navigation}: Props) {
 
   const view = useMemo(
     () => (
-      <ScrollView style={styles.infoSection}>
+      <ScrollView
+        style={styles.infoSection}
+        showsVerticalScrollIndicator={false}>
         <HeaderRankSession />
         <InfoSection />
       </ScrollView>
@@ -72,7 +74,11 @@ export default function ProfileScreen({navigation}: Props) {
       {statusBar}
       {view}
       <Translation>
-        {t => <TextButton onPress={onShowModal}>{t('logout')}</TextButton>}
+        {t => (
+          <TextButton style={styles.logout} onPress={onShowModal}>
+            {t('logout')}
+          </TextButton>
+        )}
       </Translation>
       <Translation>
         {t => (
@@ -98,5 +104,8 @@ const styling = (colors: MD3Colors) =>
     },
     infoSection: {
       flex: 1,
+    },
+    logout: {
+      padding: MyDimensions.paddingSmall,
     },
   });

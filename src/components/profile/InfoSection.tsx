@@ -58,10 +58,10 @@ export default function InfoSection() {
               />
             </Pressable>
           </View>
-          {detailRowView(t('placeholderUsername'), user!.name)}
-          {detailRowView(t('placeholderEmail'), user!.email)}
-          {detailRowView(t('placeholderPhone'), user!.phone)}
-          {!user!.location && (
+          {detailRowView(t('username'), user!.name)}
+          {detailRowView(t('email'), user!.email)}
+          {detailRowView(t('phone'), user!.phone)}
+          {user!.location && (
             <View style={styles.columnContainer}>
               <CustomText style={styles.textColor} variant="body1">
                 {t('address')}:
@@ -88,7 +88,9 @@ export default function InfoSection() {
           {detailRowView(t('memberPoint'), t('point', {point: user!.point}))}
           {detailRowView(
             t('rank'),
-            t(`${getRankTitle(user!.point)}`) ?? t('emptyRank'),
+            getRankTitle(user!.point)
+              ? t(`${getRankTitle(user!.point)}`)
+              : t('emptyRank'),
           )}
           {detailRowView(
             t('countBillTitle'),
@@ -140,7 +142,6 @@ const styling = (colors: MD3Colors) =>
     },
     columnContainer: {
       marginTop: MyDimensions.paddingMedium,
-      marginBottom: MyDimensions.paddingLarge,
     },
     addressText: {
       paddingLeft: MyDimensions.paddingSmall,

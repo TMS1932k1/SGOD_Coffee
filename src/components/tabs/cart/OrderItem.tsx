@@ -12,6 +12,8 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  ZoomIn,
+  ZoomOut,
   runOnJS,
   useAnimatedGestureHandler,
   useAnimatedStyle,
@@ -114,12 +116,14 @@ export default function OrderItem({
                 </View>
               </View>
               {isShowCheckbox && (
-                <Checkbox.Android
-                  status={isSelect ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    if (onPressCheckbox) onPressCheckbox(order);
-                  }}
-                />
+                <Animated.View entering={ZoomIn} exiting={ZoomOut}>
+                  <Checkbox.Android
+                    status={isSelect ? 'checked' : 'unchecked'}
+                    onPress={() => {
+                      if (onPressCheckbox) onPressCheckbox(order);
+                    }}
+                  />
+                </Animated.View>
               )}
             </View>
             {order.note && (

@@ -8,6 +8,7 @@ import {CustomText} from '../../common';
 import {Translation} from 'react-i18next';
 import {setFilterStatus} from '../../../store/bill/billsSlice';
 import {useIsFocused} from '@react-navigation/native';
+import Animated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
 
 export default function HeaderSection() {
   const [indexCurrent, setIndexCurrent] = useState(0);
@@ -55,13 +56,17 @@ export default function HeaderSection() {
               color={colors.primary}
             />
             {indexCurrent === index && (
-              <Translation>
-                {t => (
-                  <CustomText style={styles.statusText} variant="body2">
-                    {t(`${status.title}`)}
-                  </CustomText>
-                )}
-              </Translation>
+              <Animated.View
+                entering={ZoomIn.duration(300)}
+                exiting={ZoomOut.duration(200)}>
+                <Translation>
+                  {t => (
+                    <CustomText style={styles.statusText} variant="body2">
+                      {t(`${status.title}`)}
+                    </CustomText>
+                  )}
+                </Translation>
+              </Animated.View>
             )}
           </Pressable>
         ))}

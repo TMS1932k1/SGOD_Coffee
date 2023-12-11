@@ -13,6 +13,7 @@ import {
 import {useAppSelector} from '../../../../store/hooks';
 import {useNavigation} from '@react-navigation/native';
 import {HomeStackNavigationScreenProps} from '../../../../types/stack';
+import Animated, {ZoomIn} from 'react-native-reanimated';
 
 interface Props {
   style?: StyleProp<ViewStyle>;
@@ -55,7 +56,7 @@ export default function InfoUser({style}: Props) {
 
   const contentHaveUser = useMemo(
     () => (
-      <View style={styles.container}>
+      <Animated.View style={styles.container} entering={ZoomIn}>
         <View style={styles.pointContainer}>
           <View style={styles.rankContainer}>
             <Translation>
@@ -104,7 +105,7 @@ export default function InfoUser({style}: Props) {
           onPress={onScanQR}
           iconColor={colors.background}
         />
-      </View>
+      </Animated.View>
     ),
     [styles, user],
   );

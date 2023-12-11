@@ -17,5 +17,5 @@ export const MyDimensions = {
   borderRadiusLarge: 36,
   widthWindow: width,
   heightWindow: height,
-  navbarHeight: navbarHeight / 2,
+  navbarHeight: navbarHeight,
 };

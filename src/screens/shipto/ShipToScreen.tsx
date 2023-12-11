@@ -335,7 +335,7 @@ const styling = (colors: MD3Colors) =>
     container: {
       flex: 1,
       paddingHorizontal: MyDimensions.paddingLarge,
-      paddingBottom: MyDimensions.paddingLarge,
+      paddingBottom: MyDimensions.paddingMedium + MyDimensions.navbarHeight,
     },
     locationUser: {
       marginTop: MyDimensions.paddingMedium,

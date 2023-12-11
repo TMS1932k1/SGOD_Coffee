@@ -17,6 +17,7 @@ import {
 } from '../../../store/cart/cartSlice';
 import {Order} from '../../../types/order';
 import {useIsFocused} from '@react-navigation/native';
+import Animated, {ZoomIn, ZoomOut} from 'react-native-reanimated';
 
 export default function ListCartSection() {
   const dispatch = useAppDispatch();
@@ -107,9 +108,13 @@ export default function ListCartSection() {
         {selectType !== 'none' ? (
           <Translation>
             {t => (
-              <TextButton onPress={onShowDialog} disable={selects.length <= 0}>
-                {t('remove')}
-              </TextButton>
+              <Animated.View entering={ZoomIn} exiting={ZoomOut}>
+                <TextButton
+                  onPress={onShowDialog}
+                  disable={selects.length <= 0}>
+                  {t('remove')}
+                </TextButton>
+              </Animated.View>
             )}
           </Translation>
         ) : (

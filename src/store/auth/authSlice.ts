@@ -98,6 +98,15 @@ export const postfetchUserByToken = createAsyncThunk(
   },
 );
 
+export const updateUser = createAsyncThunk(
+  'update/auth',
+  async (data: {user: User; attrs: Partial<User>}) => {
+    await delayTime(1000);
+    const user: User = {...data.user, ...data.attrs};
+    return user;
+  },
+);
+
 export const updateFavoriteAuth = createAsyncThunk(
   'favorites',
   async (data: {userId: string; favorites: string[]}) => {
@@ -157,6 +166,9 @@ export const authSlice = createSlice({
         state.errorMes = action.payload;
       })
       .addCase(postfetchUserByToken.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
         state.user = action.payload;
       })
       .addMatcher<FulfilledAction>(
