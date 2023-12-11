@@ -61,6 +61,7 @@ export type HomeNavigatorParamList = {
   DetailBillScreen: {bill: Bill};
   ProfileScreen: undefined;
   EditProfileScreen: {user: User} | undefined;
+  ReviewScreen: Order[];
 };
 
 // Declare bottom navigation navigator param list

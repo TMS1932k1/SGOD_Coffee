@@ -28,6 +28,7 @@ import {ScanScreen} from '../screens/scan';
 import {DetailBillScreen} from '../screens/detail_bill';
 import {ProfileScreen} from '../screens/profile';
 import {EditProfileScreen} from '../screens/edit_profile';
+import {ReviewScreen} from '../screens/review';
 
 const HomeStack = createNativeStackNavigator<HomeNavigatorParamList>();
 
@@ -53,6 +54,7 @@ const homeStackRoutes: HomeStackRoutesType = [
   {name: 'DetailBillScreen', component: DetailBillScreen},
   {name: 'ProfileScreen', component: ProfileScreen},
   {name: 'EditProfileScreen', component: EditProfileScreen},
+  {name: 'ReviewScreen', component: ReviewScreen},
 ];
 
 export default function RootNavigator() {

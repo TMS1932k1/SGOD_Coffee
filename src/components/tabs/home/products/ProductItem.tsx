@@ -13,7 +13,7 @@ import {useCallback, useMemo, useState} from 'react';
 import {CustomText} from '../../../common';
 import {getColorOpacity} from '../../../../utils/colorOpacity';
 import {Translation} from 'react-i18next';
-import Animated, {ZoomIn} from 'react-native-reanimated';
+import Animated, {LinearTransition, ZoomIn} from 'react-native-reanimated';
 import {useAppDispatch, useAppSelector} from '../../../../store/hooks';
 import {updateFavoriteAuth} from '../../../../store/auth/authSlice';
 import {
@@ -101,7 +101,7 @@ export default function ProductItem({style, product, onPress}: Props) {
 
   const item = useMemo(
     () => (
-      <Animated.View entering={ZoomIn}>
+      <Animated.View entering={ZoomIn} layout={LinearTransition.duration(300)}>
         <Pressable
           style={({pressed}) => [
             styles.container,

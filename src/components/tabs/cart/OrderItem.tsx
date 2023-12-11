@@ -12,6 +12,7 @@ import {
   PanGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 import Animated, {
+  LinearTransition,
   ZoomIn,
   ZoomOut,
   runOnJS,
@@ -76,7 +77,9 @@ export default function OrderItem({
 
   const view = useMemo(
     () => (
-      <View style={styles.container}>
+      <Animated.View
+        style={styles.container}
+        layout={LinearTransition.duration(1000)}>
         <Animated.View style={[styles.delContainer, rIconStyle]}>
           <Icon
             source={'trash-can'}
@@ -137,7 +140,7 @@ export default function OrderItem({
             )}
           </Animated.View>
         </PanGestureHandler>
-      </View>
+      </Animated.View>
     ),
     [order, isSelect, isShowCheckbox],
   );

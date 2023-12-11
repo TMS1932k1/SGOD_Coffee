@@ -50,7 +50,7 @@ export default function Favoritescreen() {
       {isLoadingUser || isLoading ? (
         loadingView
       ) : user ? (
-        <ScrollView>
+        <ScrollView style={styles.scrollView}>
           <ListFavoritesSection />
         </ScrollView>
       ) : (
@@ -66,6 +66,9 @@ const styling = (colors: MD3Colors) =>
       flex: 1,
       backgroundColor: colors.background,
       paddingBottom: 110 + MyDimensions.navbarHeight,
+    },
+    scrollView: {
+      flex: 1,
     },
     loadingContainer: {
       flex: 1,
